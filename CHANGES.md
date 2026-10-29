@@ -183,6 +183,7 @@
 | /blog/b/places-with-promise-2026 | typo (CEO call) | Micheal | Michael |
 | /blog/b/places-with-promise-2026 | typo (CEO call) | over the. years | over the years |
 | /blog/b/places-with-promise-2026 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /blog/b/kiss-of-death-locations-for-2026 | link fix | http://KFF.org | https://www.kff.org |
 | /blog/b/kiss-of-death-locations-for-2026 | dash removed (builder copy rule) | Alright, let's dive into today’s topic: "Kiss of Death Locations for 2026." If you’re thin | Alright, let's dive into today’s topic: "Kiss of Death Locations for 2026." If you’re thin |
 | /blog/b/kiss-of-death-locations-for-2026 | dash removed (builder copy rule) | First, why do some locations earn the "kiss of death" label? It boils down to sustainabili | First, why do some locations earn the "kiss of death" label? It boils down to sustainabili |
 | /blog/b/kiss-of-death-locations-for-2026 | dash removed (builder copy rule) | —a small market in the heart of the Rust Belt. Youngstown has lost over 10% of its populat | , a small market in the heart of the Rust Belt. Youngstown has lost over 10% of its popula |
@@ -278,6 +279,7 @@
 | /site-viabilty-report-general-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /marketing-report-order-2598 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /getsocial-102622 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /on-site-report | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /getsocial | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /webinar-austin | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /webinar-broadcast-austin | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |

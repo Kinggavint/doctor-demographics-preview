@@ -8,6 +8,8 @@ from bs4 import BeautifulSoup, NavigableString, Comment
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'build', 'data')
+# Published output lives in docs/ (GitHub Pages source). build/ and the review docs stay at the repo root, unpublished.
+SITE = os.path.join(ROOT, 'docs')
 LIVE = 'https://doctordemographics.com'
 # TODO cutover: switch ORDER_BASE to https://order.doctordemographics.com once the GHL subdomain exists.
 ORDER_BASE = 'https://doctordemographics.com'
@@ -282,7 +284,7 @@ def finish(title, desc, main, flag=None, lead=True, extra_head='', canonical=Non
     else:
         doc = head + f'<main id="main">{main}</main></body></html>\n'
     rel = path.strip('/')
-    out = os.path.join(ROOT, rel, 'index.html') if rel else os.path.join(ROOT, 'index.html')
+    out = os.path.join(SITE, rel, 'index.html') if rel else os.path.join(SITE, 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(doc)
     PAGES.append(path)
@@ -447,7 +449,7 @@ def products():
     desc = (''.join(p(x) for x in L(s, 27, 29)) + f'<h3>{t(L(s,30))}</h3>{ul([L(s,31)])}<div class="btn-row">{btn(L(s,32), ohref(s), "gold")}</div>'
             + f'<h3>{t(L(s,33))}</h3><ul class="states">' + ''.join(f'<li>{t(x)}</li>' for x in states) + '</ul>'
             + todo('Texas is listed as both available and coming soon.', 'open') + f'<p class="note">{t(L(s,59))}</p>')
-    product(s, L(s, 15), video('https://player.vimeo.com/video/792399334?h=3e38309552', title='State Briefing video'), L(s, 17), t(L(s, 18)),
+    product(s, L(s, 15), video('https://player.vimeo.com/video/792399334?h=3e38309552', title='State Briefing video') + todo('The State Briefing Vimeo video (792399334) is dead, on live too. Replace or remove it.', 'open'), L(s, 17), t(L(s, 18)),
             feats, L(s, 24), L(s, 25), L(s, 26), desc, '',
             top_extra=f'<p style="margin-top:1rem"><strong>{t(L(s,16))}</strong> {todo("Dated: says Updated for 2023.", "open")}</p>',
             feat_extra=todo('The sample link goes to the Site Viability sample (as on live). No State Briefing sample exists.'),
@@ -606,6 +608,9 @@ def clean_post(slug):
             elif 'libsyn.com' in sv:
                 new = f'<iframe class="audio" src="{sv}" title="Podcast audio player" loading="lazy" scrolling="no"></iframe>'
         c.replace_with(BeautifulSoup(new, 'html.parser') if new else '')
+    for sp in list(root.find_all(attrs={'data-cfemail': True})):
+        enc = sp['data-cfemail']; k = int(enc[:2], 16)
+        sp.replace_with(NavigableString(''.join(chr(int(enc[i:i + 2], 16) ^ k) for i in range(2, len(enc), 2))))
     first_h1 = True
     for tag in list(root.find_all(True)):
         if getattr(tag, 'decomposed', False) or tag.parent is None:
@@ -628,8 +633,11 @@ def clean_post(slug):
             if '/cdn-cgi/l/email-protection#' in h:
                 enc = h.split('#', 1)[1]; k = int(enc[:2], 16)
                 h = 'mailto:' + ''.join(chr(int(enc[i:i + 2], 16) ^ k) for i in range(2, len(enc), 2))
+            if h.lower().rstrip('/') == 'http://kff.org':
+                CHANGES.append((CUR['path'], 'link fix', h, 'https://www.kff.org'))
+                h = 'https://www.kff.org'
             if 'example.com' in h:
-                CHANGES.append((CUR['path'], 'example.com link removed (CEO call)', h, '(text kept, link removed)'))
+                CHANGES.append((CUR['path'], 'placeholder domain link removed (CEO call)', h, '(text kept, link removed)'))
                 tag.unwrap(); continue
             mm = re.match(r'https?://(www\.)?doctordemographics\.com(/[^?#]*)?', h)
             if mm:
@@ -643,7 +651,10 @@ def clean_post(slug):
         tag.attrs = keep
     for sn in list(root.find_all(string=True)):
         if isinstance(sn, NavigableString) and sn.strip():
-            sn.replace_with(fx(str(sn)))
+            v = fx(str(sn))
+            if v.strip() == 'KFF.org':
+                v = v.replace('KFF.org', 'www.kff.org')
+            sn.replace_with(v)
     for tag in root.find_all(['p', 'h2', 'h3', 'li']):
         if not tag.get_text(strip=True) and not tag.find(['img', 'iframe', 'a']):
             tag.decompose()
@@ -662,10 +673,11 @@ def blog_posts():
         m = f'''<section class="section"><div class="wrap prose post"><p><a href="{u('/blog')}">Articles and Podcasts</a></p>
 {img(im, title)}<h1>{t(title)}</h1><p class="meta">{t(", ".join(cats))} | {t(date)} | {t(rt)}</p>
 {content}
+{('<p>' + todo('This post keeps the live phrase about an in person consultation, which relates to the removed consultation product. Keep as is or reword? (for Gavin)', 'open') + '</p>') if slug == 'demographic-marketing' else ''}
 <div class="card" style="margin-top:2rem"><h3>Mike Green</h3>{p(bio) if bio else ''}
 {todo('The header banners on blog posts show a different man labeled Micheal Green than the Mike Green photo used elsewhere. could_not_verify who is pictured.', 'open')}</div>
 <p style="margin-top:1.5rem"><a href="{u('/blog')}">Back to Blog</a></p></div></section>'''
-        TODOS.append((CUR['path'], 'note', 'Live canonical points to www.example.com (GHL blog setting). Preview canonical uses doctordemographics.com.'))
+        TODOS.append((CUR['path'], 'note', 'Live canonical points to a placeholder domain (GHL blog setting). Preview canonical uses doctordemographics.com.'))
         finish(title_of(key, title), desc_of(key), m, flag=flag_hidden('The blog is not linked from the live menu.'))
 
 def page_contact():
@@ -720,7 +732,7 @@ def page_partner():
 {todo('Live shows a client quote image here (signed, about referring to Doctor Demographics for over 25 years). Left out under the no testimonials rule. Keep it?', 'open')}</div>
 <div>{img('29969d22-aa40-4db8-86dd-0ada7c5bd70a.jpg', 'Business partners joining hands')}</div></div></section>
 <section class="section alt" id="apply"><div class="wrap prose"><h2>{t(L(s,27))}</h2>{ghl_form('mUncEfheN1LfzFqe03QM', 'Partner Program Application', 760)}
-{todo('GHL side: the form footer Privacy Policy and Terms links point to example.com. Fix in GHL.')}</div></section>'''
+{todo('GHL side: the form footer Privacy Policy and Terms links point to a placeholder domain. Fix in GHL.')}</div></section>'''
     finish(title_of(s, 'Partners'), desc_of(s), m, flag=fl)
 
 def page_book():
@@ -743,14 +755,15 @@ REDIRECTS = [('/home-9727', '/', 'duplicate home page'),
              ('/best-sites-report-general-form', O('/best-sites-report-form'), 'duplicate form page'),
              ('/site-viabilty-report-general-form', O('/site-viabilty-report-form'), 'duplicate form page'),
              ('/marketing-report-order-2598', O('/marketing-report-order'), 'duplicate order page with no products (left out per CEO call)'),
-             ('/getsocial-102622', O('/getsocial'), 'duplicate training page')]
+             ('/getsocial-102622', O('/getsocial'), 'duplicate training page'),
+             ('/on-site-report', '/reports', 'removed product (Gavin decision). Target is provisional, pending Gavin')]
 
 def redirect_stub(src, dst, why):
     begin(src)
     target = u(dst)
     m = f'''<section class="section"><div class="wrap prose"><h1>This page has moved</h1>
 <p>Stand in for a planned 301 redirect from <code>{src}</code> to <a href="{a_(target)}">{html.escape(dst)}</a> ({html.escape(why)}).</p>
-<p>The real 301 is set at go live on the host. This preview uses a meta refresh.</p></div></section>'''
+<p>The real 301 is set at go live on the host. This preview uses a meta refresh.</p>{('<p>' + todo('Redirect target ' + dst + ' is provisional, pending Gavin.', 'open') + '</p>') if 'provisional' in why else ''}</div></section>'''
     finish('Redirecting | Doctor Demographics', 'Redirect stand in.', m, lead=False,
            extra_head=f'<meta http-equiv="refresh" content="0; url={a_(target)}">', canonical=LIVE + (dst if dst.startswith('/') and dst != '/' else '/') if not dst.startswith('http') else dst)
 
@@ -775,13 +788,13 @@ GHL_BUGS = [
     'The Competition sample form sends people to the Best Sites sample PDF.',
     '/marketing-report-order-2598 shows no products (duplicate order page).',
     'The State Briefing thank you page (/order-complete-state-briefing) shows a blank sender name.',
-    'GHL form footers link Privacy Policy and Terms to example.com.',
-    'Blog post canonicals point to www.example.com (GHL blog setting).',
+    'GHL form footers link Privacy Policy and Terms to a placeholder domain.',
+    'Blog post canonicals point to a placeholder domain (GHL blog setting).',
     'Unknown paths on doctordemographics.com redirect to prodemographics.com.',
     'Podcast page plays the wrong video on Episodes 291, 259 and 246.',
     'The home page "most recent episode" is stale (Episode 252).',
     'The Site Viability form says "Comparision".',
-    'The On-Site Visit form (HVWSBqGPEBYVxwgBzyRG) shows a raw label "common.other_option". The product is removed from the new site (Gavin decision), so this only matters while the live page stays up.',
+    'The form for the removed consultation product (HVWSBqGPEBYVxwgBzyRG) shows a raw label "common.other_option". The product is removed from the new site (Gavin decision), so this only matters while the live page stays up.',
 ]
 
 def dedupe_todos():
@@ -806,8 +819,9 @@ def notes_page():
     for pg, kind, b, a in CHANGES:
         ch.setdefault((kind, b, a), set()).add(pg)
     chrows = ''.join(f'<tr><td>{html.escape(k)}</td><td>{html.escape(b)}</td><td>{html.escape(a)}</td><td>{html.escape(", ".join(sorted(p)) if len(p) < 15 else "many pages")}</td></tr>'
-                     for (k, b, a), p in ch.items() if not k.startswith(('dash', 'no-cost', 'emoji', 'Gavin')))
+                     for (k, b, a), p in ch.items() if not k.startswith(('dash', 'no-cost', 'emoji', 'Gavin', 'placeholder')))
     ndash = sum(1 for c in CHANGES if c[1].startswith(('dash', 'emoji')))
+    nph = len({c[2] for c in CHANGES if c[1].startswith('placeholder')})
     ngav = len({(c[2], c[3]) for c in CHANGES if c[1].startswith('Gavin')})
     nfree = len({(c[2], c[3]) for c in CHANGES if c[1].startswith('no-cost')})
     m = hero('Preview notes')
@@ -815,33 +829,33 @@ def notes_page():
 <p>Preview of doctordemographics.com, rebuilt from the live copy for review. Every page is noindexed and the robots file blocks crawling. Canonicals point to the live URLs.
 Forms and calendars are the live GoHighLevel embeds and order buttons go to the live GoHighLevel pages, so please do not submit anything.</p>
 <h2>Decided by Gavin</h2><ul>
-<li>On-Site Demographic Marketing Report: removed from the preview (no page, link, or listing).</li>
+<li>The in person consultation product: removed from the preview (no page, link, or listing).</li>
 <li>Experience: "since 1983" replaces every year count. Scott McDonald is shown as founder, now retired.</li>
 <li>YouTube: {html.escape(YT_FOOTER)} everywhere.</li></ul>
 <h2>Decisions made by the APEX CEO</h2><p>Each one is a CEO call, pending Gavin/Mike review.</p>
-<table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'ceo')}</table>
-<h2>Open questions</h2><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'open')}</table>
-<h2>Other TODOs</h2><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k not in ('ceo', 'open'))}</table>
+<div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'ceo')}</table></div>
+<h2>Open questions</h2><div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'open')}</table></div>
+<h2>Other TODOs</h2><div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k not in ('ceo', 'open'))}</table></div>
 <h2>GoHighLevel side bugs (not changed, report only)</h2><ul>{''.join(f'<li>{html.escape(b)}</li>' for b in GHL_BUGS)}</ul>
-<h2>Redirect plan (stand in pages)</h2><table class="tbl"><tr><th>From</th><th>To</th><th>Why</th></tr>
-{''.join(f'<tr><td><a href="{u(s)}">{s}</a></td><td>{html.escape(d)}</td><td>{html.escape(w)}</td></tr>' for s, d, w in REDIRECTS)}</table>
-<h2>Copy changes</h2><p>{ndash} dash and emoji fixes (builder copy rule) and {nfree} no cost wording changes (CEO call, pending Gavin/Mike review) and {ngav} experience wording changes (Gavin decision) are listed in CHANGES.md.</p>
-<table class="tbl"><tr><th>Kind</th><th>Before</th><th>After</th><th>Pages</th></tr>{chrows}</table>
-<h2>Copy exception</h2><p>The Episode 278 podcast title keeps its published wording, so the copy lint flags it once. See TODO.md.</p>
+<h2>Redirect plan (stand in pages)</h2><div class="tbl-wrap"><table class="tbl"><tr><th>From</th><th>To</th><th>Why</th></tr>
+{''.join(f'<tr><td><a href="{u(s)}">{s}</a></td><td>{html.escape(d)}</td><td>{html.escape(w)}</td></tr>' for s, d, w in REDIRECTS)}</table></div>
+<h2>Copy changes</h2><p>{ndash} dash and emoji fixes (builder copy rule) and {nfree} no cost wording changes (CEO call, pending Gavin/Mike review) and {ngav} experience wording changes (Gavin decision) are listed in CHANGES.md (in the repo, not published). {nph} links to a placeholder domain were removed from blog posts (CEO call).</p>
+<div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Before</th><th>After</th><th>Pages</th></tr>{chrows}</table></div>
+<h2>Copy exception</h2><p>The Episode 278 podcast title keeps its published wording, so the copy lint flags it once. It is listed under Open questions above.</p>
 </div></section>'''
     finish('Preview notes | Doctor Demographics', 'Review notes.', m, lead=False, canonical=LIVE + '/')
 
 def page_404():
-    home = open(os.path.join(ROOT, 'index.html')).read()
+    home = open(os.path.join(SITE, 'index.html')).read()
     begin('/')
     m = hero('Page not found', 'That page does not exist in this preview.', actions=f'<div class="btn-row"><a class="btn gold" href="{PREVIEW_BASE}">Go to the home page</a></div>')
     CUR['depth'] = 0
     finish('Page not found | Doctor Demographics', 'Page not found.', m, lead=False)
     PAGES.pop()
-    src = open(os.path.join(ROOT, 'index.html')).read()
-    open(os.path.join(ROOT, 'index.html'), 'w').write(home)
+    src = open(os.path.join(SITE, 'index.html')).read()
+    open(os.path.join(SITE, 'index.html'), 'w').write(home)
     s404 = src.replace('<head><meta charset="utf-8">', f'<head><meta charset="utf-8">\n<base href="{PREVIEW_BASE}">', 1)
-    open(os.path.join(ROOT, '404.html'), 'w').write(s404)
+    open(os.path.join(SITE, '404.html'), 'w').write(s404)
 
 def docs(eps):
     seen = dedupe_todos()
@@ -867,9 +881,9 @@ def docs(eps):
         w = csv.writer(f); w.writerow(['from', 'to', 'type', 'reason'])
         for s, d, why in REDIRECTS:
             w.writerow([s, (LIVE + d) if d.startswith('/') else d, '301', why])
-    with open(os.path.join(ROOT, 'robots.txt'), 'w') as f:
+    with open(os.path.join(SITE, 'robots.txt'), 'w') as f:
         f.write('User-agent: *\nDisallow: /\n')
-    open(os.path.join(ROOT, '.nojekyll'), 'w').close()
+    open(os.path.join(SITE, '.nojekyll'), 'w').close()
     with open(os.path.join(ROOT, 'README.md'), 'w') as f:
         f.write(f'''# doctordemographics.com preview
 
@@ -880,7 +894,8 @@ Preview: {PREVIEW_BASE}
 - Every page has noindex, nofollow, and robots.txt blocks crawling. Canonicals point to doctordemographics.com.
 - Forms and calendars embed the live GoHighLevel widgets by ID. Order and training buttons link to the live GHL pages.
   ORDER_BASE in build/gen.py switches to {ORDER_FUTURE} at cutover.
-- Build: `python3 build/gen.py` then `build/verify.sh .`
+- Build: `python3 build/gen.py` then `build/verify.sh docs`
+- Published folder: `docs/` (Pages source: branch `preview`, path `/docs`). build/, TODO.md, CHANGES.md, REDIRECTS.csv and this README are not published.
 - Open items: TODO.md. Copy changes: CHANGES.md. Redirect plan: REDIRECTS.csv.
 - Pages: {len(PAGES)} generated. Podcast episodes listed: {len(eps)}.
 ''')
@@ -901,6 +916,5 @@ if __name__ == '__main__':
         redirect_stub(s_, d_, w_)
     for r in ghl_rows():
         ghl_stub(r)
-    TODOS.append(('/on-site-report', 'note', 'On-Site Report removed (Gavin decision). At go live, decide where the old /on-site-report URL should 301 (for example /reports).'))
     notes_page(); page_404(); docs(eps)
     print('pages', len(PAGES), 'todos', len(TODOS), 'unique', len(dedupe_todos()), 'changes', len(CHANGES), 'episodes', len(eps))

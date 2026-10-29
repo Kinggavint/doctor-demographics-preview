@@ -142,3 +142,10 @@ blockquote{margin:0 0 .75rem;font-style:italic;color:var(--text)}
 .meta{color:var(--muted);font-size:var(--text-sm)}
 table.tbl{border-collapse:collapse;width:100%;font-size:var(--text-sm)}
 table.tbl th,table.tbl td{border:1px solid var(--divider);padding:.5rem;text-align:left;vertical-align:top}
+/* mobile overflow fixes (QA, Oct 29) */
+.site-footer .cols>div{min-width:0}
+.site-footer a,.site-footer p,.site-footer li{overflow-wrap:anywhere}
+@media (max-width:480px){.site-footer .cols{grid-template-columns:1fr}}
+main a,main p,main li,main td,main h1,main h2,main h3{overflow-wrap:anywhere}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.tbl-wrap table.tbl{min-width:560px}
