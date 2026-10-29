@@ -673,7 +673,7 @@ def blog_posts():
         m = f'''<section class="section"><div class="wrap prose post"><p><a href="{u('/blog')}">Articles and Podcasts</a></p>
 {img(im, title)}<h1>{t(title)}</h1><p class="meta">{t(", ".join(cats))} | {t(date)} | {t(rt)}</p>
 {content}
-{('<p>' + todo('This post keeps the live phrase about an in person consultation, which relates to the removed consultation product. Keep as is or reword? (for Gavin)', 'open') + '</p>') if slug == 'demographic-marketing' else ''}
+{('<p>' + todo('This post keeps the live phrase about an in person consultation, which relates to the removed on-location report. Keep as is or reword? (for Gavin)', 'open') + '</p>') if slug == 'demographic-marketing' else ''}
 <div class="card" style="margin-top:2rem"><h3>Mike Green</h3>{p(bio) if bio else ''}
 {todo('The header banners on blog posts show a different man labeled Micheal Green than the Mike Green photo used elsewhere. could_not_verify who is pictured.', 'open')}</div>
 <p style="margin-top:1.5rem"><a href="{u('/blog')}">Back to Blog</a></p></div></section>'''
@@ -762,7 +762,7 @@ def redirect_stub(src, dst, why):
     begin(src)
     target = u(dst)
     m = f'''<section class="section"><div class="wrap prose"><h1>This page has moved</h1>
-<p>Stand in for a planned 301 redirect from <code>{src}</code> to <a href="{a_(target)}">{html.escape(dst)}</a> ({html.escape(why)}).</p>
+<p>Stand in for a planned 301 redirect from {('this old URL' if src == '/on-site-report' else '<code>' + src + '</code>')} to <a href="{a_(target)}">{html.escape(dst)}</a> ({html.escape(why)}).</p>
 <p>The real 301 is set at go live on the host. This preview uses a meta refresh.</p>{('<p>' + todo('Redirect target ' + dst + ' is provisional, pending Gavin.', 'open') + '</p>') if 'provisional' in why else ''}</div></section>'''
     finish('Redirecting | Doctor Demographics', 'Redirect stand in.', m, lead=False,
            extra_head=f'<meta http-equiv="refresh" content="0; url={a_(target)}">', canonical=LIVE + (dst if dst.startswith('/') and dst != '/' else '/') if not dst.startswith('http') else dst)
@@ -794,7 +794,7 @@ GHL_BUGS = [
     'Podcast page plays the wrong video on Episodes 291, 259 and 246.',
     'The home page "most recent episode" is stale (Episode 252).',
     'The Site Viability form says "Comparision".',
-    'The form for the removed consultation product (HVWSBqGPEBYVxwgBzyRG) shows a raw label "common.other_option". The product is removed from the new site (Gavin decision), so this only matters while the live page stays up.',
+    'The form for the removed on-location report (HVWSBqGPEBYVxwgBzyRG) shows a raw label "common.other_option". The product is removed from the new site (Gavin decision), so this only matters while the live page stays up.',
 ]
 
 def dedupe_todos():
@@ -829,7 +829,7 @@ def notes_page():
 <p>Preview of doctordemographics.com, rebuilt from the live copy for review. Every page is noindexed and the robots file blocks crawling. Canonicals point to the live URLs.
 Forms and calendars are the live GoHighLevel embeds and order buttons go to the live GoHighLevel pages, so please do not submit anything.</p>
 <h2>Decided by Gavin</h2><ul>
-<li>The in person consultation product: removed from the preview (no page, link, or listing).</li>
+<li>The removed on-location report: removed from the preview (no page, link, or listing).</li>
 <li>Experience: "since 1983" replaces every year count. Scott McDonald is shown as founder, now retired.</li>
 <li>YouTube: {html.escape(YT_FOOTER)} everywhere.</li></ul>
 <h2>Decisions made by the APEX CEO</h2><p>Each one is a CEO call, pending Gavin/Mike review.</p>

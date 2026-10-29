@@ -28,7 +28,7 @@
 - [open] The Episode 278 title is kept as published, but it uses a word the copy rule bans, so verify.sh flags it once. Keep it or reword it? (/podcast)
 - [open] Episode 268 is missing from the live list. (/podcast)
 - [open] The header banners on blog posts show a different man labeled Micheal Green than the Mike Green photo used elsewhere. could_not_verify who is pictured. (/blog/b/big-city-exodus, /blog/b/demographic-marketing, /blog/b/kiss-of-death-locations-for-2026, /blog/b/launch-smart-5-demographic-factors-for-your-new-practice, /blog/b/places-with-promise-2026, /blog/b/relocate-or-revamp)
-- [open] This post keeps the live phrase about an in person consultation, which relates to the removed consultation product. Keep as is or reword? (for Gavin) (/blog/b/demographic-marketing)
+- [open] This post keeps the live phrase about an in person consultation, which relates to the removed on-location report. Keep as is or reword? (for Gavin) (/blog/b/demographic-marketing)
 - [open] Both webinar dates have passed (2025). Update or retire. (/webinars)
 - [open] Live shows a client quote image here (signed, about referring to Doctor Demographics for over 25 years). Left out under the no testimonials rule. Keep it? (/partner)
 - [open] Dated: publication was expected December 2024. The blog says the book is on Amazon now. Update or retire. (/book)
@@ -66,4 +66,4 @@
 - Podcast page plays the wrong video on Episodes 291, 259 and 246.
 - The home page "most recent episode" is stale (Episode 252).
 - The Site Viability form says "Comparision".
-- The form for the removed consultation product (HVWSBqGPEBYVxwgBzyRG) shows a raw label "common.other_option". The product is removed from the new site (Gavin decision), so this only matters while the live page stays up.
+- The form for the removed on-location report (HVWSBqGPEBYVxwgBzyRG) shows a raw label "common.other_option". The product is removed from the new site (Gavin decision), so this only matters while the live page stays up.
