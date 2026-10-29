@@ -14,25 +14,28 @@
 - [ceo] One live Order button went to the Site Viability form. Both now go to /comp-report-form. (/comp-report)
 - [ceo] Telephone price $90, matches the checkout. (/telephone-consultation)
 
+## CEO calls (Oct 29), pending Gavin
+
+- [CEO call, pending Gavin] the dead State Briefing Vimeo video (792399334, dead on live too) is removed from the preview. For Mike's team: supply a working video if one should show here. (/state-briefings)
+- [CEO call, pending Gavin] the Episode 278 title is kept as published (decided). verify.sh copy check flags it once, by design. (/podcast)
+- [CEO call, pending Gavin] one sentence reworded so it no longer refers to the removed on-location report. It now reads: The idea came to me years ago while consulting with a struggling practice in Washington. (/blog/b/demographic-marketing)
+- [CEO call, pending Gavin] this old URL redirects to /reports. (/on-site-report)
+
 ## Open questions
 
 - [open] Live /about shows only the leadership block and has no page title. Title and heading here are placeholders. (/about)
 - [open] Quick View Report and State Briefings are not listed here on live (hidden pages). Add them to this hub? (/reports)
 - [open] On live, this features list is identical to the Site Viability list. Confirm the Marketing Report features. (/marketing-report)
 - [open] Texas is listed as both available and coming soon. (/state-briefings)
-- [open] The State Briefing Vimeo video (792399334) is dead, on live too. Replace or remove it. (/state-briefings)
 - [open] Dated: says Updated for 2023. (/state-briefings)
 - [open] The intro says three exclusive sample reports, but four are listed. (/sample-reports)
 - [open] Download and episode counts are live claims and look dated. Confirm or remove. (/dental-demographics)
 - [open] Episodes 257 and 258 share the same description on live. (/podcast)
-- [open] The Episode 278 title is kept as published, but it uses a word the copy rule bans, so verify.sh flags it once. Keep it or reword it? (/podcast)
 - [open] Episode 268 is missing from the live list. (/podcast)
 - [open] The header banners on blog posts show a different man labeled Micheal Green than the Mike Green photo used elsewhere. could_not_verify who is pictured. (/blog/b/big-city-exodus, /blog/b/demographic-marketing, /blog/b/kiss-of-death-locations-for-2026, /blog/b/launch-smart-5-demographic-factors-for-your-new-practice, /blog/b/places-with-promise-2026, /blog/b/relocate-or-revamp)
-- [open] This post keeps the live phrase about an in person consultation, which relates to the removed on-location report. Keep as is or reword? (for Gavin) (/blog/b/demographic-marketing)
 - [open] Both webinar dates have passed (2025). Update or retire. (/webinars)
 - [open] Live shows a client quote image here (signed, about referring to Doctor Demographics for over 25 years). Left out under the no testimonials rule. Keep it? (/partner)
 - [open] Dated: publication was expected December 2024. The blog says the book is on Amazon now. Update or retire. (/book)
-- [open] Redirect target /reports is provisional, pending Gavin. (/on-site-report)
 - [open] Needs the order.doctordemographics.com subdomain set up in GHL at cutover. No DNS change made. (every page)
 
 ## Other TODOs

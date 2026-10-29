@@ -131,7 +131,7 @@ def a_(s):
 
 def todo(text, kind=''):
     TODOS.append((CUR['path'] or '/', kind or 'todo', text))
-    cls = 'todo' + ((' ' + kind) if kind else '')
+    cls = 'todo' + ((' ' + ('ceo' if kind.startswith('CEO') else kind)) if kind else '')
     return f'<span class="{cls}">{html.escape(text, quote=False)}</span>'
 
 # ---------------------------------------------------------------- links
@@ -449,7 +449,7 @@ def products():
     desc = (''.join(p(x) for x in L(s, 27, 29)) + f'<h3>{t(L(s,30))}</h3>{ul([L(s,31)])}<div class="btn-row">{btn(L(s,32), ohref(s), "gold")}</div>'
             + f'<h3>{t(L(s,33))}</h3><ul class="states">' + ''.join(f'<li>{t(x)}</li>' for x in states) + '</ul>'
             + todo('Texas is listed as both available and coming soon.', 'open') + f'<p class="note">{t(L(s,59))}</p>')
-    product(s, L(s, 15), video('https://player.vimeo.com/video/792399334?h=3e38309552', title='State Briefing video') + todo('The State Briefing Vimeo video (792399334) is dead, on live too. Replace or remove it.', 'open'), L(s, 17), t(L(s, 18)),
+    product(s, L(s, 15), todo('CEO call, pending Gavin: the dead State Briefing Vimeo video (792399334, dead on live too) is removed from the preview. For Mike\'s team: supply a working video if one should show here.', 'CEO call, pending Gavin'), L(s, 17), t(L(s, 18)),
             feats, L(s, 24), L(s, 25), L(s, 26), desc, '',
             top_extra=f'<p style="margin-top:1rem"><strong>{t(L(s,16))}</strong> {todo("Dated: says Updated for 2023.", "open")}</p>',
             feat_extra=todo('The sample link goes to the Site Viability sample (as on live). No State Briefing sample exists.'),
@@ -559,7 +559,7 @@ def page_podcast():
         if n in (257, 258):
             extra = todo('Episodes 257 and 258 share the same description on live.', 'open')
         m += f'<article class="episode"><div>{media}</div><div><h3>{t("Episode %d: %s" % (n, title))}</h3>{"".join(p(d) for d in desc)}{extra}</div></article>'
-    TODOS.append(('/podcast', 'open', 'The Episode 278 title is kept as published, but it uses a word the copy rule bans, so verify.sh flags it once. Keep it or reword it?'))
+    TODOS.append(('/podcast', 'CEO call, pending Gavin', 'CEO call, pending Gavin: the Episode 278 title is kept as published (decided). verify.sh copy check flags it once, by design.'))
     if 268 not in nums:
         m += f'<p style="margin-top:1rem">{todo("Episode 268 is missing from the live list.", "open")}</p>'
     m += '</div></section>'
@@ -652,6 +652,9 @@ def clean_post(slug):
     for sn in list(root.find_all(string=True)):
         if isinstance(sn, NavigableString) and sn.strip():
             v = fx(str(sn))
+            if 'during an on-site consultation with a struggling practice' in v:
+                CHANGES.append((CUR['path'], 'CEO call, pending Gavin', 'during an on-site consultation with a struggling practice', 'while consulting with a struggling practice'))
+                v = v.replace('during an on-site consultation with a struggling practice', 'while consulting with a struggling practice')
             if v.strip() == 'KFF.org':
                 v = v.replace('KFF.org', 'www.kff.org')
             sn.replace_with(v)
@@ -673,7 +676,7 @@ def blog_posts():
         m = f'''<section class="section"><div class="wrap prose post"><p><a href="{u('/blog')}">Articles and Podcasts</a></p>
 {img(im, title)}<h1>{t(title)}</h1><p class="meta">{t(", ".join(cats))} | {t(date)} | {t(rt)}</p>
 {content}
-{('<p>' + todo('This post keeps the live phrase about an in person consultation, which relates to the removed on-location report. Keep as is or reword? (for Gavin)', 'open') + '</p>') if slug == 'demographic-marketing' else ''}
+{('<p>' + todo('CEO call, pending Gavin: one sentence reworded so it no longer refers to the removed on-location report. It now reads: The idea came to me years ago while consulting with a struggling practice in Washington.', 'CEO call, pending Gavin') + '</p>') if slug == 'demographic-marketing' else ''}
 <div class="card" style="margin-top:2rem"><h3>Mike Green</h3>{p(bio) if bio else ''}
 {todo('The header banners on blog posts show a different man labeled Micheal Green than the Mike Green photo used elsewhere. could_not_verify who is pictured.', 'open')}</div>
 <p style="margin-top:1.5rem"><a href="{u('/blog')}">Back to Blog</a></p></div></section>'''
@@ -756,14 +759,14 @@ REDIRECTS = [('/home-9727', '/', 'duplicate home page'),
              ('/site-viabilty-report-general-form', O('/site-viabilty-report-form'), 'duplicate form page'),
              ('/marketing-report-order-2598', O('/marketing-report-order'), 'duplicate order page with no products (left out per CEO call)'),
              ('/getsocial-102622', O('/getsocial'), 'duplicate training page'),
-             ('/on-site-report', '/reports', 'removed product (Gavin decision). Target is provisional, pending Gavin')]
+             ('/on-site-report', '/reports', 'removed product (Gavin decision). Target /reports is a CEO call, pending Gavin')]
 
 def redirect_stub(src, dst, why):
     begin(src)
     target = u(dst)
     m = f'''<section class="section"><div class="wrap prose"><h1>This page has moved</h1>
 <p>Stand in for a planned 301 redirect from {('this old URL' if src == '/on-site-report' else '<code>' + src + '</code>')} to <a href="{a_(target)}">{html.escape(dst)}</a> ({html.escape(why)}).</p>
-<p>The real 301 is set at go live on the host. This preview uses a meta refresh.</p>{('<p>' + todo('Redirect target ' + dst + ' is provisional, pending Gavin.', 'open') + '</p>') if 'provisional' in why else ''}</div></section>'''
+<p>The real 301 is set at go live on the host. This preview uses a meta refresh.</p>{('<p>' + todo('CEO call, pending Gavin: this old URL redirects to ' + dst + '.', 'CEO call, pending Gavin') + '</p>') if src == '/on-site-report' else ''}</div></section>'''
     finish('Redirecting | Doctor Demographics', 'Redirect stand in.', m, lead=False,
            extra_head=f'<meta http-equiv="refresh" content="0; url={a_(target)}">', canonical=LIVE + (dst if dst.startswith('/') and dst != '/' else '/') if not dst.startswith('http') else dst)
 
@@ -813,13 +816,13 @@ def notes_page():
             if not filter_fn(kind):
                 continue
             pg = 'every page' if len(set(pages)) > 15 else ', '.join(sorted(set(pages)))
-            r += f'<tr><td>{html.escape(kind)}</td><td>{html.escape(text)}</td><td>{html.escape(pg)}</td></tr>'
+            r += f'<tr><td>{html.escape(kind)}</td><td>{html.escape(text.replace("CEO call, pending Gavin: ", ""))}</td><td>{html.escape(pg)}</td></tr>'
         return r
     ch = {}
     for pg, kind, b, a in CHANGES:
         ch.setdefault((kind, b, a), set()).add(pg)
     chrows = ''.join(f'<tr><td>{html.escape(k)}</td><td>{html.escape(b)}</td><td>{html.escape(a)}</td><td>{html.escape(", ".join(sorted(p)) if len(p) < 15 else "many pages")}</td></tr>'
-                     for (k, b, a), p in ch.items() if not k.startswith(('dash', 'no-cost', 'emoji', 'Gavin', 'placeholder')))
+                     for (k, b, a), p in ch.items() if not k.startswith(('dash', 'no-cost', 'emoji', 'Gavin', 'placeholder', 'CEO call')))
     ndash = sum(1 for c in CHANGES if c[1].startswith(('dash', 'emoji')))
     nph = len({c[2] for c in CHANGES if c[1].startswith('placeholder')})
     ngav = len({(c[2], c[3]) for c in CHANGES if c[1].startswith('Gavin')})
@@ -834,14 +837,15 @@ Forms and calendars are the live GoHighLevel embeds and order buttons go to the 
 <li>YouTube: {html.escape(YT_FOOTER)} everywhere.</li></ul>
 <h2>Decisions made by the APEX CEO</h2><p>Each one is a CEO call, pending Gavin/Mike review.</p>
 <div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'ceo')}</table></div>
+<h2>CEO calls (Oct 29), pending Gavin</h2><div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'CEO call, pending Gavin')}</table></div>
 <h2>Open questions</h2><div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'open')}</table></div>
-<h2>Other TODOs</h2><div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k not in ('ceo', 'open'))}</table></div>
+<h2>Other TODOs</h2><div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k not in ('ceo', 'open', 'CEO call, pending Gavin'))}</table></div>
 <h2>GoHighLevel side bugs (not changed, report only)</h2><ul>{''.join(f'<li>{html.escape(b)}</li>' for b in GHL_BUGS)}</ul>
 <h2>Redirect plan (stand in pages)</h2><div class="tbl-wrap"><table class="tbl"><tr><th>From</th><th>To</th><th>Why</th></tr>
 {''.join(f'<tr><td><a href="{u(s)}">{s}</a></td><td>{html.escape(d)}</td><td>{html.escape(w)}</td></tr>' for s, d, w in REDIRECTS)}</table></div>
 <h2>Copy changes</h2><p>{ndash} dash and emoji fixes (builder copy rule) and {nfree} no cost wording changes (CEO call, pending Gavin/Mike review) and {ngav} experience wording changes (Gavin decision) are listed in CHANGES.md (in the repo, not published). {nph} links to a placeholder domain were removed from blog posts (CEO call).</p>
 <div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Before</th><th>After</th><th>Pages</th></tr>{chrows}</table></div>
-<h2>Copy exception</h2><p>The Episode 278 podcast title keeps its published wording, so the copy lint flags it once. It is listed under Open questions above.</p>
+<h2>Copy exception</h2><p>The Episode 278 podcast title keeps its published wording (decided, CEO call, pending Gavin), so the copy lint flags it once by design.</p>
 </div></section>'''
     finish('Preview notes | Doctor Demographics', 'Review notes.', m, lead=False, canonical=LIVE + '/')
 
@@ -864,13 +868,15 @@ def docs(eps):
                 '- On-Site Demographic Marketing Report removed from the preview: no page, link, or listing.\n'
                 '- "Since 1983" replaces every year count (company founded 1983). Scott McDonald shown as founder, now retired.\n'
                 f'- YouTube: {YT_FOOTER} everywhere.\n\n')
-        for label, fn in (('CEO calls, pending Gavin/Mike review', lambda k: k == 'ceo'), ('Open questions', lambda k: k == 'open'),
-                          ('Other TODOs', lambda k: k not in ('ceo', 'open'))):
+        for label, fn in (('CEO calls, pending Gavin/Mike review', lambda k: k == 'ceo'),
+                          ('CEO calls (Oct 29), pending Gavin', lambda k: k == 'CEO call, pending Gavin'),
+                          ('Open questions', lambda k: k == 'open'),
+                          ('Other TODOs', lambda k: k not in ('ceo', 'open', 'CEO call, pending Gavin'))):
             f.write(f'## {label}\n\n')
             for (kind, text), pages in seen.items():
                 if fn(kind):
                     pg = 'every page' if len(set(pages)) > 15 else ', '.join(sorted(set(pages)))
-                    f.write(f'- [{kind}] {text} ({pg})\n')
+                    f.write(f'- [{kind}] {text.replace("CEO call, pending Gavin: ", "")} ({pg})\n')
             f.write('\n')
         f.write('## GoHighLevel side bugs (report only, nothing changed)\n\n' + ''.join(f'- {b}\n' for b in GHL_BUGS))
     with open(os.path.join(ROOT, 'CHANGES.md'), 'w') as f:
