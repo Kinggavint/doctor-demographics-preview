@@ -6,13 +6,16 @@
 - "Since 1983" replaces every year count (company founded 1983). Scott McDonald shown as founder, now retired.
 - YouTube: https://www.youtube.com/@doctordemographicslive2702 everywhere.
 
+## Decided by Mike (Oct 29, 2026)
+
+- Competition Report $350 per site (matches checkout).
+- Telephone Consultation $149, not $90. GHL checkout product change is on Mike's side.
+
 ## CEO calls, pending Gavin/Mike review
 
 - [ceo] Facebook link corrected from doctordemograhics to doctordemographics; could_not_verify which page is the real one. (every page)
 - [ceo] ApexAI link kept in the main menu; confirm it stays. (every page)
-- [ceo] Competition price $350 per site, matches the checkout. (/comp-report)
 - [ceo] One live Order button went to the Site Viability form. Both now go to /comp-report-form. (/comp-report)
-- [ceo] Telephone price $90, matches the checkout. (/telephone-consultation)
 
 ## CEO calls (Oct 29), pending Gavin
 
@@ -43,6 +46,8 @@
 - [todo] Live home shows the Episode 252 video. The podcast page lists a newer most recent episode (10/14/2026, video 0QxDdSgI0VY). Which should show here? (/)
 - [note] Live home also has a hidden popup ("Weekly Practice Placement, Promotion, and Profit Tips", Book prelaunch form s7hud67kdZaPKZmuYwDE, "Join 2,000+ Doctors"). Hidden on live, left out of the preview. Add it? (/)
 - [todo] Mike's own year count was removed under the since 1983 rule. Add a figure for Mike back? (every page)
+- [Mike decision] Competition price $350 per site (confirmed by Mike), matches the checkout. (/comp-report)
+- [Mike decision] Telephone price $149 (decided by Mike). The GHL checkout still shows $90 until Mike updates the product in GHL. (/telephone-consultation)
 - [hidden page] Hidden on live, kept unlinked. Keep, update, or retire?  (/dental-demographics, /mike, /partner, /quick-view-report)
 - [todo] The sample link goes to the Site Viability sample (as on live). No State Briefing sample exists. (/state-briefings)
 - [hidden page] Hidden on live, kept unlinked. Keep, update, or retire? Also dated (Updated for 2023). (/state-briefings)

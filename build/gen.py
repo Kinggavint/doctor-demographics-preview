@@ -422,14 +422,14 @@ def products():
     s = 'comp-report'
     begin('/comp-report')
     product(s, L(s, 15), video(FS + '69b8614e9379cf3f4dc0cf65.mp4', 'e12832a2aa8ca86a.jpg', 'Competition Report video'), L(s, 17),
-            t(L(s, 18)) + ' ' + todo('Competition price $350 per site, matches the checkout.', 'ceo'),
+            t(L(s, 18)) + ' ' + todo('Competition price $350 per site (confirmed by Mike), matches the checkout.', 'Mike decision'),
             ul(L(s, 19, 23)), L(s, 24), L(s, 25), L(s, 26), ''.join(p(x) for x in L(s, 27, 29)),
             f'<div class="need"><h3>{t(L(s,31))}</h3>{need_list(L(s,32,35))}<p class="note">{t(L(s,36))}</p></div>',
             feat_extra=todo('One live Order button went to the Site Viability form. Both now go to /comp-report-form.', 'ceo'))
     CHANGES.append(('/comp-report', 'wrong button target fixed (CEO call)', '/site-viabilty-report-form', '/comp-report-form'))
     s = 'telephone-consultation'
     begin('/telephone-consultation')
-    price = f'Price: <s>$225</s> $90 (60% off) {todo("Telephone price $90, matches the checkout.", "ceo")}'
+    price = f'Price: $149 {todo("Telephone price $149 (decided by Mike). The GHL checkout still shows $90 until Mike updates the product in GHL.", "Mike decision")}'
     desc = (f'<h3>{t(L(s,28))}</h3>{p(L(s,29))}{ul([x.lstrip("- ") for x in L(s,30,32)], "plain")}'
             + ''.join(p(x) for x in L(s, 33, 35)) + f'<h3>{t(L(s,36))}</h3>{ul(L(s,37,40), "plain")}')
     product(s, L(s, 15), video(FS + '68e831484d2dff19aa33a36b.mp4', title='Telephone Consultation video'), L(s, 17), price,
@@ -835,6 +835,9 @@ Forms and calendars are the live GoHighLevel embeds and order buttons go to the 
 <li>The removed on-location report: removed from the preview (no page, link, or listing).</li>
 <li>Experience: "since 1983" replaces every year count. Scott McDonald is shown as founder, now retired.</li>
 <li>YouTube: {html.escape(YT_FOOTER)} everywhere.</li></ul>
+<h2>Decided by Mike</h2><ul>
+<li>Competition Report: $350 per site (matches the checkout).</li>
+<li>Telephone Consultation: $149 (not $90). The GHL checkout product still needs to change to $149 on Mike's side.</li></ul>
 <h2>Decisions made by the APEX CEO</h2><p>Each one is a CEO call, pending Gavin/Mike review.</p>
 <div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'ceo')}</table></div>
 <h2>CEO calls (Oct 29), pending Gavin</h2><div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'CEO call, pending Gavin')}</table></div>
@@ -867,7 +870,10 @@ def docs(eps):
         f.write('# Doctor Demographics preview: open items\n\n## Decided by Gavin (Oct 29, 2026)\n\n'
                 '- On-Site Demographic Marketing Report removed from the preview: no page, link, or listing.\n'
                 '- "Since 1983" replaces every year count (company founded 1983). Scott McDonald shown as founder, now retired.\n'
-                f'- YouTube: {YT_FOOTER} everywhere.\n\n')
+                f'- YouTube: {YT_FOOTER} everywhere.\n\n'
+                '## Decided by Mike (Oct 29, 2026)\n\n'
+                '- Competition Report $350 per site (matches checkout).\n'
+                '- Telephone Consultation $149, not $90. GHL checkout product change is on Mike\'s side.\n\n')
         for label, fn in (('CEO calls, pending Gavin/Mike review', lambda k: k == 'ceo'),
                           ('CEO calls (Oct 29), pending Gavin', lambda k: k == 'CEO call, pending Gavin'),
                           ('Open questions', lambda k: k == 'open'),
