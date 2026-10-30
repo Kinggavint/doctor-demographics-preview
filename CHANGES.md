@@ -12,6 +12,7 @@
 | / | typo (CEO call) | Infomation | Information |
 | / | typo (CEO call) | Infomation | Information |
 | / | Gavin design (Oct 30) | video thumbnails on report cards | report icons |
+| / | Gavin design (Oct 30) | Key Benefits: 4 small icon cards | navy editorial split: photo + numbered benefit rows with short headlines (copy unchanged) |
 | / | Gavin decision (since 1983, Scott now retired) | For over 40 years, the team at Doctor Demographics has | Since 1983, the team at Doctor Demographics has |
 | / | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
 | / | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |

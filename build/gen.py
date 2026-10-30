@@ -356,6 +356,22 @@ def hero(h1, sub='', kicker='', small=True, actions='', ico=''):
     s = f'<p>{sub}</p>' if sub else ''
     return f'<section class="hero{" small" if small else ""}"><div class="wrap">{k}<h1{' class="with-ico"' if ico else ''}>{h1}</h1>{s}{actions}</div></section>'
 # ---------------------------------------------------------------- pages
+# Home "Key Benefits" (Gavin redesign, Oct 30): navy editorial split. Benefit bodies are the live copy verbatim (home.txt 24-27);
+# the short headlines only restate each line. No new claims or numbers. Scoped classes: .kb-*.
+BENEFITS = (('pen-line', 'Hand-written by specialist demographers'), ('messages-square', 'Live one-on-one follow-up consultation'),
+            ('map', 'Thousands of reports, nearly every street'), ('scale', 'Straight answers, good news or bad'))
+def benefits_home(s):
+    rows = ''.join(
+        f'<li class="kb-row"><span class="kb-num" aria-hidden="true">{i:02d}</span>{icon(ic, "ico kb-ico")}'
+        f'<div class="kb-txt"><h3>{html.escape(hd, quote=False)}</h3><p>{t(x).replace('/', '/<wbr>')}</p></div></li>'
+        for i, ((ic, hd), x) in enumerate(zip(BENEFITS, L(s, 24, 27)), 1))
+    return (f'<section class="section kb" aria-labelledby="kb-title"><div class="wrap kb-grid">'
+            f'<div class="kb-intro"><p class="kb-kicker">Dental · Medical · Veterinary · Optometric</p>'
+            f'<h2 id="kb-title">{t(L(s,23))}</h2>'
+            f'<figure class="kb-fig">{img("a3f4f699-56ba-4b33-ba83-e0f60b7e19f8.jpeg", "Team reviewing findings together around a table")}'
+            f'<figcaption class="kb-chip">{icon("messages-square", "ico kb-chip-ico")}<span>Every report includes a live one-on-one follow-up</span></figcaption></figure></div>'
+            f'<ol class="kb-list">{rows}</ol></div></section>')
+
 def page_home():
     begin('/')
     s = 'home'
@@ -366,8 +382,7 @@ def page_home():
     m += f'''<section class="section"><div class="wrap split"><div class="prose">
 <h2>{t(L(s,19))}</h2>{p(L(s,20))}{p(L(s,21))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div>
 <div>{img('62748d21ea2ab126f720248c.png', 'Doctors and team members smiling')}</div></div></section>
-<section class="section alt"><div class="wrap"><h2 class="center">{t(L(s,23))}</h2><div class="grid g4">
-{''.join(f'<div class="card benefit">{icon(ic, "ico lg")}<p>{t(x)}</p></div>' for x, ic in zip(L(s,24,27), ('pen-line', 'messages-square', 'map', 'scale')))}</div></div></section>
+{benefits_home(s)}
 <section class="section"><div class="wrap split"><div>{img('d584a9f2-537d-4611-ae13-77848e700c56.png', 'Practice owners reviewing plans together')}</div>
 <div class="prose"><h2>{t(L(s,28))}</h2>{p(L(s,29))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div></div></section>
 <section class="section dark"><div class="wrap split"><div class="prose"><h2>{t(L(s,31))}</h2>{p(L(s,32))}
@@ -380,6 +395,7 @@ def page_home():
         m += f'<div class="card report-card">{ricon(href, "ico xl")}<h3>{t(L(s,h))}</h3>{p(L(s,d))}<div class="actions">{btn("More Infomation", href)}</div></div>'
     m += '</div></div></section>'
     CHANGES.append(('/', 'Gavin design (Oct 30)', 'video thumbnails on report cards', 'report icons'))
+    CHANGES.append(('/', 'Gavin design (Oct 30)', 'Key Benefits: 4 small icon cards', 'navy editorial split: photo + numbered benefit rows with short headlines (copy unchanged)'))
     finish(title_of(s, 'Doctor Demographics'), desc_of(s), m, lead=True)
 
 def page_about():
