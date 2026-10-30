@@ -799,6 +799,13 @@ RETIRED = {'/best-sites-report-medical-form', '/best-sites-report-veterinary-for
            '/site-viability-report-veterinary-order', '/state-briefing-order', '/order-complete-state-briefing',
            '/marketing-report-order-2598', '/state-briefings', '/webinars'}
 
+WHY_R = 'retired per Mike (Oct 2026); target approved by APEX CEO Oct 30'
+for _p in sorted(RETIRED) + ['/webinar-austin', '/webinar-broadcast-austin', '/webinar-broadcast-cincinnati', '/webinar-cincinnati',
+                             '/webinar-confirmation-austin', '/webinar-confirmation-cincinnati', '/webinar-registration-austin', '/webinar-registration-cincinnati']:
+    _d = '/best-sites-report' if _p.startswith('/best-sites') else '/site-viability-report' if _p.startswith('/site-viab') else '/reports'
+    REDIRECTS.append((_p, _d, WHY_R))
+
+
 def ghl_stub(r):
     path = r['path']
     begin(path)
