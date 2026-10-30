@@ -480,3 +480,5 @@ p.dx-cta-btns{margin:0}
 @media (min-width:1001px){.dx-glass-grid.apx-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .btn.apx-light{background:#fff;border-color:#fff;color:var(--primary)}
 .btn.apx-light:hover{background:var(--offset);border-color:var(--offset);color:var(--primary-hover)}
+.apx-hero .dx-hero-txt>p{margin:1.25rem 0 0}
+@media (max-width:900px){.nav.open{flex-wrap:nowrap;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);overflow-y:auto}.nav.open>*{flex-shrink:0}}

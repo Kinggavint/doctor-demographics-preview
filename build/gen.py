@@ -903,7 +903,7 @@ def page_apex_draft():
 #  apex-hero-laptop-stethoscope-unsplash-nci.webp: Photo "Stethoscope and Laptop Computer" by National Cancer Institute (@nci)
 #    on Unsplash (photographer Daniel Sone), https://unsplash.com/photos/person-sitting-while-using-laptop-computer-and-green-stethoscope-near-NFvdKIhxYlU
 #    (Unsplash License, https://unsplash.com/license). Cropped 4:3, mild cool grade, 720x540 WebP q76 (16KB).
-#  Menu logo: apexai-logo-full.svg is the original from https://apexailabs.ai/images/apexai-logo-full.svg (280x64).
+#  Menu logo: build/assets/apexai-logo-full.svg is the original (kept out of docs/, unused on the site) from https://apexailabs.ai/images/apexai-logo-full.svg (280x64).
 #    apexai-logo-nav.svg is a compact copy: same dark badge, bolt and wordmark, subline dropped, wordmark stacked on two lines (135x64), text as paths (Inter Bold).
 # Gavin's line "the only company in the world with that level of detail" is softened until there is a source (see TODO).
 APEX_URL = 'https://apexailabs.ai'
