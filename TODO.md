@@ -38,7 +38,6 @@
 
 - [Mike decision] Marketing Report features written from the Marketing Report video on this page, as Mike asked. The 20 minute call line is kept from the live page. Please check the wording. (/marketing-report)
 - [Mike decision] Competition price $350 per site (confirmed by Mike), matches the checkout. (/comp-report)
-- [Mike decision] Telephone price $149 (decided by Mike). The GHL checkout still shows $90 and the $75 video upgrade, which Mike asked to remove. GHL change pending. (/telephone-consultation)
 - [hidden page (decided)] Mike: partners only, not for retail. Stays unlisted. (/quick-view-report)
 - [hidden page] Hidden on live, kept unlinked. Keep, update, or retire? Only linked from the Quick View page (partners only, per Mike). (/quick-view-report-sample)
 - [todo] GHL side: after submit, this form sends people to the Best Sites sample PDF, not the Competition sample. Fix in GHL. (/competition-report-sample)

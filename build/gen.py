@@ -295,7 +295,7 @@ def footer():
 <div><img class="logo" src="{u('assets/img/logo-white.svg')}" alt="Doctor Demographics" loading="lazy" style="height:54px;width:auto;margin-bottom:1rem">
 <p>{t('For over 40 years, the Doctor Demographics team have helped thousands of doctors and practice owners select the perfect place to set up their practice.')}</p></div>
 <div><h4>Quick Links</h4><ul>{''.join(f'<li><a href="{u(h)}">{ricon(h, "ico sm") if h.strip("/") in REPORT_ICON else ""}{l}</a></li>' for l, h in ql)}</ul></div>
-<div><h4>Contact Us</h4><ul><li><a href="{PHONE_TEL}"><strong>{PHONE}</strong></a></li><li><a href="mailto:{EMAIL}"><strong>{EMAIL}</strong></a></li></ul></div>
+<div><h4>Contact Us</h4><ul><li><a href="{PHONE_TEL}"><strong>{PHONE}</strong></a></li><li><a href="mailto:{EMAIL}"><strong>{EMAIL.replace('@', '<wbr>@')}</strong></a></li></ul></div>
 <div><h4>Follow Us</h4><ul>{soc}</ul>
 </div>
 </div>
@@ -431,7 +431,7 @@ def reports_page():
         m += f'<div class="card report-card">{ricon(slug, "ico xl")}<h3>{t(title)}</h3>{p(L(s,d))}<div class="actions">{acts}</div></div>'
     m += f'''</div></div></section>
 <section class="section alt"><div class="wrap grid g2"><div><h3>Contact Us by Phone</h3><p><a href="{PHONE_TEL}"><strong>{PHONE}</strong></a></p></div>
-<div><h3>Contact Us by Email</h3><p><a href="mailto:{EMAIL}"><strong>{EMAIL}</strong></a></p></div></div></section>'''
+<div><h3>Contact Us by Email</h3><p><a href="mailto:{EMAIL}"><strong>{EMAIL.replace('@', '<wbr>@')}</strong></a></p></div></div></section>'''
     CHANGES.append(('/reports', 'client OEDIT d92ae0d', 'card buttons', 'added "Order a report" next to More Info'))
     CHANGES.append(('/reports', 'Gavin design (Oct 30)', 'sample report buttons on each block and the Order a Sample Report button', 'removed; report icons added to all 5 blocks'))
     finish(title_of(s, 'Demographic Reports'), desc_of(s), m)
@@ -499,7 +499,7 @@ def products():
     CHANGES.append(('/comp-report', 'wrong button target fixed (CEO call)', '/site-viabilty-report-form', '/comp-report-form'))
     s = 'telephone-consultation'
     begin('/telephone-consultation')
-    price = f'Price: $149 {todo("Telephone price $149 (decided by Mike). The GHL checkout still shows $90 and the $75 video upgrade, which Mike asked to remove. GHL change pending.", "Mike decision")}'
+    price = 'Price: $149'
     desc = (f'<h3>{t(L(s,28))}</h3>{p(L(s,29))}{ul([x.lstrip("- ") for x in L(s,30,32)], "plain")}'
             + ''.join(p(x) for x in L(s, 33, 35)) + f'<h3>{t(L(s,36))}</h3>{ul(L(s,37,40), "plain")}')
     product(s, L(s, 15), video(FS + '68e831484d2dff19aa33a36b.mp4', title='Telephone Consultation video'), L(s, 17), price,
@@ -755,7 +755,7 @@ def page_contact():
     m = hero('Contact Us')
     m += f'''<section class="section"><div class="wrap split contact"><div class="grid">
 <a class="card contact-card" href="{PHONE_TEL}">{icon('phone', 'ico xl')}<span><span class="lbl">Contact Us by Phone</span><strong>{PHONE}</strong></span></a>
-<a class="card contact-card" href="mailto:{EMAIL}">{icon('mail', 'ico xl')}<span><span class="lbl">Contact Us by Email</span><strong>{EMAIL}</strong></span></a></div>
+<a class="card contact-card" href="mailto:{EMAIL}">{icon('mail', 'ico xl')}<span><span class="lbl">Contact Us by Email</span><strong>{EMAIL.replace('@', '<wbr>@')}</strong></span></a></div>
 <div>{img('67b8a4a9f4c6849f1db0854b.jpg', 'Doctor Demographics: our team is ready to help', 'contact-img')}</div></div></section>
 <section class="section alt"><div class="wrap"><h2 class="center">Demographic Reports</h2><div class="grid g5 report-links">
 {''.join(f'<a class="card report-link" href="{u(h)}">{ricon(h, "ico lg")}<span>{l}</span></a>' for l, h in NAV_REPORTS)}</div></div></section>'''
@@ -933,7 +933,7 @@ Forms and calendars are the live GoHighLevel embeds and order buttons go to the 
 <li>YouTube: {html.escape(YT_FOOTER)} everywhere.</li></ul>
 <h2>Decided by Mike</h2><ul>
 <li>Competition Report: $350 per site (matches the checkout).</li>
-<li>Telephone Consultation: $149 (not $90). Remove the $75 video upgrade. The GHL checkout still needs both changes.</li>
+<li>Telephone Consultation: $149. QA saw the GHL checkout showing a single $149 item on Oct 30.</li>
 <li>Medical, veterinary and specialist versions, State Briefings, the /marketing-report-order-2598 page and the webinars are retired. Their preview pages are gone.</li>
 <li>Quick View Report: partners only, stays unlisted. /mike stays hidden. /partner is hidden for now. The newsletter pop up stays hidden.</li>
 <li>Marketing Report features: written from the video on that page.</li>
