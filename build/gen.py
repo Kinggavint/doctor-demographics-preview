@@ -10,14 +10,22 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from icons import ICONS  # Lucide, ISC License (build/LICENSE-lucide.txt)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Production build (launch-doctordemographics): DD_PROD=1 python3 build/gen.py -> dist/ (served by CloudFront at cutover).
+PROD = os.environ.get('DD_PROD') == '1'
 DATA = os.path.join(ROOT, 'build', 'data')
 # Published output lives in docs/ (GitHub Pages source). build/ and the review docs stay at the repo root, unpublished.
-SITE = os.path.join(ROOT, 'docs')
+SITE = os.path.join(ROOT, 'dist' if PROD else 'docs')
 LIVE = 'https://doctordemographics.com'
 # TODO cutover: switch ORDER_BASE to https://order.doctordemographics.com once the GHL subdomain exists.
-ORDER_BASE = 'https://doctordemographics.com'
 ORDER_FUTURE = 'https://order.doctordemographics.com'
+ORDER_BASE = ORDER_FUTURE if PROD else 'https://doctordemographics.com'
 PREVIEW_BASE = 'https://kinggavint.github.io/doctor-demographics-preview/'
+GHL_PATHS = ['/getsocial', '/accessdso', '/apexchat', '/ppschedule', '/best-sites-report-form', '/comp-report-form',
+             '/quick-view-report-form', '/site-viabilty-report-form', '/best-sites-report-order', '/comp-report-order',
+             '/marketing-report-order', '/quick-view-report-order', '/site-viability-order', '/telephone-consultation-order',
+             '/order-complete', '/order-complete-telephone']
+# Hidden on live (decided): unlinked, noindex, left out of the sitemap in production.
+PROD_NOINDEX = {'/partner', '/book', '/mike', '/quick-view-report', '/quick-view-report-sample', '/dental-demographics'}
 PHONE, PHONE_TEL = '(844) 704-0499', 'tel:+18447040499'
 EMAIL = 'support@doctordemographics.com'
 APPLE = 'https://podcasts.apple.com/us/podcast/doctor-demographics-podcast/id800840123'
@@ -138,6 +146,8 @@ def a_(s):
 def todo(text, kind=''):
     TODOS.append((CUR['path'] or '/', kind or 'todo', text))
     cls = 'todo' + ((' ' + ('ceo' if kind.startswith('CEO') else kind)) if kind else '')
+    if PROD:
+        return ''
     return f'<span class="{cls}">{html.escape(text, quote=False)}</span>'
 
 # ---------------------------------------------------------------- links
@@ -202,13 +212,13 @@ def ghl_form(fid, name, height=700):
             f'data-deactivation-value="" data-form-name="{a_(name)}" data-height="{height}" data-layout-iframe-id="inline-{fid}" '
             f'data-form-id="{fid}" title="{a_(name)}" style="min-height:{height}px"></iframe>'
             f'<script src="https://link.msgsndr.com/js/form_embed.js"></script>'
-            f'<p class="embed-note">This is the live GoHighLevel form ({fid}). Preview reviewers: please do not submit it.</p></div>')
+            + ('' if PROD else f'<p class="embed-note">This is the live GoHighLevel form ({fid}). Preview reviewers: please do not submit it.</p>') + '</div>')
 
 def ghl_booking(cid):
     return (f'<div class="form-embed"><iframe src="https://api.leadconnectorhq.com/widget/booking/{cid}" '
             f'id="{cid}_booking" title="Booking calendar" scrolling="no" style="min-height:900px;overflow:hidden"></iframe>'
             f'<script src="https://link.msgsndr.com/js/form_embed.js"></script>'
-            f'<p class="embed-note">This is the live GoHighLevel booking calendar ({cid}). Preview reviewers: please do not book a slot.</p></div>')
+            + ('' if PROD else f'<p class="embed-note">This is the live GoHighLevel booking calendar ({cid}). Preview reviewers: please do not book a slot.</p>') + '</div>')
 
 # ---------------------------------------------------------------- icons
 # One Lucide icon per report, used everywhere a report is named (Gavin, Oct 30).
@@ -236,6 +246,8 @@ def begin(path):
     CUR['path'] = '/' + path if path else '/'
     CUR['depth'] = len(path.split('/')) if path else 0
 
+PREVIEW_BAR = '<div class="preview-bar">Preview build for review only. Not the live site. Forms and order buttons connect to the live GoHighLevel system, so please do not submit them. <a href="{notes}">Review notes and open items</a></div>\n'
+
 def header():
     cur = CUR['path']
     def nl(label, href):
@@ -243,8 +255,7 @@ def header():
         return f'<a href="{u(href)}"{ac}>{label}</a>'
     dd = ''.join(f'<a href="{u(h)}">{ricon(h, "ico sm")}{l}</a>' for l, h in NAV_REPORTS)
     return f'''<a class="skip" href="#main">Skip to content</a>
-<div class="preview-bar">Preview build for review only. Not the live site. Forms and order buttons connect to the live GoHighLevel system, so please do not submit them. <a href="{u('/preview-notes')}">Review notes and open items</a></div>
-<div class="topbar"><div class="wrap"><a href="{PHONE_TEL}">{PHONE}</a><a href="mailto:{EMAIL}">{EMAIL}</a></div></div>
+{'' if PROD else PREVIEW_BAR.format(notes=u('/preview-notes'))}<div class="topbar"><div class="wrap"><a href="{PHONE_TEL}">{PHONE}</a><a href="mailto:{EMAIL}">{EMAIL}</a></div></div>
 <header class="site-header"><div class="wrap">
 <a class="logo" href="{u('/')}"><img src="{u('assets/img/logo.svg')}" alt="Doctor Demographics" width="226" height="55"></a>
 <button class="menu-toggle" aria-expanded="false" aria-controls="nav" onclick="var n=document.getElementById('nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">Menu</button>
@@ -311,28 +322,44 @@ def finish(title, desc, main, flag=None, lead=False, extra_head='', canonical=No
     canon = canonical or (LIVE + ('' if path == '/' else path))
     if path == '/':
         canon = LIVE + '/'
-    fl = f'<div class="flag"><div class="wrap">{flag}</div></div>' if flag else ''
+    fl = f'<div class="flag"><div class="wrap">{flag}</div></div>' if flag and not PROD else ''
+    robots = 'noindex, nofollow' if (not PROD or path in PROD_NOINDEX) else 'index, follow'
     head = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{a_(desc)}">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="{robots}">
 <link rel="canonical" href="{canon}">
 <link rel="icon" href="{u('assets/img/68a3b42d10041847e0bead17.png')}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="{u('css/style.css')}">{extra_head}
+<link rel="stylesheet" href="{u('css/style.css')}">{extra_head}{head_tags(path, title, desc, main, canon)}
 </head><body>'''
     if chrome:
         doc = head + header() + fl + f'<main id="main">{main}</main>' + (leadership_short() if lead and path == '/' else '') + footer() + '</body></html>\n'
     else:
         doc = head + f'<main id="main">{main}</main></body></html>\n'
+    if PROD:
+        doc = prod_links(doc)
     rel = path.strip('/')
     out = os.path.join(SITE, rel, 'index.html') if rel else os.path.join(SITE, 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(doc)
     PAGES.append(path)
+
+# Extra <head> tags (analytics, JSON-LD). Each hook is f(path, title, desc, main, canon) -> str; empty string means nothing added.
+HEAD_HOOKS = []
+
+def head_tags(path, title, desc, main, canon):
+    return ''.join(h(path, title, desc, main, canon) for h in HEAD_HOOKS)
+
+def prod_links(doc):
+    """Production: links to GHL pages go straight to the order subdomain (skips the 301 hop)."""
+    alt = '|'.join(re.escape(p) for p in sorted(GHL_PATHS, key=len, reverse=True))
+    doc = re.sub(r'https://(?:www\.)?doctordemographics\.com(' + alt + r')(?=["/?#])', lambda m_: ORDER_FUTURE + m_.group(1), doc)
+    # Pages are served as /<path>/ (CloudFront 301s /<path> to /<path>/), so absolute site links and canonicals use the slash form.
+    return re.sub(r'(https://doctordemographics\.com/[A-Za-z0-9_/-]*[A-Za-z0-9_-])(?=["?#])', r'\1/', doc)
 
 def title_of(slug, fallback):
     tt = META.get(slug, {}).get('title') or fallback
@@ -1081,20 +1108,25 @@ Forms and calendars are the live GoHighLevel embeds and order buttons go to the 
     finish('Preview notes | Doctor Demographics', 'Review notes.', m, lead=False, canonical=LIVE + '/')
 
 def page_404():
+    base = (LIVE + '/') if PROD else PREVIEW_BASE
     home = open(os.path.join(SITE, 'index.html')).read()
     begin('/')
     links = [('Home', ''), ('Demographic Reports', 'reports/'), ('Sample Reports', 'sample-reports/'), ('Podcast', 'podcast/'), ('Blog', 'blog/'), ('Contact Us', 'contact/')]
     m = hero('Page not found', 'Sorry, we could not find that page. It may have moved or the address may be mistyped.',
-             actions=f'<div class="btn-row"><a class="btn gold" href="{PREVIEW_BASE}">Go to the home page</a><a class="btn ghost" href="{PREVIEW_BASE}contact/">Contact us</a></div>')
+             actions=f'<div class="btn-row"><a class="btn gold" href="{base}">Go to the home page</a><a class="btn ghost" href="{base}contact/">Contact us</a></div>')
     m += ('<section class="section"><div class="wrap prose"><h2>Popular pages</h2><ul class="check">'
-          + ''.join(f'<li><a href="{PREVIEW_BASE}{h}">{l}</a></li>' for l, h in links)
+          + ''.join(f'<li><a href="{base}{h}">{l}</a></li>' for l, h in links)
           + f'</ul><p>Questions? Call <a href="{PHONE_TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p></div></section>')
     CUR['depth'] = 0
     finish('Page not found | Doctor Demographics', 'Page not found.', m, lead=False)
     PAGES.pop()
     src = open(os.path.join(SITE, 'index.html')).read()
     open(os.path.join(SITE, 'index.html'), 'w').write(home)
-    s404 = src.replace('<head><meta charset="utf-8">', f'<head><meta charset="utf-8">\n<base href="{PREVIEW_BASE}">', 1)
+    s404 = src.replace('<head><meta charset="utf-8">', f'<head><meta charset="utf-8">\n<base href="{base}">', 1)
+    if PROD:
+        s404 = s404.replace('<meta name="robots" content="index, follow">', '<meta name="robots" content="noindex, follow">', 1)
+        s404 = re.sub(r'<link rel="canonical" href="[^"]*">\n?', '', s404, count=1)
+    s404 = re.sub(r'\n<script type="application/ld\+json">.*?</script>', '', s404)
     open(os.path.join(SITE, '404.html'), 'w').write(s404)
 
 def docs(eps):
@@ -1151,6 +1183,84 @@ Preview: {PREVIEW_BASE}
 - Pages: {len(PAGES)} generated. Podcast episodes listed: {len(eps)}.
 ''')
 
+def prod_files():
+    """Production robots.txt and sitemap.xml (public pages only; hidden pages and redirects left out)."""
+    import datetime
+    today = datetime.date.today().isoformat()
+    # Static assets are committed in docs/ (shared with the preview); copy them into the production folder.
+    for d in ('assets', 'css'):
+        shutil.copytree(os.path.join(ROOT, 'docs', d), os.path.join(SITE, d), dirs_exist_ok=True)
+    urls = [p for p in PAGES if p not in PROD_NOINDEX]
+    with open(os.path.join(SITE, 'robots.txt'), 'w') as f:
+        f.write(f'User-agent: *\nAllow: /\n\nSitemap: {LIVE}/sitemap.xml\n')
+    with open(os.path.join(SITE, 'sitemap.xml'), 'w') as f:
+        f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
+        for p in sorted(urls, key=lambda x: (x != '/', x)):
+            loc = LIVE + '/' if p == '/' else LIVE + p + '/'
+            f.write(f'  <url><loc>{loc}</loc><lastmod>{today}</lastmod></url>\n')
+        f.write('</urlset>\n')
+
+# ---------------------------------------------------------------- analytics, Organization JSON-LD, llms.txt
+# GA4 web stream "Doctor Demographics site - GA4" (property 312406016, stream 3467154372). Verified from the GA4 Admin API
+# data stream list and the gtag config on the old live GHL pages. Production only, so preview visits never reach the property.
+GA4_MEASUREMENT_ID = 'G-R78SE578C3'
+ORG_ID = LIVE + '/#organization'
+
+def ld(obj):
+    """One JSON-LD block. '</' is escaped so text can never close the script tag."""
+    return '\n<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>'
+
+def ga4_tag(path, title, desc, main, canon):
+    if not PROD or not GA4_MEASUREMENT_ID:
+        return ''
+    g = GA4_MEASUREMENT_ID
+    return (f'\n<script async src="https://www.googletagmanager.com/gtag/js?id={g}"></script>'
+            f"\n<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{g}');</script>")
+
+def organization():
+    """Facts shown on the site: footer (legal name, phone, email, socials, Since 1983), About (founder)."""
+    return {'@type': 'Organization', '@id': ORG_ID, 'name': 'Doctor Demographics', 'legalName': 'Doctor Demographics, LLC',
+            'url': LIVE + '/', 'logo': LIVE + '/assets/img/logo.svg',
+            'description': t('Since 1983, the Doctor Demographics team has helped thousands of doctors and practice owners select the perfect place to set up their practice.'),
+            'foundingDate': '1983', 'founder': {'@type': 'Person', 'name': 'Scott McDonald'},
+            'telephone': PHONE_TEL.replace('tel:', ''), 'email': EMAIL,
+            'contactPoint': {'@type': 'ContactPoint', 'telephone': PHONE_TEL.replace('tel:', ''), 'email': EMAIL, 'contactType': 'customer service'},
+            'sameAs': [h for _, h in SOCIALS]}
+
+def org_ld(path, title, desc, main, canon):
+    if path != '/':
+        return ''
+    site = {'@type': 'WebSite', '@id': LIVE + '/#website', 'name': 'Doctor Demographics', 'url': LIVE + '/', 'publisher': {'@id': ORG_ID}}
+    return ld({'@context': 'https://schema.org', '@graph': [organization(), site]})
+
+HEAD_HOOKS += [ga4_tag, org_ld]
+
+def llms_txt():
+    """/llms.txt: plain summary for AI crawlers, facts and prices as shown on the site."""
+    def lk(name, path):
+        return f'[{name}]({LIVE}{path}/)'
+    reports = [('Best Sites Report', '/best-sites-report', 'Report and consultation. Finds the 5 best sites in an area you define (up to 5 counties in the same state), with a 20 minute consultation. Price: $795.'),
+               ('Site Viability Report', '/site-viability-report', 'Checks the viability of one practice location before you sign, using 14 contiguous zip codes and drive time radii, with a 20 minute consultation. Price: $495 (discount for multiple sites).'),
+               ('Marketing Report', '/marketing-report', 'Research based analysis of a practice brand, marketing tools, competition and clinical offerings. Price: $695.'),
+               ('Competition Report', '/comp-report', 'Analysis of the local competition for a professional practice. Price: $350 per site.'),
+               ('Telephone Consultation', '/telephone-consultation', 'Live telephone consultation on practice placement, marketing and other challenges. Price: $149.')]
+    out = ['# Doctor Demographics', '',
+           '> Since 1983, Doctor Demographics has provided demographic and psychographic data and custom reports that help doctors and practice owners (dental, medical, optometry, veterinary) choose the perfect place to put a practice.', '',
+           f'Doctor Demographics, LLC. Founder: Scott McDonald (now retired). Owner and Lead Demographer: Mike Green. Phone: {PHONE}. Email: {EMAIL}.', '',
+           '## Reports and services', '', f'* {lk("All demographic reports", "/reports")}: overview of every report.']
+    out += [f'* {lk(n, p_)}: {d}' for n, p_, d in reports]
+    out += ['', '## Learn', '',
+            f'* {lk("Sample Reports", "/sample-reports")}: sample pages from each report.',
+            f'* {lk("The Perfect Place to Put a Practice Podcast", "/podcast")}: podcast with Scott McDonald and Mike Green. Also on [Apple Podcasts]({APPLE}), [Spotify]({SPOTIFY}) and [YouTube]({YT_FOOTER}).',
+            f'* {lk("Blog", "/blog")}: articles on practice locations and demographics by Mike Green.',
+            '', '## Company', '',
+            f'* {lk("About", "/about")}: leadership team.',
+            f'* {lk("Contact", "/contact")}: phone and email.', '']
+    txt = '\n'.join(out)
+    assert not re.search('[\u2013\u2014]| - |free', txt, re.I), 'llms.txt copy rule'
+    open(os.path.join(SITE, 'llms.txt'), 'w').write(txt)
+
+
 # ---------------------------------------------------------------- main
 KEEP_PATHS = {'/', '/about', '/reports', '/best-sites-report', '/site-viability-report', '/marketing-report', '/comp-report',
               '/telephone-consultation', '/quick-view-report', '/sample-reports',
@@ -1162,10 +1272,16 @@ if __name__ == '__main__':
     page_home(); page_about(); reports_page(); products(); sample_hub(); samples(); page_dental()
     eps = page_podcast(); blog_index(); blog_posts(); page_contact()
     legal('privacy-policy', 'Privacy Policy'); legal('eula', 'Terms and Conditions')
-    page_partner(); page_book(); page_mike(); page_apex_draft(); page_apex_ai_labs()
-    for s_, d_, w_ in REDIRECTS:
-        redirect_stub(s_, d_, w_)
-    for r in ghl_rows():
-        ghl_stub(r)
-    notes_page(); page_404(); docs(eps)
+    page_partner(); page_book(); page_mike()
+    if not PROD:
+        page_apex_draft()  # DRAFT: not shipped to production
+    page_apex_ai_labs(); llms_txt()
+    if PROD:
+        page_404(); prod_files()
+    else:
+        for s_, d_, w_ in REDIRECTS:
+            redirect_stub(s_, d_, w_)
+        for r in ghl_rows():
+            ghl_stub(r)
+        notes_page(); page_404(); docs(eps)
     print('pages', len(PAGES), 'todos', len(TODOS), 'unique', len(dedupe_todos()), 'changes', len(CHANGES), 'episodes', len(eps))
