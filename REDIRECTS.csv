@@ -3,7 +3,10 @@ from,to,type,reason
 /best-sites-report-general-form,https://doctordemographics.com/best-sites-report-form,301,duplicate form page
 /site-viabilty-report-general-form,https://doctordemographics.com/site-viabilty-report-form,301,duplicate form page
 /getsocial-102622,https://doctordemographics.com/getsocial,301,duplicate training page
-/on-site-report,https://doctordemographics.com/reports,301,"removed product (Gavin decision). Target /reports is a CEO call, pending Gavin"
+/on-site-report,https://doctordemographics.com/reports,301,removed product (Gavin decision); target approved by APEX CEO Oct 30
+/blog/b/places-with-promise-2023,https://doctordemographics.com/blog/b/places-with-promise-2026,301,old blog post; newer edition of same article
+/blog/b/site-selection-process-for-doctors,https://doctordemographics.com/blog/b/launch-smart-5-demographic-factors-for-your-new-practice,301,old blog post; closest current article on choosing a practice location
+/blog/b/patient-attitudes-7413,https://doctordemographics.com/blog,301,old blog post; no matching current article
 /best-sites-report-medical-form,https://doctordemographics.com/best-sites-report,301,retired per Mike (Oct 2026); target approved by APEX CEO Oct 30
 /best-sites-report-medical-order,https://doctordemographics.com/best-sites-report,301,retired per Mike (Oct 2026); target approved by APEX CEO Oct 30
 /best-sites-report-veterinarian,https://doctordemographics.com/best-sites-report,301,retired per Mike (Oct 2026); target approved by APEX CEO Oct 30

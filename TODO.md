@@ -27,7 +27,6 @@
 
 - [CEO call, pending Gavin] the Episode 278 title is kept as published (decided). verify.sh copy check flags it once, by design. (/podcast)
 - [CEO call, pending Gavin] one sentence reworded so it no longer refers to the removed on-location report. It now reads: The idea came to me years ago while consulting with a struggling practice in Washington. (/blog/b/demographic-marketing)
-- [CEO call, pending Gavin] this old URL redirects to /reports. (/on-site-report)
 
 ## Open questions
 

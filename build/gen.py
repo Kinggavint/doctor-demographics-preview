@@ -909,14 +909,18 @@ REDIRECTS = [('/home-9727', '/', 'duplicate home page'),
              ('/best-sites-report-general-form', O('/best-sites-report-form'), 'duplicate form page'),
              ('/site-viabilty-report-general-form', O('/site-viabilty-report-form'), 'duplicate form page'),
              ('/getsocial-102622', O('/getsocial'), 'duplicate training page'),
-             ('/on-site-report', '/reports', 'removed product (Gavin decision). Target /reports is a CEO call, pending Gavin')]
+             ('/on-site-report', '/reports', 'removed product (Gavin decision); target approved by APEX CEO Oct 30'),
+             # Old blog posts no longer on the site; still cited by Perplexity (baseline Oct 30). Approved by APEX CEO Oct 30.
+             ('/blog/b/places-with-promise-2023', '/blog/b/places-with-promise-2026', 'old blog post; newer edition of same article'),
+             ('/blog/b/site-selection-process-for-doctors', '/blog/b/launch-smart-5-demographic-factors-for-your-new-practice', 'old blog post; closest current article on choosing a practice location'),
+             ('/blog/b/patient-attitudes-7413', '/blog', 'old blog post; no matching current article')]
 
 def redirect_stub(src, dst, why):
     begin(src)
     target = u(dst)
     m = f'''<section class="section"><div class="wrap prose"><h1>This page has moved</h1>
 <p>Stand in for a planned 301 redirect from {('this old URL' if src == '/on-site-report' else '<code>' + src + '</code>')} to <a href="{a_(target)}">{html.escape(dst)}</a> ({html.escape(why)}).</p>
-<p>The real 301 is set at go live on the host. This preview uses a meta refresh.</p>{('<p>' + todo('CEO call, pending Gavin: this old URL redirects to ' + dst + '.', 'CEO call, pending Gavin') + '</p>') if src == '/on-site-report' else ''}</div></section>'''
+<p>The real 301 is set at go live on the host. This preview uses a meta refresh.</p></div></section>'''
     finish('Redirecting | Doctor Demographics', 'Redirect stand in.', m, lead=False,
            extra_head=f'<meta http-equiv="refresh" content="0; url={a_(target)}">', canonical=LIVE + (dst if dst.startswith('/') and dst != '/' else '/') if not dst.startswith('http') else dst)
 
