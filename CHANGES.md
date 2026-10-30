@@ -59,8 +59,11 @@
 | /quick-view-report-sample | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /competition-report-sample | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /dental-demographics | Mike decision (update counts) | over 250 episodes | over 290 episodes |
+| /dental-demographics | SEO (pending Gavin) | Dental Demographics | Dental Demographics Reports |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 30 Years, Doctor Demographics has | Since 1983, Doctor Demographics has |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | Our founder, Scott McDonald pioneered | Our founder, Scott McDonald (now retired), pioneered |
+| /dental-demographics | SEO title (pending Gavin) | Dental Demographics / Scott McDonald | Dental Demographics Report for Dentists / Doctor Demographics |
+| /dental-demographics | SEO description (pending Gavin) | Dental Demographics provided by the expert team at Doctor Demographics.  | Dental demographics reports for general and specialty dentists, since 1983. The Best Sites Report and Site Viability Report each include a 20 minute consultation. |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /podcast | dash removed (builder copy rule) | In this data-packed episode, we reveal the 5 areas in the greater Phoenix metro showing th | In this data-packed episode, we reveal the 5 areas in the greater Phoenix metro showing th |
 | /podcast | dash removed (builder copy rule) | In this episode, Mike Green from Doctor Demographics explores the top 5 southern states tr | In this episode, Mike Green from Doctor Demographics explores the top 5 southern states tr |
@@ -194,6 +197,7 @@
 | /blog/b/places-with-promise-2023 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/site-selection-process-for-doctors | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/patient-attitudes-7413 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /blog/b/5-locations-southeast | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /best-sites-report-medical-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /best-sites-report-medical-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /best-sites-report-veterinarian | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
