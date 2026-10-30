@@ -393,12 +393,12 @@ def benefits_home(s):
 
 # Home polish (Gavin request Oct 30 2026): navy dx hero with stock photo, raised content cards, navy closing band on the
 # existing "Most Popular Demographic Reports" section. Wording, headings, links and meta unchanged. Scoped classes: .home-*.
-#  home-us-map-pins-unsplash-joey-csunyo.webp: Photo "United States map" by Joey Csunyo (@joey_csunyo) on Unsplash,
-#    https://unsplash.com/photos/united-states-map-NwGMe-NuDm0  (Unsplash License, https://unsplash.com/license)
-#    Cropped 4:3 on the central/eastern US, mild cool colour grade for the navy style, 720x540 WebP q76 (under 60KB).
+#  home-doctors-tablet-unsplash-vitaly-gariev.webp: Photo "Two doctors looking at a tablet together" by Vitaly Gariev (@silverkblack) on Unsplash,
+#    https://unsplash.com/photos/two-doctors-looking-at-a-tablet-together-2kopEHjST-g  (Unsplash License, https://unsplash.com/license)
+#    Cropped 4:3 around both doctors, mild cool colour grade (saturation 0.92) for the navy style, 720x540 WebP q78 (under 60KB).
 HOME_HERO_LAZY = False  # hero photo is above the fold (LCP candidate on desktop): load eagerly
-HOME_HERO_IMG = ('home-us-map-pins-unsplash-joey-csunyo.webp',
-                 'Close-up of a United States map with push pins marking cities across the South, Midwest and East Coast')
+HOME_HERO_IMG = ('home-doctors-tablet-unsplash-vitaly-gariev.webp',
+                 'Two doctors in white coats reviewing information together on a tablet in a clinic office')
 
 def page_home():
     begin('/')
