@@ -355,11 +355,13 @@ def hero(h1, sub='', kicker='', small=True, actions='', ico=''):
         h1 = f'{ico}<span>{h1}</span>'
     s = f'<p>{sub}</p>' if sub else ''
     return f'<section class="hero{" small" if small else ""}"><div class="wrap">{k}<h1{' class="with-ico"' if ico else ''}>{h1}</h1>{s}{actions}</div></section>'
-def dx_hero(h1, aside=''):
-    """Navy hero with glow + dot pattern (Reports, Sample Reports, Contact; Gavin redesign Oct 30). Scoped .dx-*."""
+def dx_hero(h1, aside='', pre='', after='', cls=''):
+    """Navy hero with glow + dot pattern (Reports, Sample Reports, Contact, Podcast, Blog; Gavin redesign Oct 30). Scoped .dx-*.
+    pre/after: existing page content shown above/below the h1 (breadcrumb, badges, post meta). cls: extra hero class."""
     a = f'<div class="dx-hero-aside">{aside}</div>' if aside else ''
-    return (f'<section class="hero dx-hero{" has-aside" if aside else ""}"><div class="wrap dx-hero-grid">'
-            f'<div class="dx-hero-txt"><span class="dx-rule" aria-hidden="true"></span><h1>{h1}</h1></div>{a}</div></section>')
+    c = (" has-aside" if aside else "") + (" " + cls if cls else "")
+    return (f'<section class="hero dx-hero{c}"><div class="wrap dx-hero-grid">'
+            f'<div class="dx-hero-txt">{pre}<span class="dx-rule" aria-hidden="true"></span><h1>{h1}</h1>{after}</div>{a}</div></section>')
 
 # ---------------------------------------------------------------- pages
 # Home "Key Benefits" (Gavin redesign, Oct 30): navy editorial split. Benefit bodies are the live copy verbatim (home.txt 24-27);
@@ -622,11 +624,12 @@ def episodes():
 def page_podcast():
     begin('/podcast')
     eps = episodes()
-    m = hero('The Perfect Place to Put a Practice Podcast', '',
-             actions=f'<div class="badges"><a href="{APPLE}" target="_blank" rel="noopener">{img("67adffc74478e192700f4248.png", "Apple Podcasts")}</a><a href="{SPOTIFY}" target="_blank" rel="noopener">{img("67adf9f516725e5ab4fc8ddf.png", "Listen on Spotify")}</a></div>')
-    m += f'''<section class="section"><div class="wrap split"><div><h2>Our Most Recent Episode</h2></div>
-<div>{latest_episode()}</div></div></section>
-<section class="section alt"><div class="wrap"><h2>Previous Podcast Episodes</h2>'''
+    badges = f'<div class="badges"><a href="{APPLE}" target="_blank" rel="noopener">{img("67adffc74478e192700f4248.png", "Apple Podcasts", lazy=False)}</a><a href="{SPOTIFY}" target="_blank" rel="noopener">{img("67adf9f516725e5ab4fc8ddf.png", "Listen on Spotify", lazy=False)}</a></div>'
+    ptitle = 'The Perfect Place to Put a Practice Podcast'
+    m = dx_hero(ptitle, img('mike_profile_26.jpg', 'Mike Green', 'dx-hero-img dx-portrait', lazy=False), after=badges)
+    m += f'''<section class="section dx-light dx-pull"><div class="wrap"><div class="card dx-feature"><div class="dx-feature-txt">{icon('mic', 'ico xl dx-ico')}<h2>Our Most Recent Episode</h2></div>
+<div>{latest_episode()}</div></div></div></section>
+<section class="section dx-light dx-eps"><div class="wrap"><h2>Previous Podcast Episodes</h2><div class="dx-ep-list">'''
     nums = [e[0] for e in eps]
     for n, title, desc in eps:
         vid = POD_VIDEOS.get(n)
@@ -640,11 +643,14 @@ def page_podcast():
         if n in DESC_FIX:
             CHANGES.append(('/podcast', 'Mike decision (match by title on YouTube)', 'Episode %d description (same as 257 on live)' % n, DESC_FIX[n][0][:90]))
             desc = DESC_FIX[n]
-        m += f'<article class="episode"><div>{media}</div><div><h3>{t("Episode %d: %s" % (n, title))}</h3>{"".join(p(d) for d in desc)}{extra}</div></article>'
+        m += f'<article class="episode card dx-ep"><div class="dx-ep-media">{media}</div><div><h3>{t("Episode %d: %s" % (n, title))}</h3>{"".join(p(d) for d in desc)}{extra}</div></article>'
     TODOS.append(('/podcast', 'CEO call, pending Gavin', 'CEO call, pending Gavin: the Episode 278 title is kept as published (decided). verify.sh copy check flags it once, by design.'))
     if 268 not in nums:
         TODOS.append(('/podcast', 'done', 'Episode 268: numbering gap, left out (decided Oct 30).'))
-    m += '</div></section>'
+    m += '</div></div></section>'
+    # Closing band (Gavin redesign Oct 30): repeats the page title and the same Apple/Spotify badges, no new copy.
+    m += (f'<section class="section dx-cta-wrap"><div class="wrap"><div class="dx-cta"><div class="dx-cta-txt">{icon("mic", "ico dx-gold-ico")}'
+          f'<p class="dx-cta-title">{ptitle}</p></div><div class="dx-cta-btns">{badges.replace("<img ", "<img loading=\"lazy\" ")}</div></div></div></section>')
     finish(title_of('podcast', 'Podcast'), 'The Perfect Place to Put a Practice podcast from Doctor Demographics with Scott McDonald and Mike Green.', m)
     return eps
 
@@ -656,8 +662,8 @@ def blog_index():
     begin('/blog')
     s = 'blog'
     lines = [x.strip() for x in body(s)]
-    m = hero(t(lines[0]))
-    m += '<section class="section"><div class="wrap"><div class="grid g3">'
+    m = dx_hero(t(lines[0]), img('698e760f0007617a60147d17.jpg', 'Mike Green', 'dx-hero-img dx-portrait', lazy=False))
+    m += '<section class="section dx-light dx-pull"><div class="wrap"><div class="dx-cards dx-3">'
     i = 1
     for slug, im in BLOGS:
         title, exc = lines[i], lines[i + 1]
@@ -666,10 +672,14 @@ def blog_index():
             cats.append(lines[j].rstrip(' ,')); j += 1
         date, rt = lines[j], lines[j + 2]
         i = j + 3
-        m += (f'<div class="card">{img(im, title, "thumb")}<p class="meta">{t(", ".join(cats))} | {t(date)} | {t(rt)}</p>'
-              f'<h3>{t(title)}</h3>{p(exc)}<div class="actions"><a href="{u("/blog/b/" + slug)}">...more</a></div></div>')
+        m += (f'<article class="card dx-card dx-post-card"><div class="dx-post-thumb">{img(im, title, "thumb")}</div><div class="dx-card-body"><p class="meta">{t(", ".join(cats))} | {t(date)} | {t(rt)}</p>'
+              f'<h3>{t(title)}</h3>{p(exc)}<div class="actions"><a class="dx-more" href="{u("/blog/b/" + slug)}">...more{icon("arrow-right", "ico")}</a></div></div></article>')
         BLOGMETA[slug] = (title, cats, date, rt)
     m += '</div></div></section>'
+    # Closing band (Gavin redesign Oct 30): the podcast title and the same Apple/Spotify badges used on /podcast, no new copy.
+    m += (f'<section class="section dx-cta-wrap"><div class="wrap"><div class="dx-cta"><div class="dx-cta-txt">{icon("mic", "ico dx-gold-ico")}'
+          f'<p class="dx-cta-title"><a href="{u("/podcast")}">The Perfect Place to Put a Practice Podcast</a></p></div><div class="dx-cta-btns"><div class="badges">'
+          f'<a href="{APPLE}" target="_blank" rel="noopener">{img("67adffc74478e192700f4248.png", "Apple Podcasts")}</a><a href="{SPOTIFY}" target="_blank" rel="noopener">{img("67adf9f516725e5ab4fc8ddf.png", "Listen on Spotify")}</a></div></div></div></div></section>')
     CHANGES.append(('/blog', 'Mike decision', 'blog not in the menu', 'Blog added to the main menu'))
     finish(title_of(s, 'Blog'), desc_of(s), m)
 BLOGMETA = {}
@@ -756,12 +766,15 @@ def blog_posts():
             bio = ln(key, 'Coming from a marketing background')
         except KeyError:
             bio = ''
-        m = f'''<section class="section"><div class="wrap prose post"><p><a href="{u('/blog')}">Articles and Podcasts</a></p>
-{img(im, title)}<h1>{t(title)}</h1><p class="meta">{t(", ".join(cats))} | {t(date)} | {t(rt)}</p>
+        crumb = f'<p class="dx-crumb"><a href="{u("/blog")}">{icon("arrow-left", "ico")}Articles and Podcasts</a></p>'
+        meta = f'<p class="meta">{t(", ".join(cats))} | {t(date)} | {t(rt)}</p>'
+        m = dx_hero(t(title), img(im, title, 'dx-hero-img', lazy=False), pre=crumb, after=meta, cls='dx-post-hero')
+        m += f'''<section class="section dx-light dx-pull"><div class="wrap"><article class="card dx-article prose post">
 {content}
 {('<p>' + todo('CEO call, pending Gavin: one sentence reworded so it no longer refers to the removed on-location report. It now reads: The idea came to me years ago while consulting with a struggling practice in Washington.', 'CEO call, pending Gavin') + '</p>') if slug == 'demographic-marketing' else ''}
-<div class="card" style="margin-top:2rem"><h3>Mike Green</h3>{p(bio) if bio else ''}</div>
-<p style="margin-top:1.5rem"><a href="{u('/blog')}">Back to Blog</a></p></div></section>'''
+</article></div></section>
+<section class="section dx-cta-wrap"><div class="wrap"><div class="dx-cta dx-author">{img('mike_profile_26.jpg', 'Mike Green', 'dx-avatar')}<div class="dx-author-txt"><h3>Mike Green</h3>{p(bio) if bio else ''}</div>
+<p class="dx-cta-btns"><a class="btn gold" href="{u('/blog')}">Back to Blog</a></p></div></div></section>'''
         TODOS.append((CUR['path'], 'note', 'Live canonical points to a placeholder domain (GHL blog setting). Preview canonical uses doctordemographics.com.'))
         finish(title_of(key, title), desc_of(key), m)
 

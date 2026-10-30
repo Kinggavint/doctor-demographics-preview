@@ -377,3 +377,67 @@ h3.with-ico{display:flex;align-items:center;gap:.6rem}
 .dx-contact-item a:hover{color:var(--accent)}
 @media (max-width:480px){.dx-contact .contact-card{padding:1.1rem 1rem;gap:.8rem}.dx-contact .contact-card .ico.xl{width:2.6rem;height:2.6rem}.dx-contact .contact-card .ico.xl svg{width:1.3rem;height:1.3rem}}
 @media (max-width:360px){.dx-contact .contact-card strong{font-size:.85rem}}
+
+/* Podcast, Blog, blog posts (Gavin redesign, Oct 30). Same .dx-* system; scoped additions only. */
+.dx-hero .badges{margin-top:1.75rem}
+.dx-hero .meta{color:#CBD5E1;margin:1rem 0 0;font-size:var(--text-sm)}
+.dx-crumb{margin:0 0 1.5rem}
+.dx-crumb a{display:inline-flex;align-items:center;gap:.45rem;color:#fff;font-weight:700;font-size:var(--text-sm);text-decoration-color:var(--accent);text-underline-offset:3px}
+.dx-crumb a:hover{color:var(--accent)}
+.dx-crumb .ico{color:var(--accent)}
+.dx-hero-aside:has(.dx-portrait){max-width:340px}
+.dx-hero-img.dx-portrait{aspect-ratio:1;object-position:50% 25%}
+.dx-post-hero h1{font-size:clamp(1.9rem,1.3rem + 2.4vw,3rem);line-height:1.1}
+.dx-post-hero .dx-hero-img{aspect-ratio:16/9;margin:0}
+.dx-post-hero.has-aside .dx-hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.dx-post-hero .dx-hero-aside{max-width:520px}
+
+.dx-feature{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:2.5rem;align-items:center;padding:2rem;border-top:4px solid var(--accent);
+  box-shadow:0 1px 2px rgba(15,35,66,.06),0 24px 50px -20px rgba(15,35,66,.35)}
+.dx-feature-txt h2{margin:1.1rem 0 0;font-size:clamp(1.6rem,1.2rem + 1.4vw,2.4rem);letter-spacing:-.02em}
+.dx-eps{padding-top:1rem}
+.dx-eps h2{margin-bottom:1.5rem}
+.dx-ep-list{display:grid;grid-template-columns:minmax(0,1fr);gap:1.25rem}
+.episode.dx-ep{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:1.75rem;align-items:start;padding:1.25rem;border:1px solid var(--divider);
+  border-left:4px solid var(--accent);box-shadow:0 1px 2px rgba(15,35,66,.06),0 14px 32px -18px rgba(15,35,66,.25);transition:transform .25s ease,box-shadow .25s ease}
+.episode.dx-ep:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(15,35,66,.06),0 22px 44px -20px rgba(15,35,66,.35)}
+.episode.dx-ep h3{font-size:var(--text-lg);color:var(--dark-2);margin:.2rem 0 .5rem;letter-spacing:-.01em}
+.episode.dx-ep p{color:var(--text);line-height:1.65;margin:0 0 .5rem}
+.dx-ep-media .lite{border-radius:var(--r-lg);box-shadow:0 10px 24px -12px rgba(15,35,66,.5)}
+
+.dx-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dx-post-thumb{background:var(--dark-2)}
+.dx-post-card .card-img,.dx-post-card img.thumb{display:block;margin:0;border-radius:0;aspect-ratio:16/9;width:100%;object-fit:cover}
+.dx-post-card .meta{color:var(--muted);margin:0 0 .6rem}
+.dx-post-card .dx-card-body p:not(.meta){color:var(--text)}
+.dx-more{display:inline-flex;align-items:center;gap:.4rem;font-weight:800;color:var(--primary);text-underline-offset:3px}
+.dx-more .ico{color:var(--accent)}
+.dx-more .ico svg{width:1.1em;height:1.1em;transition:transform .2s ease}
+.dx-more:hover .ico svg{transform:translateX(3px)}
+
+.dx-cta-txt{display:flex;align-items:center;gap:1.25rem}
+.dx-cta-title{margin:0;color:#fff;font-weight:800;font-size:clamp(1.4rem,1.1rem + 1.2vw,2.1rem);line-height:1.2;letter-spacing:-.02em}
+.dx-cta-title a{color:#fff;text-decoration-color:var(--accent);text-underline-offset:4px}
+.dx-cta-title a:hover{color:var(--accent)}
+.dx-cta .badges{display:flex;gap:.9rem;flex-wrap:wrap}
+.dx-cta .badges img{height:52px;width:auto;max-width:100%}
+
+.dx-article{max-width:56rem;margin:0 auto;padding:3rem 3.5rem;border-top:4px solid var(--accent);display:block;
+  box-shadow:0 1px 2px rgba(15,35,66,.06),0 24px 50px -22px rgba(15,35,66,.3)}
+.dx-article>:first-child{margin-top:0}
+.dx-article h2{letter-spacing:-.01em}
+.dx-article img,.dx-article .lite{max-width:100%;height:auto}
+.dx-author{grid-template-columns:auto minmax(0,1fr) auto;max-width:56rem;margin:0 auto}
+.dx-avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:50% 20%;border:3px solid var(--accent);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.dx-author h3{color:#fff;margin:0 0 .35rem}
+.dx-author p{margin:0;color:#CBD5E1}
+p.dx-cta-btns{margin:0}
+
+@media (max-width:1000px){.dx-3{grid-template-columns:repeat(2,minmax(0,1fr))}.dx-feature{grid-template-columns:minmax(0,1fr);gap:1.5rem}
+  .dx-author{grid-template-columns:auto minmax(0,1fr)}.dx-author .dx-cta-btns{grid-column:1/-1}}
+@media (max-width:860px){.dx-post-hero.has-aside .dx-hero-grid{grid-template-columns:minmax(0,1fr)}.dx-hero-aside:has(.dx-portrait){max-width:260px}}
+@media (max-width:760px){.episode.dx-ep{grid-template-columns:minmax(0,1fr);gap:1rem}.dx-article{padding:1.75rem 1.25rem}}
+@media (max-width:640px){.dx-3{grid-template-columns:minmax(0,1fr)}.dx-feature{padding:1.25rem}
+  .dx-cta-txt{flex-direction:column;align-items:flex-start;gap:.9rem}.dx-cta .badges img{height:44px}
+  .dx-author{grid-template-columns:minmax(0,1fr)}.dx-avatar{width:76px;height:76px}}
+@media (prefers-reduced-motion:reduce){.episode.dx-ep,.dx-more .ico svg{transition:none}.episode.dx-ep:hover{transform:none}.dx-more:hover .ico svg{transform:none}}
