@@ -25,7 +25,8 @@ GHL_PATHS = ['/getsocial', '/accessdso', '/apexchat', '/ppschedule', '/best-site
              '/marketing-report-order', '/quick-view-report-order', '/site-viability-order', '/telephone-consultation-order',
              '/order-complete', '/order-complete-telephone']
 # Hidden on live (decided): unlinked, noindex, left out of the sitemap in production.
-PROD_NOINDEX = {'/partner', '/book', '/mike', '/quick-view-report', '/quick-view-report-sample', '/dental-demographics'}
+# /dental-demographics is indexable (SEO PR3, pending Gavin): target query "dental demographics report".
+PROD_NOINDEX = {'/partner', '/book', '/mike', '/quick-view-report', '/quick-view-report-sample'}
 PHONE, PHONE_TEL = '(844) 704-0499', 'tel:+18447040499'
 EMAIL = 'support@doctordemographics.com'
 APPLE = 'https://podcasts.apple.com/us/podcast/doctor-demographics-podcast/id800840123'
@@ -628,8 +629,13 @@ def page_dental():
     CHANGES.append(('/dental-demographics', 'Mike decision (update counts)', 'over 250 episodes', 'over 290 episodes'))
     begin('/dental-demographics')
     s = 'dental-demographics'
-    fl = flag_hidden('Mike asked for the link: ' + PREVIEW_BASE + 'dental-demographics/ (live: ' + LIVE + '/dental-demographics).')
-    m = hero(t(L(s, 15)), t(L(s, 16)))
+    # SEO PR3 (pending Gavin): indexable in production and in the sitemap; title, description and H1 aimed at "dental demographics report".
+    TODOS.append((CUR['path'], 'SEO (pending Gavin)', 'Indexable in production and in the sitemap. Title, description and H1 tuned for "dental demographics report". No menu link points here yet.'))
+    fl = ('<strong>Review flag.</strong> SEO change, pending Gavin: this page is indexable in production and listed in the sitemap. '
+          'No menu link points here yet. Title, description and H1 now target "dental demographics report".')
+    h1 = 'Dental Demographics Reports'
+    CHANGES.append(('/dental-demographics', 'SEO (pending Gavin)', t(L(s, 15)), h1))
+    m = hero(h1, t(L(s, 16)))
     m += f'''<section class="section"><div class="wrap split"><div class="prose">{p(L(s,17))}{p(L(s,18))}
 <h2>{t(L(s,19))}</h2>{p(L(s,20))}</div><div>{img('67adf6c345496e764b44a6b3.jpg', 'Smiling dentist in a dental office')}</div></div></section>
 <section class="section alt"><div class="wrap"><h2 class="center">{t(L(s,21))}</h2><div class="grid g2">
@@ -640,7 +646,11 @@ def page_dental():
 <div class="badges"><a href="{SPOTIFY}" target="_blank" rel="noopener">{img('67adf9f516725e5ab4fc8ddf.png', 'Listen on Spotify')}</a>
 <a href="{APPLE}" target="_blank" rel="noopener">{img('67adffc74478e192700f4248.png', 'Apple Podcasts')}</a>
 <a class="btn ghost ext" href="{YT_FOOTER}" target="_blank" rel="noopener">YouTube</a></div></div></section>'''
-    finish(title_of(s, 'Dental Demographics'), desc_of(s), m, flag=fl)
+    seo_title = 'Dental Demographics Report for Dentists | Doctor Demographics'
+    seo_desc = t('Dental demographics reports for general and specialty dentists, since 1983. The Best Sites Report and Site Viability Report each include a 20 minute consultation.')
+    CHANGES.append(('/dental-demographics', 'SEO title (pending Gavin)', title_of(s, 'Dental Demographics'), seo_title))
+    CHANGES.append(('/dental-demographics', 'SEO description (pending Gavin)', desc_of(s), seo_desc))
+    finish(seo_title, seo_desc, m, flag=fl)
 
 POD_VIDEOS = {292: 'DLRUQ0ugVMA', 291: '0pK3TDC90V0', 290: 'UBmlxksls5Q', 289: 'yDTjof2sIII', 288: 'CTvdj7PVWN4', 287: 'axQAnZh-mDg',
   286: 'iJBQwi3FZtA', 285: 'vAhCjC1FjzM', 284: '7ULHhxkbkiw', 283: 'zq0joirpLTI', 282: 'vjwg3XhGbzM', 281: 'viiWr4cWQp0',
@@ -988,7 +998,9 @@ REDIRECTS = [('/home-9727', '/', 'duplicate home page'),
              # Old blog posts no longer on the site; still cited by Perplexity (baseline Oct 30). Approved by APEX CEO Oct 30.
              ('/blog/b/places-with-promise-2023', '/blog/b/places-with-promise-2026', 'old blog post; newer edition of same article'),
              ('/blog/b/site-selection-process-for-doctors', '/blog/b/launch-smart-5-demographic-factors-for-your-new-practice', 'old blog post; closest current article on choosing a practice location'),
-             ('/blog/b/patient-attitudes-7413', '/blog', 'old blog post; no matching current article')]
+             ('/blog/b/patient-attitudes-7413', '/blog', 'old blog post; no matching current article'),
+             # 93 Search impressions in 12 months, now a 404. Old post: 5 practice location options in the Southeast (Episode 250).
+             ('/blog/b/5-locations-southeast', '/blog/b/places-with-promise-2026', 'old blog post; closest current article on promising practice locations (SEO PR3, pending Gavin)')]
 
 def redirect_stub(src, dst, why):
     begin(src)
