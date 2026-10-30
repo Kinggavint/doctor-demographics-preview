@@ -132,7 +132,7 @@ ul.plain{padding-left:1.25rem}
 .leader-stack{display:grid;gap:1.5rem}
 .leader-l{display:grid;grid-template-columns:160px 1fr;gap:2rem;align-items:start;padding:2rem}
 .leader-l img{width:160px;height:160px}
-.leader-l blockquote p,.leader-l p{max-width:65ch}
+.leader-l blockquote p,.leader-l p{max-width:42rem}
 @media (max-width:600px){.leader-s{grid-template-columns:72px 1fr;gap:1rem}.leader-s img{width:72px;height:72px;border-width:3px}
   .leader-l{grid-template-columns:1fr;gap:1rem;padding:1.5rem}.leader-l img{width:112px;height:112px}}
 blockquote{margin:0 0 .75rem;font-style:italic;color:var(--text)}
