@@ -363,7 +363,8 @@ h3.with-ico{display:flex;align-items:center;gap:.6rem}
   .dx-photo{margin:0 .75rem .75rem 0}.dx-photo::before{inset:.75rem -.75rem -.75rem .75rem}
   .dx-hero-aside:has(.dx-hero-img){margin:0 .75rem .75rem 0}.dx-hero-aside:has(.dx-hero-img)::before{inset:.75rem -.75rem -.75rem .75rem}
 }
-@media (max-width:380px){.dx-contact-item{flex-direction:column;align-items:flex-start}.dx-contact-item strong{font-size:.95rem}}
+@media (max-width:860px){.dx-contact-band{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:420px){.dx-cta.dx-contact-band{padding:1.5rem 1rem}.dx-contact-item{flex-direction:column;align-items:flex-start}.dx-contact-item strong{font-size:.95rem}}
 @media (prefers-reduced-motion:reduce){.dx-card,.dx-glass,.dx-links .report-link,.dx-contact .contact-card{transition:none}
   .dx-card:hover,.dx-glass:hover,.dx-links .report-link:hover,.dx-contact .contact-card:hover{transform:none}}
 .dx-links-panel{display:block}
