@@ -334,7 +334,7 @@ def finish(title, desc, main, flag=None, lead=False, extra_head='', canonical=No
 <link rel="icon" href="{u('assets/img/68a3b42d10041847e0bead17.png')}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="{u('css/style.css')}">{extra_head}
+<link rel="stylesheet" href="{u('css/style.css')}">{extra_head}{head_tags(path, title, desc, main, canon)}
 </head><body>'''
     if chrome:
         doc = head + header() + fl + f'<main id="main">{main}</main>' + (leadership_short() if lead and path == '/' else '') + footer() + '</body></html>\n'
@@ -347,6 +347,12 @@ def finish(title, desc, main, flag=None, lead=False, extra_head='', canonical=No
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(doc)
     PAGES.append(path)
+
+# Extra <head> tags (analytics, JSON-LD). Each hook is f(path, title, desc, main, canon) -> str; empty string means nothing added.
+HEAD_HOOKS = []
+
+def head_tags(path, title, desc, main, canon):
+    return ''.join(h(path, title, desc, main, canon) for h in HEAD_HOOKS)
 
 def prod_links(doc):
     """Production: links to GHL pages go straight to the order subdomain (skips the 301 hop)."""
