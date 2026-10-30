@@ -355,6 +355,12 @@ def hero(h1, sub='', kicker='', small=True, actions='', ico=''):
         h1 = f'{ico}<span>{h1}</span>'
     s = f'<p>{sub}</p>' if sub else ''
     return f'<section class="hero{" small" if small else ""}"><div class="wrap">{k}<h1{' class="with-ico"' if ico else ''}>{h1}</h1>{s}{actions}</div></section>'
+def dx_hero(h1, aside=''):
+    """Navy hero with glow + dot pattern (Reports, Sample Reports, Contact; Gavin redesign Oct 30). Scoped .dx-*."""
+    a = f'<div class="dx-hero-aside">{aside}</div>' if aside else ''
+    return (f'<section class="hero dx-hero{" has-aside" if aside else ""}"><div class="wrap dx-hero-grid">'
+            f'<div class="dx-hero-txt"><span class="dx-rule" aria-hidden="true"></span><h1>{h1}</h1></div>{a}</div></section>')
+
 # ---------------------------------------------------------------- pages
 # Home "Key Benefits" (Gavin redesign, Oct 30): navy editorial split. Benefit bodies are the live copy verbatim (home.txt 24-27);
 # the short headlines only restate each line. No new claims or numbers. Scoped classes: .kb-*.
@@ -419,19 +425,21 @@ def ohref(slug):
 def reports_page():
     begin('/reports')
     s = 'reports'
-    m = hero('Demographic Reports')
+    m = dx_hero('Demographic Reports', img('635195d6b495690eab7a6fa0.jpg', 'Analyst reviewing a report at a desk', 'dx-hero-img', lazy=False))
     items = [('telephone-consultation', 16, 17), ('site-viability-report', 19, 20), ('marketing-report', 22, 24),
              ('best-sites-report', 26, 28), ('comp-report', 30, 31)]
-    m += '<section class="section"><div class="wrap"><div class="grid g3">'
+    m += '<section class="section dx-light"><div class="wrap"><div class="dx-cards dx-5">'
     for slug, h0, d in items:
         title = ' '.join(x.strip() for x in L(s, h0, d - 1))
         acts = btn('More Info', '/' + slug, 'ghost')
         o = PRODUCTS[slug]['order']
         acts += btn('Order a report', ('/' + slug + o) if o.startswith('#') else O(o))
-        m += f'<div class="card report-card">{ricon(slug, "ico xl")}<h3>{t(title)}</h3>{p(L(s,d))}<div class="actions">{acts}</div></div>'
+        m += (f'<article class="card report-card dx-card"><div class="dx-card-top">{ricon(slug, "ico xl dx-ico")}</div>'
+              f'<div class="dx-card-body"><h3>{t(title)}</h3>{p(L(s,d))}<div class="actions">{acts}</div></div></article>')
     m += f'''</div></div></section>
-<section class="section alt"><div class="wrap grid g2"><div><h3>Contact Us by Phone</h3><p><a href="{PHONE_TEL}"><strong>{PHONE}</strong></a></p></div>
-<div><h3>Contact Us by Email</h3><p><a href="mailto:{EMAIL}"><strong>{EMAIL.replace('@', '<wbr>@')}</strong></a></p></div></div></section>'''
+<section class="section dx-cta-wrap"><div class="wrap"><div class="dx-cta dx-contact-band">
+<div class="dx-contact-item">{icon('phone', 'ico dx-gold-ico')}<div><h3>Contact Us by Phone</h3><p><a href="{PHONE_TEL}"><strong>{PHONE}</strong></a></p></div></div>
+<div class="dx-contact-item">{icon('mail', 'ico dx-gold-ico')}<div><h3>Contact Us by Email</h3><p><a href="mailto:{EMAIL}"><strong>{EMAIL.replace('@', '<wbr>@')}</strong></a></p></div></div></div></div></section>'''
     CHANGES.append(('/reports', 'client OEDIT d92ae0d', 'card buttons', 'added "Order a report" next to More Info'))
     CHANGES.append(('/reports', 'Gavin design (Oct 30)', 'sample report buttons on each block and the Order a Sample Report button', 'removed; report icons added to all 5 blocks'))
     finish(title_of(s, 'Demographic Reports'), desc_of(s), m)
@@ -519,26 +527,33 @@ def sample_hub():
     CHANGES.append(('/sample-reports', 'Mike decision', 'three exclusive sample reports', 'four exclusive sample reports'))
     h2, rest = intro.split('ReportsAt ', 1)
     h2 += 'Reports'; rest = 'At ' + rest
-    m = hero(t(L(s, 15)))
+    covers = (img('67adf42190796256c5f5834a.jpg', 'Best Sites Report cover', 'dx-cover c1', lazy=False)
+              + img('67adf5a6dd8c5c69890b2d05.jpg', 'Practice Site Viability Report cover', 'dx-cover c2', lazy=False))
+    m = dx_hero(t(L(s, 15)), f'<div class="dx-covers">{covers}</div>')
     targets = ['/site-viability-report-sample', '/marketing-report-sample', '/best-sites-report-sample', '/competition-report-sample']
     rslug = ['site-viability-report', 'marketing-report', 'best-sites-report', 'comp-report']
     # Order links first (Gavin, Oct 30), descriptions below, same icons on both.
-    m += '<section class="section"><div class="wrap"><div class="grid g4 order-row">'
+    m += '<section class="section dx-light dx-pull"><div class="wrap"><div class="dx-cards dx-4 order-row">'
+    labels = []
     for a, tg, rs in zip((25, 27, 29, 31), targets, rslug):
-        m += f'<div class="card report-card">{ricon(rs, "ico xl")}<h3>{t(L(s,a))}</h3><div class="actions">{btn(L(s,a+1), tg)}</div></div>'
+        labels.append((t(L(s, a + 1)), tg))
+        m += (f'<article class="card report-card dx-card"><div class="dx-card-top">{ricon(rs, "ico xl dx-ico")}</div>'
+              f'<div class="dx-card-body"><h3>{t(L(s,a))}</h3><div class="actions">{btn(labels[-1][0], tg, raw=True)}</div></div></article>')
     m += '</div></div></section>'
-    blocks = ''.join(f'<div class="card desc-card">{ricon(rs, "ico lg")}<div><h3>{t(L(s,a).rstrip(":"))}</h3>{p(L(s,a+1))}</div></div>'
+    blocks = ''.join(f'<li class="dx-glass">{ricon(rs, "ico dx-gold-ico")}<div><h3>{t(L(s,a).rstrip(":"))}</h3>{p(L(s,a+1))}</div></li>'
                      for a, rs in zip((17, 19, 21, 23), rslug))
-    m += f'''<section class="section alt"><div class="wrap"><div class="prose"><h2>{t(h2)}</h2>{p(rest)}</div>
-<div class="grid desc-grid" style="margin-top:1.5rem">{blocks}</div></div></section>'''
+    m += f'''<section class="section dx-navy"><div class="wrap"><div class="dx-intro"><h2>{t(h2)}</h2>{p(rest)}</div>
+<ol class="dx-glass-grid">{blocks}</ol></div></section>'''
     CHANGES.append(('/sample-reports', 'Gavin design (Oct 30)', 'descriptions above the order links', 'order links at the top, descriptions below, report icons on both'))
     why = re.split(r'(?<=[.!])(?=[A-Z][A-Za-z ]+:)', L(s, 34))
     items = []
-    for w in why:
+    for w, ic in zip(why, ('database', 'sliders-horizontal', 'shield-check')):
         k, v = w.split(':', 1)
-        items.append(f'<strong>{t(k)}:</strong> {t(v)}')
-    m += f'''<section class="section"><div class="wrap prose"><h2>{t(L(s,33))}</h2><ul class="check">{''.join(f'<li>{x}</li>' for x in items)}</ul>
-<h2>{t(L(s,35))}</h2>{p(L(s,36))}</div></section>'''
+        items.append(f'<li class="card dx-why">{icon(ic, "ico xl dx-ico")}<p><strong>{t(k)}:</strong> {t(v)}</p></li>')
+    again = ''.join(btn(lb, tg, 'gold', raw=True) for lb, tg in labels)
+    m += f'''<section class="section dx-light"><div class="wrap"><h2 class="center">{t(L(s,33))}</h2><ul class="dx-why-grid">{''.join(items)}</ul></div></section>
+<section class="section dx-cta-wrap"><div class="wrap"><div class="dx-cta"><div class="dx-cta-txt"><h2>{t(L(s,35))}</h2>{p(L(s,36))}</div>
+<div class="dx-cta-btns">{again}</div></div></div></section>'''
     finish(title_of(s, 'Sample Reports'), desc_of(s), m)
 
 SAMPLES = [('best-sites-report-sample', 'sZobEUyu2FoPFeWiim6r', None),
@@ -752,13 +767,13 @@ def blog_posts():
 
 def page_contact():
     begin('/contact')
-    m = hero('Contact Us')
-    m += f'''<section class="section"><div class="wrap split contact"><div class="grid">
+    m = dx_hero('Contact Us')
+    m += f'''<section class="section dx-light dx-pull"><div class="wrap split contact dx-contact"><div class="grid">
 <a class="card contact-card" href="{PHONE_TEL}">{icon('phone', 'ico xl')}<span><span class="lbl">Contact Us by Phone</span><strong>{PHONE}</strong></span></a>
 <a class="card contact-card" href="mailto:{EMAIL}">{icon('mail', 'ico xl')}<span><span class="lbl">Contact Us by Email</span><strong>{EMAIL.replace('@', '<wbr>@')}</strong></span></a></div>
-<div>{img('67b8a4a9f4c6849f1db0854b.jpg', 'Doctor Demographics: our team is ready to help', 'contact-img')}</div></div></section>
-<section class="section alt"><div class="wrap"><h2 class="center">Demographic Reports</h2><div class="grid g5 report-links">
-{''.join(f'<a class="card report-link" href="{u(h)}">{ricon(h, "ico lg")}<span>{l}</span></a>' for l, h in NAV_REPORTS)}</div></div></section>'''
+<div class="dx-photo">{img('67b8a4a9f4c6849f1db0854b.jpg', 'Doctor Demographics: our team is ready to help', 'contact-img')}</div></div></section>
+<section class="section dx-cta-wrap"><div class="wrap"><div class="dx-cta dx-links-panel"><h2 class="center">Demographic Reports</h2><div class="grid g5 report-links dx-links">
+{''.join(f'<a class="card report-link" href="{u(h)}">{ricon(h, "ico lg")}<span>{l}</span></a>' for l, h in NAV_REPORTS)}</div></div></div></section>'''
     CHANGES.append(('/contact', 'Gavin design (Oct 30)', 'two plain text cards', 'phone and email icon cards plus report icon links'))
     finish(title_of('contact', 'Contact Us'), desc_of('contact'), m)
 
