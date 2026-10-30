@@ -167,10 +167,11 @@ def btn(text, href, cls='', ext=None, raw=False):
     c = 'btn' + (' ' + cls if cls else '') + (' ext' if ext else '')
     return f'<a class="{c}" href="{a_(u(href))}"{extra}>{label}</a>'
 
-def img(name, alt, cls='', lazy=True, w=None):
+def img(name, alt, cls='', lazy=True, w=None, wh=None):
     c = f' class="{cls}"' if cls else ''
     lz = ' loading="lazy"' if lazy else ''
-    return f'<img{c} src="{u("assets/img/" + name)}" alt="{a_(alt)}"{lz}>'
+    d = f' width="{wh[0]}" height="{wh[1]}"' if wh else ''
+    return f'<img{c} src="{u("assets/img/" + name)}" alt="{a_(alt)}"{d}{lz}>'
 
 def p(s):
     return f'<p>{t(s)}</p>'
@@ -355,6 +356,16 @@ def hero(h1, sub='', kicker='', small=True, actions='', ico=''):
         h1 = f'{ico}<span>{h1}</span>'
     s = f'<p>{sub}</p>' if sub else ''
     return f'<section class="hero{" small" if small else ""}"><div class="wrap">{k}<h1{' class="with-ico"' if ico else ''}>{h1}</h1>{s}{actions}</div></section>'
+# Stock photo credits (list-page headers only; Gavin request Oct 30 2026). Cropped square, resized to 680x680 (2x the 340px slot), WebP q80.
+#  podcast-microphone-unsplash-mikey-rogers.webp: Photo by Mikey Rogers (@mikeyrogerstv) on Unsplash,
+#    https://unsplash.com/photos/a-close-up-of-a-microphone-in-a-dark-room-DEqW7Kn_OUs  (Unsplash License, https://unsplash.com/license)
+#  blog-stethoscope-notes-pexels-thirdman.webp: Photo by Thirdman on Pexels,
+#    https://www.pexels.com/photo/a-medical-person-using-a-laptop-for-research-5327916/  (Pexels License, https://www.pexels.com/license/)
+POD_HERO_IMG = ('podcast-microphone-unsplash-mikey-rogers.webp',
+                'Close-up of a silver studio condenser microphone lit in deep blue, ready for a podcast recording')
+BLOG_HERO_IMG = ('blog-stethoscope-notes-pexels-thirdman.webp',
+                 'Overhead view of a desk with a stethoscope and a tablet where a hand takes handwritten notes with a stylus')
+
 def dx_hero(h1, aside='', pre='', after='', cls=''):
     """Navy hero with glow + dot pattern (Reports, Sample Reports, Contact, Podcast, Blog; Gavin redesign Oct 30). Scoped .dx-*.
     pre/after: existing page content shown above/below the h1 (breadcrumb, badges, post meta). cls: extra hero class."""
@@ -626,7 +637,7 @@ def page_podcast():
     eps = episodes()
     badges = f'<div class="badges"><a href="{APPLE}" target="_blank" rel="noopener">{img("67adffc74478e192700f4248.png", "Apple Podcasts", lazy=False)}</a><a href="{SPOTIFY}" target="_blank" rel="noopener">{img("67adf9f516725e5ab4fc8ddf.png", "Listen on Spotify", lazy=False)}</a></div>'
     ptitle = 'The Perfect Place to Put a Practice Podcast'
-    m = dx_hero(ptitle, img('mike_profile_26.jpg', 'Mike Green', 'dx-hero-img dx-portrait', lazy=False), after=badges)
+    m = dx_hero(ptitle, img(*POD_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680)), after=badges)
     m += f'''<section class="section dx-light dx-pull"><div class="wrap"><div class="card dx-feature"><div class="dx-feature-txt">{icon('mic', 'ico xl dx-ico')}<h2>Our Most Recent Episode</h2></div>
 <div>{latest_episode()}</div></div></div></section>
 <section class="section dx-light dx-eps"><div class="wrap"><h2>Previous Podcast Episodes</h2><div class="dx-ep-list">'''
@@ -662,7 +673,7 @@ def blog_index():
     begin('/blog')
     s = 'blog'
     lines = [x.strip() for x in body(s)]
-    m = dx_hero(t(lines[0]), img('698e760f0007617a60147d17.jpg', 'Mike Green', 'dx-hero-img dx-portrait', lazy=False))
+    m = dx_hero(t(lines[0]), img(*BLOG_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680)))
     m += '<section class="section dx-light dx-pull"><div class="wrap"><div class="dx-cards dx-3">'
     i = 1
     for slug, im in BLOGS:
