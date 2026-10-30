@@ -31,8 +31,6 @@
 
 ## Open questions
 
-- [open] Episode count updated to over 290 (the podcast page numbers episodes up to 292). The download count (well over 100K) is kept as published: no public source for a newer number. Mike, please send the current download total. (/dental-demographics)
-- [open] Episode 268: no episode between 267 and 269 on either YouTube channel or in the podcast feed (Jul 1 and Jul 8, 2025 are back to back). Looks like a numbering gap. Mike, confirm or send the link. (/podcast)
 - [open] Live shows a client quote image here (signed, about referring to Doctor Demographics for over 25 years). Left out under the no testimonials rule. Keep it? (/partner)
 - [open] Needs the order.doctordemographics.com subdomain set up in GHL at cutover. No DNS change made. (every page)
 
@@ -45,6 +43,8 @@
 - [hidden page] Hidden on live, kept unlinked. Keep, update, or retire? Only linked from the Quick View page (partners only, per Mike). (/quick-view-report-sample)
 - [todo] GHL side: after submit, this form sends people to the Best Sites sample PDF, not the Competition sample. Fix in GHL. (/competition-report-sample)
 - [hidden page (decided)] Mike asked for the link: https://kinggavint.github.io/doctor-demographics-preview/dental-demographics/ (live: https://doctordemographics.com/dental-demographics). (/dental-demographics)
+- [done] Episode count updated to over 290 (the podcast page numbers episodes up to 292). Download count shown as 100K+ per decision on Oct 30. (/dental-demographics)
+- [done] Episode 268: numbering gap, left out (decided Oct 30). (/podcast)
 - [note] Live canonical points to a placeholder domain (GHL blog setting). Preview canonical uses doctordemographics.com. (/blog/b/big-city-exodus, /blog/b/demographic-marketing, /blog/b/kiss-of-death-locations-for-2026, /blog/b/launch-smart-5-demographic-factors-for-your-new-practice, /blog/b/places-with-promise-2026, /blog/b/relocate-or-revamp)
 - [hidden page (decided)] Mike: hide this page for now. (/partner)
 - [todo] GHL side: the form footer Privacy Policy and Terms links point to a placeholder domain. Fix in GHL. (/partner)

@@ -513,7 +513,7 @@ def page_dental():
 <div class="card">{img('67adf42190796256c5f5834a.jpg', 'Best Sites Report', 'thumb')}<h3>{t(L(s,22))}</h3>{p(L(s,23))}<div class="actions">{btn(L(s,24), '/best-sites-report')}</div></div>
 <div class="card">{img('67adf5a6dd8c5c69890b2d05.jpg', 'Practice Site Viability Report', 'thumb')}<h3>{t(L(s,25))}</h3>{p(L(s,26))}<div class="actions">{btn(L(s,27), '/site-viability-report')}</div></div>
 </div></div></section>
-<section class="section"><div class="wrap prose"><h2>{t(L(s,28))}</h2><p>{t(L(s,29).replace('over 250 episodes', 'over 290 episodes'))} {todo('Episode count updated to over 290 (the podcast page numbers episodes up to 292). The download count (well over 100K) is kept as published: no public source for a newer number. Mike, please send the current download total.', 'open')}</p>{p(L(s,30))}
+<section class="section"><div class="wrap prose"><h2>{t(L(s,28))}</h2><p>{t(L(s,29).replace('over 250 episodes', 'over 290 episodes').replace('well over 100K downloads', '100K+ downloads'))} {todo('Episode count updated to over 290 (the podcast page numbers episodes up to 292). Download count shown as 100K+ per decision on Oct 30.', 'done')}</p>{p(L(s,30))}
 <div class="badges"><a href="{SPOTIFY}" target="_blank" rel="noopener">{img('67adf9f516725e5ab4fc8ddf.png', 'Listen on Spotify')}</a>
 <a href="{APPLE}" target="_blank" rel="noopener">{img('67adffc74478e192700f4248.png', 'Apple Podcasts')}</a>
 <a class="btn ghost ext" href="{YT_FOOTER}" target="_blank" rel="noopener">YouTube</a></div></div></section>'''
@@ -570,7 +570,7 @@ def page_podcast():
         m += f'<article class="episode"><div>{media}</div><div><h3>{t("Episode %d: %s" % (n, title))}</h3>{"".join(p(d) for d in desc)}{extra}</div></article>'
     TODOS.append(('/podcast', 'CEO call, pending Gavin', 'CEO call, pending Gavin: the Episode 278 title is kept as published (decided). verify.sh copy check flags it once, by design.'))
     if 268 not in nums:
-        TODOS.append(('/podcast', 'open', 'Episode 268: no episode between 267 and 269 on either YouTube channel or in the podcast feed (Jul 1 and Jul 8, 2025 are back to back). Looks like a numbering gap. Mike, confirm or send the link.'))
+        TODOS.append(('/podcast', 'done', 'Episode 268: numbering gap, left out (decided Oct 30).'))
     m += '</div></section>'
     finish(title_of('podcast', 'Podcast'), 'The Perfect Place to Put a Practice podcast from Doctor Demographics with Scott McDonald and Mike Green.', m)
     return eps
