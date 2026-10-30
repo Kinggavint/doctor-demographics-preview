@@ -1126,6 +1126,7 @@ def page_404():
     if PROD:
         s404 = s404.replace('<meta name="robots" content="index, follow">', '<meta name="robots" content="noindex, follow">', 1)
         s404 = re.sub(r'<link rel="canonical" href="[^"]*">\n?', '', s404, count=1)
+    s404 = re.sub(r'\n<script type="application/ld\+json">.*?</script>', '', s404)
     open(os.path.join(SITE, '404.html'), 'w').write(s404)
 
 def docs(eps):
@@ -1199,6 +1200,67 @@ def prod_files():
             f.write(f'  <url><loc>{loc}</loc><lastmod>{today}</lastmod></url>\n')
         f.write('</urlset>\n')
 
+# ---------------------------------------------------------------- analytics, Organization JSON-LD, llms.txt
+# GA4 web stream "Doctor Demographics site - GA4" (property 312406016, stream 3467154372). Verified from the GA4 Admin API
+# data stream list and the gtag config on the old live GHL pages. Production only, so preview visits never reach the property.
+GA4_MEASUREMENT_ID = 'G-R78SE578C3'
+ORG_ID = LIVE + '/#organization'
+
+def ld(obj):
+    """One JSON-LD block. '</' is escaped so text can never close the script tag."""
+    return '\n<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>'
+
+def ga4_tag(path, title, desc, main, canon):
+    if not PROD or not GA4_MEASUREMENT_ID:
+        return ''
+    g = GA4_MEASUREMENT_ID
+    return (f'\n<script async src="https://www.googletagmanager.com/gtag/js?id={g}"></script>'
+            f"\n<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{g}');</script>")
+
+def organization():
+    """Facts shown on the site: footer (legal name, phone, email, socials, Since 1983), About (founder)."""
+    return {'@type': 'Organization', '@id': ORG_ID, 'name': 'Doctor Demographics', 'legalName': 'Doctor Demographics, LLC',
+            'url': LIVE + '/', 'logo': LIVE + '/assets/img/logo.svg',
+            'description': t('Since 1983, the Doctor Demographics team has helped thousands of doctors and practice owners select the perfect place to set up their practice.'),
+            'foundingDate': '1983', 'founder': {'@type': 'Person', 'name': 'Scott McDonald'},
+            'telephone': PHONE_TEL.replace('tel:', ''), 'email': EMAIL,
+            'contactPoint': {'@type': 'ContactPoint', 'telephone': PHONE_TEL.replace('tel:', ''), 'email': EMAIL, 'contactType': 'customer service'},
+            'sameAs': [h for _, h in SOCIALS]}
+
+def org_ld(path, title, desc, main, canon):
+    if path != '/':
+        return ''
+    site = {'@type': 'WebSite', '@id': LIVE + '/#website', 'name': 'Doctor Demographics', 'url': LIVE + '/', 'publisher': {'@id': ORG_ID}}
+    return ld({'@context': 'https://schema.org', '@graph': [organization(), site]})
+
+HEAD_HOOKS += [ga4_tag, org_ld]
+
+def llms_txt():
+    """/llms.txt: plain summary for AI crawlers, facts and prices as shown on the site."""
+    def lk(name, path):
+        return f'[{name}]({LIVE}{path}/)'
+    reports = [('Best Sites Report', '/best-sites-report', 'Report and consultation. Finds the 5 best sites in an area you define (up to 5 counties in the same state), with a 20 minute consultation. Price: $795.'),
+               ('Site Viability Report', '/site-viability-report', 'Checks the viability of one practice location before you sign, using 14 contiguous zip codes and drive time radii, with a 20 minute consultation. Price: $495 (discount for multiple sites).'),
+               ('Marketing Report', '/marketing-report', 'Research based analysis of a practice brand, marketing tools, competition and clinical offerings. Price: $695.'),
+               ('Competition Report', '/comp-report', 'Analysis of the local competition for a professional practice. Price: $350 per site.'),
+               ('Telephone Consultation', '/telephone-consultation', 'Live telephone consultation on practice placement, marketing and other challenges. Price: $149.')]
+    out = ['# Doctor Demographics', '',
+           '> Since 1983, Doctor Demographics has provided demographic and psychographic data and custom reports that help doctors and practice owners (dental, medical, optometry, veterinary) choose the perfect place to put a practice.', '',
+           f'Doctor Demographics, LLC. Founder: Scott McDonald (now retired). Owner and Lead Demographer: Mike Green. Phone: {PHONE}. Email: {EMAIL}.', '',
+           '## Reports and services', '', f'* {lk("All demographic reports", "/reports")}: overview of every report.']
+    out += [f'* {lk(n, p_)}: {d}' for n, p_, d in reports]
+    out += ['', '## Learn', '',
+            f'* {lk("Sample Reports", "/sample-reports")}: sample pages from each report.',
+            f'* {lk("The Perfect Place to Put a Practice Podcast", "/podcast")}: podcast with Scott McDonald and Mike Green. Also on [Apple Podcasts]({APPLE}), [Spotify]({SPOTIFY}) and [YouTube]({YT_FOOTER}).',
+            f'* {lk("Blog", "/blog")}: articles on practice locations and demographics by Mike Green.',
+            '', '## Company', '',
+            f'* {lk("About", "/about")}: leadership team.',
+            f'* {lk("Contact", "/contact")}: phone and email.', '']
+    txt = '\n'.join(out)
+    assert not re.search('[\u2013\u2014]| - |free', txt, re.I), 'llms.txt copy rule'
+    open(os.path.join(SITE, 'llms.txt'), 'w').write(txt)
+
+
 # ---------------------------------------------------------------- main
 KEEP_PATHS = {'/', '/about', '/reports', '/best-sites-report', '/site-viability-report', '/marketing-report', '/comp-report',
               '/telephone-consultation', '/quick-view-report', '/sample-reports',
@@ -1213,7 +1275,7 @@ if __name__ == '__main__':
     page_partner(); page_book(); page_mike()
     if not PROD:
         page_apex_draft()  # DRAFT: not shipped to production
-    page_apex_ai_labs()
+    page_apex_ai_labs(); llms_txt()
     if PROD:
         page_404(); prod_files()
     else:
