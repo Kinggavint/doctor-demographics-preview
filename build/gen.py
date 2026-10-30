@@ -756,12 +756,34 @@ def clean_post(slug):
             tag.decompose()
     return root.decode_contents()
 
+URL_TXT = re.compile(r'(?:https?://|www\.)[^\s<>"]+|[\w.+-]+@[\w-]+(?:\.[\w-]+)+')
+
+def wbr_urls(html):
+    """QA Oct 30: add <wbr> break points to web addresses/emails shown as text in post bodies
+    (after 'www.', before '@' and '/'), so narrow screens break there, not mid-word.
+    Text nodes only; tags and attributes (href etc.) are untouched; visible text is unchanged."""
+    def fix(m):
+        x = m.group(0)
+        x = x.replace('/', '<wbr>/').replace('@', '<wbr>@')
+        return re.sub(r'(?i)\bwww\.', lambda w: w.group(0) + '<wbr>', x)
+    parts = re.split(r'(<[^>]*>)', html)
+    skip = 0
+    for i, part in enumerate(parts):
+        if part.startswith('<'):
+            tag = re.match(r'</?\s*([a-zA-Z0-9]+)', part)
+            if tag and tag.group(1).lower() in ('script', 'style', 'textarea'):
+                skip = 0 if part.startswith('</') else 1
+            continue
+        if not skip:
+            parts[i] = URL_TXT.sub(fix, part)
+    return ''.join(parts)
+
 def blog_posts():
     for slug, im in BLOGS:
         begin('/blog/b/' + slug)
         title, cats, date, rt = BLOGMETA[slug]
         key = 'blog__b__' + slug
-        content = clean_post(slug)
+        content = wbr_urls(clean_post(slug))
         try:
             bio = ln(key, 'Coming from a marketing background')
         except KeyError:
