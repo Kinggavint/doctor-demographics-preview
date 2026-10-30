@@ -221,7 +221,7 @@ h3.with-ico{display:flex;align-items:center;gap:.6rem}
   transition:transform .25s ease,background-color .25s ease,border-color .25s ease}
 .kb-row::before{content:"";position:absolute;left:-1px;top:1.5rem;height:3.25rem;width:3px;border-radius:3px;background:var(--accent)}
 .kb-row:hover{transform:translateY(-3px);background:rgba(255,255,255,.08);border-color:rgba(212,168,67,.45)}
-.kb-num{position:absolute;top:1.1rem;right:1.25rem;font-size:1.6rem;font-weight:800;line-height:1;color:var(--accent);opacity:.55;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kb-num{position:absolute;top:1.1rem;right:1.25rem;font-size:1.6rem;font-weight:800;line-height:1;color:var(--accent);opacity:.9;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .kb-ico{width:3.25rem;height:3.25rem;border-radius:var(--r-xl);color:var(--accent);
   background:linear-gradient(145deg,rgba(212,168,67,.22),rgba(212,168,67,.06));border:1px solid rgba(212,168,67,.35);transition:background-color .25s ease,color .25s ease}
 .kb-ico svg{width:1.5rem;height:1.5rem}
