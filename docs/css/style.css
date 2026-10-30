@@ -441,3 +441,28 @@ p.dx-cta-btns{margin:0}
   .dx-cta-txt{flex-direction:column;align-items:flex-start;gap:.9rem}.dx-cta .badges img{height:44px}
   .dx-author{grid-template-columns:minmax(0,1fr)}.dx-avatar{width:76px;height:76px}}
 @media (prefers-reduced-motion:reduce){.episode.dx-ep,.dx-more .ico svg{transition:none}.episode.dx-ep:hover{transform:none}.dx-more:hover .ico svg{transform:none}}
+
+/* Home polish (Gavin, Oct 30). Scoped .home-*; reuses the dx navy hero/band. Key Benefits (.kb) and leadership untouched. */
+.home-hero .dx-hero-txt>p{margin:1.25rem 0 0;max-width:40rem}
+.home-hero .btn-row{margin:1.75rem 0 0}
+.home-hero-img{aspect-ratio:4/3}
+.home-s{padding:4.5rem 0}
+.home-s.dx-pull{padding-top:0}
+.home-card{position:relative;background:#fff;border:1px solid var(--divider);border-radius:1.5rem;padding:clamp(1.5rem,1rem + 2.5vw,3rem);
+  box-shadow:0 1px 2px rgba(15,35,66,.06),0 24px 50px -22px rgba(15,35,66,.32);align-items:center}
+.home-card img{border-radius:var(--r-xl);width:100%}
+.home-card .prose h2{letter-spacing:-.02em}
+.home-card .prose::before{content:"";display:block;width:3.5rem;height:4px;border-radius:4px;background:var(--accent);margin-bottom:1.25rem}
+.home-pod-wrap{padding:0 0 4.5rem;background:#fff}
+.home-pod{border-radius:1.5rem;padding:clamp(1.5rem,1rem + 2.5vw,3rem);align-items:center;box-shadow:0 30px 60px -28px rgba(15,35,66,.55)}
+.home-pod>*{position:relative}
+.home-pod h2,.home-pod h3{color:#fff}
+.home-pod p{color:#CBD5E1}
+.home-pod .note{color:#CBD5E1;margin:0}
+.home-band h2{margin-bottom:2rem}
+.home-band .home-rcard{color:var(--text)}.home-band .home-rcard h3{color:var(--dark-2)}
+.home-band .home-rcard{border-color:transparent;box-shadow:0 24px 50px -22px rgba(0,0,0,.55);transition:transform .25s ease,box-shadow .25s ease}
+.home-band .home-rcard:hover{transform:translateY(-4px);box-shadow:0 30px 60px -24px rgba(0,0,0,.6)}
+.home-band .home-rcard .ico.xl{background:var(--accent);color:var(--dark-2)}
+@media (max-width:860px){.home-s{padding:3.5rem 0}.home-pod-wrap{padding-bottom:3.5rem}}
+@media (prefers-reduced-motion:reduce){.home-band .home-rcard{transition:none}.home-band .home-rcard:hover{transform:none}}

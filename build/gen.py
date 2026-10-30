@@ -391,27 +391,37 @@ def benefits_home(s):
             f'<figcaption class="kb-chip">{icon("messages-square", "ico kb-chip-ico")}<span>Every report includes a live one-on-one follow-up</span></figcaption></figure></div>'
             f'<ol class="kb-list">{rows}</ol></div></section>')
 
+# Home polish (Gavin request Oct 30 2026): navy dx hero with stock photo, raised content cards, navy closing band on the
+# existing "Most Popular Demographic Reports" section. Wording, headings, links and meta unchanged. Scoped classes: .home-*.
+#  home-city-grid-unsplash-lerone-pieters.webp: Photo by Lerone Pieters (@leronep) on Unsplash,
+#    https://unsplash.com/photos/aerial-view-of-a-brightly-lit-city-at-dusk-VHXs4-7AuJI  (Unsplash License, https://unsplash.com/license)
+#    Cropped 4:3 around the lit block, 720x540 WebP q60 (about 1.7x the 420px slot; kept under 60KB).
+HOME_HERO_LAZY = False  # hero photo is above the fold (LCP candidate on desktop): load eagerly
+HOME_HERO_IMG = ('home-city-grid-unsplash-lerone-pieters.webp',
+                 'Top-down aerial view of a city street grid at dusk, with one block outlined in bright light')
+
 def page_home():
     begin('/')
     s = 'home'
     sub = t(L(s, 17).replace('VETERINARIANS, and optometrists', 'veterinarians, optometrists, and audiologists'))
     CHANGES.append(('/', 'client OEDIT d9e575d', 'VETERINARIANS, and optometrists', 'veterinarians, optometrists, and audiologists'))
-    m = hero('Helping doctors find the perfect place to practice', sub, small=False,
-             actions=f'<div class="btn-row">{btn("Order a Demographic Report", "/reports", "gold")}</div>')
-    m += f'''<section class="section"><div class="wrap split"><div class="prose">
+    m = dx_hero('Helping doctors find the perfect place to practice',
+                img(*HOME_HERO_IMG, 'dx-hero-img home-hero-img', lazy=HOME_HERO_LAZY, wh=(720, 540)),
+                after=f'<p>{sub}</p><div class="btn-row">{btn("Order a Demographic Report", "/reports", "gold")}</div>', cls='home-hero')
+    m += f'''<section class="section dx-light dx-pull home-s"><div class="wrap"><div class="home-card split"><div class="prose">
 <h2>{t(L(s,19))}</h2>{p(L(s,20))}{p(L(s,21))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div>
-<div>{img('62748d21ea2ab126f720248c.png', 'Doctors and team members smiling')}</div></div></section>
+<div>{img('62748d21ea2ab126f720248c.png', 'Doctors and team members smiling')}</div></div></div></section>
 {benefits_home(s)}
-<section class="section"><div class="wrap split"><div>{img('d584a9f2-537d-4611-ae13-77848e700c56.png', 'Practice owners reviewing plans together')}</div>
-<div class="prose"><h2>{t(L(s,28))}</h2>{p(L(s,29))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div></div></section>
-<section class="section dark"><div class="wrap split"><div class="prose"><h2>{t(L(s,31))}</h2>{p(L(s,32))}
+<section class="section dx-light home-s"><div class="wrap"><div class="home-card split"><div>{img('d584a9f2-537d-4611-ae13-77848e700c56.png', 'Practice owners reviewing plans together')}</div>
+<div class="prose"><h2>{t(L(s,28))}</h2>{p(L(s,29))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div></div></div></section>
+<section class="section home-pod-wrap"><div class="wrap"><div class="home-pod dx-navy split"><div class="prose"><h2>{t(L(s,31))}</h2>{p(L(s,32))}
 <div class="btn-row">{btn("Subscribe Here", APPLE_HOME, "gold")}</div><p class="note">Weekly Episode in Your Inbox</p></div>
-<div><h3>Here's Our Most Recent Episode:</h3>{latest_episode()}</div></div></section>
-<section class="section"><div class="wrap"><h2 class="center">{t(L(s,36))}</h2><div class="grid g4">'''
+<div><h3>Here's Our Most Recent Episode:</h3>{latest_episode()}</div></div></div></section>
+<section class="section dx-navy home-band"><div class="wrap"><h2 class="center">{t(L(s,36))}</h2><div class="grid g4">'''
     cards = [(39, 40, '/best-sites-report', '64adb6bd1aa4669e1a404704.jpg'), (43, 44, '/site-viability-report', '65258de43fd52c3674559fc6.jpg'),
              (47, 48, '/marketing-report', '68e832bde22f982ba43459c3.jpg'), (51, 52, '/telephone-consultation', '68e833334d2dffc79b33fde1.jpg')]
     for h, d, href, im in cards:
-        m += f'<div class="card report-card">{ricon(href, "ico xl")}<h3>{t(L(s,h))}</h3>{p(L(s,d))}<div class="actions">{btn("More Infomation", href)}</div></div>'
+        m += f'<div class="card report-card home-rcard">{ricon(href, "ico xl")}<h3>{t(L(s,h))}</h3>{p(L(s,d))}<div class="actions">{btn("More Infomation", href)}</div></div>'
     m += '</div></div></section>'
     CHANGES.append(('/', 'Gavin design (Oct 30)', 'video thumbnails on report cards', 'report icons'))
     CHANGES.append(('/', 'Gavin design (Oct 30)', 'Key Benefits: 4 small icon cards', 'navy editorial split: photo + numbered benefit rows with short headlines (copy unchanged)'))
