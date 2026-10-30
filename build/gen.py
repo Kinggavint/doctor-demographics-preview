@@ -288,7 +288,7 @@ def leadership_full():
 </div></div></section>'''
 
 def footer():
-    ql = [('Reports', '/reports'), ('Site Viability', '/site-viability-report'), ('Best Sites Report', '/best-sites-report'),
+    ql = [('Reports', '/reports'), ('Site Viability', '/site-viability-report'), ('Best Sites Report', '/best-sites-report'), ('Competition Report', '/comp-report'),
           ('Telephone Consultation', '/telephone-consultation'), ('Marketing Report', '/marketing-report'), ('Contact Us', '/contact')]
     soc = ''.join(f'<li><a href="{h}" target="_blank" rel="noopener">{n}</a></li>' for n, h in SOCIALS)
     return f'''<footer class="site-footer"><div class="wrap"><div class="cols">
