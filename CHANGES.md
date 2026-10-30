@@ -8,14 +8,12 @@
 | / | typo (CEO call) | doctor's of all kinds | doctors of all kinds |
 | / | typo (CEO call) | Infomation | Information |
 | / | typo (CEO call) | Site Viability  Report | Site Viability Report |
-| / | typo (CEO call) | Site Viability  Report | Site Viability Report |
 | / | typo (CEO call) | Infomation | Information |
 | / | typo (CEO call) | Infomation | Information |
 | / | typo (CEO call) | Infomation | Information |
+| / | Gavin design (Oct 30) | video thumbnails on report cards | report icons |
 | / | Gavin decision (since 1983, Scott now retired) | For over 40 years, the team at Doctor Demographics has | Since 1983, the team at Doctor Demographics has |
 | / | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| / | typo (CEO call) | Micheal | Michael |
-| / | typo (CEO call) | over the. years | over the years |
 | / | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /about | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /about | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
@@ -24,84 +22,44 @@
 | /about | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /reports | Gavin decision (since 1983, Scott now retired) | with 40+ years of experience | with expertise built since 1983 |
 | /reports | typo (CEO call) | nessecity | necessity |
-| /reports | client OEDIT d92ae0d | card buttons | added "Order a report" and "See sample report" next to More Info (no sample for Telephone, per OEDIT f66af04) |
-| /reports | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /reports | typo (CEO call) | Micheal | Michael |
-| /reports | typo (CEO call) | over the. years | over the years |
+| /reports | client OEDIT d92ae0d | card buttons | added "Order a report" next to More Info |
+| /reports | Gavin design (Oct 30) | sample report buttons on each block and the Order a Sample Report button | removed; report icons added to all 5 blocks |
 | /reports | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /best-sites-report | typo (CEO call) | Report Price:  $ | Report Price: $ |
-| /best-sites-report | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /best-sites-report | typo (CEO call) | Micheal | Michael |
-| /best-sites-report | typo (CEO call) | over the. years | over the years |
 | /best-sites-report | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /site-viability-report | typo (CEO call) | Viabililty | Viability |
 | /site-viability-report | typo (CEO call) | Viabililty | Viability |
-| /site-viability-report | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /site-viability-report | typo (CEO call) | Micheal | Michael |
-| /site-viability-report | typo (CEO call) | over the. years | over the years |
 | /site-viability-report | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /marketing-report | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /marketing-report | typo (CEO call) | Micheal | Michael |
-| /marketing-report | typo (CEO call) | over the. years | over the years |
 | /marketing-report | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /marketing-report | Mike decision (features from the page video) | Site Viability features list (live) | Built around your street address or cross streets, so the plan fits your exact site. / Profiles of your local competition and of the population you are most likely to draw from. / Drive time and traffic past your site. / A review of your current website, advertising, and what has been used before. / Fits a practice transition: buying a practice, losing a partner, or taking on a new partner. / Built for your goals, from maintaining your practice to growing dramatically or changing your patient base. / Your patient counts by zip code (no names or addresses) set the real geographic radius around your practice. |
-| /comp-report | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /comp-report | typo (CEO call) | Micheal | Michael |
-| /comp-report | typo (CEO call) | over the. years | over the years |
 | /comp-report | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /comp-report | wrong button target fixed (CEO call) | /site-viabilty-report-form | /comp-report-form |
 | /telephone-consultation | typo (CEO call) | in the follow situations | in the following situations |
 | /telephone-consultation | typo (CEO call) | numbers will comes | numbers will come |
-| /telephone-consultation | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /telephone-consultation | typo (CEO call) | Micheal | Michael |
-| /telephone-consultation | typo (CEO call) | over the. years | over the years |
 | /telephone-consultation | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /quick-view-report | dash removed (builder copy rule) | The Quick View Report is exactly that - a brief analysis of an area or site. The report is | The Quick View Report is exactly that, a brief analysis of an area or site. The report is  |
 | /quick-view-report | dash removed (builder copy rule) | The Quick View Report is exactly that - a brief analysis of an area or site. The report is | The Quick View Report is exactly that, a brief analysis of an area or site. The report is  |
-| /quick-view-report | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /quick-view-report | typo (CEO call) | Micheal | Michael |
-| /quick-view-report | typo (CEO call) | over the. years | over the years |
 | /quick-view-report | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /sample-reports | Mike decision | three exclusive sample reports | four exclusive sample reports |
 | /sample-reports | no-cost wording (CEO call) | Free Sample Reports | Sample Reports |
+| /sample-reports | no-cost wording (CEO call) | Order Free Sample  | Order a Sample  |
+| /sample-reports | no-cost wording (CEO call) | Order Free Sample  | Order a Sample  |
+| /sample-reports | no-cost wording (CEO call) | Order Free Sample  | Order a Sample  |
+| /sample-reports | no-cost wording (CEO call) | Order Free Sample  | Order a Sample  |
 | /sample-reports | no-cost wording (CEO call) | Our Free Sample Reports | Our Sample Reports |
-| /sample-reports | no-cost wording (CEO call) | Order Free Sample  | Order a Sample  |
-| /sample-reports | no-cost wording (CEO call) | Order Free Sample  | Order a Sample  |
-| /sample-reports | no-cost wording (CEO call) | Order Free Sample  | Order a Sample  |
-| /sample-reports | no-cost wording (CEO call) | Order Free Sample  | Order a Sample  |
+| /sample-reports | Gavin design (Oct 30) | descriptions above the order links | order links at the top, descriptions below, report icons on both |
 | /sample-reports | no-cost wording (CEO call) | Get Your Free Sample Reports | Get Your Sample Reports |
 | /sample-reports | no-cost wording (CEO call) | your free sample reports | your sample reports |
 | /sample-reports | no-cost wording (CEO call) | Free sample reports | Sample reports |
-| /sample-reports | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /sample-reports | typo (CEO call) | Micheal | Michael |
-| /sample-reports | typo (CEO call) | over the. years | over the years |
 | /sample-reports | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /best-sites-report-sample | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /best-sites-report-sample | typo (CEO call) | Micheal | Michael |
-| /best-sites-report-sample | typo (CEO call) | over the. years | over the years |
 | /best-sites-report-sample | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /site-viability-report-sample | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /site-viability-report-sample | typo (CEO call) | Micheal | Michael |
-| /site-viability-report-sample | typo (CEO call) | over the. years | over the years |
 | /site-viability-report-sample | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /marketing-report-sample | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /marketing-report-sample | typo (CEO call) | Micheal | Michael |
-| /marketing-report-sample | typo (CEO call) | over the. years | over the years |
 | /marketing-report-sample | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /quick-view-report-sample | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /quick-view-report-sample | typo (CEO call) | Micheal | Michael |
-| /quick-view-report-sample | typo (CEO call) | over the. years | over the years |
 | /quick-view-report-sample | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /competition-report-sample | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /competition-report-sample | typo (CEO call) | Micheal | Michael |
-| /competition-report-sample | typo (CEO call) | over the. years | over the years |
 | /competition-report-sample | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /dental-demographics | Mike decision (update counts) | over 250 episodes | over 290 episodes |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 30 Years, Doctor Demographics has | Since 1983, Doctor Demographics has |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | Our founder, Scott McDonald pioneered | Our founder, Scott McDonald (now retired), pioneered |
-| /dental-demographics | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /dental-demographics | typo (CEO call) | Micheal | Michael |
-| /dental-demographics | typo (CEO call) | over the. years | over the years |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /podcast | dash removed (builder copy rule) | In this data-packed episode, we reveal the 5 areas in the greater Phoenix metro showing th | In this data-packed episode, we reveal the 5 areas in the greater Phoenix metro showing th |
 | /podcast | dash removed (builder copy rule) | In this episode, Mike Green from Doctor Demographics explores the top 5 southern states tr | In this episode, Mike Green from Doctor Demographics explores the top 5 southern states tr |
@@ -126,15 +84,9 @@
 | /podcast | dash removed (builder copy rule) | Are you thinking about opening your own practice this year? The journey might seem dauntin | Are you thinking about opening your own practice this year? The journey might seem dauntin |
 | /podcast | dash removed (builder copy rule) | Episode 234: The Two Step Model - A Foundational Model in Establishing a New Practice Imag | Episode 234: The Two Step Model, A Foundational Model in Establishing a New Practice Image |
 | /podcast | Gavin decision (since 1983, Scott now retired) | for doctors nearly 40 years ago | for doctors back in 1983 |
-| /podcast | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /podcast | typo (CEO call) | Micheal | Michael |
-| /podcast | typo (CEO call) | over the. years | over the years |
 | /podcast | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog | dash removed (builder copy rule) | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026" – 8 markets  | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026", 8 markets ( |
 | /blog | Mike decision | blog not in the menu | Blog added to the main menu |
-| /blog | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /blog | typo (CEO call) | Micheal | Michael |
-| /blog | typo (CEO call) | over the. years | over the years |
 | /blog | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/relocate-or-revamp | dash removed (builder copy rule) | , the podcast where we help dentists, veterinarians, optometrists, and other private pract | , the podcast where we help dentists, veterinarians, optometrists, and other private pract |
 | /blog/b/relocate-or-revamp | dash removed (builder copy rule) | Alright, let's dive into today’s topic: "Relocate or Revamp: The Marketing Fix Your Practi | Alright, let's dive into today’s topic: "Relocate or Revamp: The Marketing Fix Your Practi |
@@ -147,9 +99,6 @@
 | /blog/b/relocate-or-revamp | dash removed (builder copy rule) | Another example: A dentist in Washington state—sound familiar from my book?—was in what he | Another example: A dentist in Washington state, sound familiar from my book?, was in what  |
 | /blog/b/relocate-or-revamp | dash removed (builder copy rule) | Of course, there are times when relocation is the right call—like if your area has seen ma | Of course, there are times when relocation is the right call, like if your area has seen m |
 | /blog/b/relocate-or-revamp | dash removed (builder copy rule) | Before we wrap up, a quick tip: Start small. Pick one marketing channel—like social media— | Before we wrap up, a quick tip: Start small. Pick one marketing channel, like social media |
-| /blog/b/relocate-or-revamp | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /blog/b/relocate-or-revamp | typo (CEO call) | Micheal | Michael |
-| /blog/b/relocate-or-revamp | typo (CEO call) | over the. years | over the years |
 | /blog/b/relocate-or-revamp | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/big-city-exodus | dash removed (builder copy rule) | Alright, let's dive into today’s topic. The "Big City Exodus" isn’t just a catchy phrase—i | Alright, let's dive into today’s topic. The "Big City Exodus" isn’t just a catchy phrase,  |
 | /blog/b/big-city-exodus | dash removed (builder copy rule) |  data from 2023, over 5 million people moved out of major metropolitan areas between 2020  |  data from 2023, over 5 million people moved out of major metropolitan areas between 2020  |
@@ -161,9 +110,6 @@
 | /blog/b/big-city-exodus | dash removed (builder copy rule) |  to analyze population trends, competition, and income levels in target areas. Look at sta |  to analyze population trends, competition, and income levels in target areas. Look at sta |
 | /blog/b/big-city-exodus | no-cost wording (CEO call) | for a free consultation | for a consultation |
 | /blog/b/big-city-exodus | dash removed (builder copy rule) | In this episode, we reveal the top five mid- and large-sized U.S. markets with the brighte | In this episode, we reveal the top five mid- and large-sized U.S. markets with the brighte |
-| /blog/b/big-city-exodus | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /blog/b/big-city-exodus | typo (CEO call) | Micheal | Michael |
-| /blog/b/big-city-exodus | typo (CEO call) | over the. years | over the years |
 | /blog/b/big-city-exodus | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/places-with-promise-2026 | dash removed (builder copy rule) | ! I’m your host, Mike Green, from Doctor Demographics. Today, we’re exploring "Places with | ! I’m your host, Mike Green, from Doctor Demographics. Today, we’re exploring "Places with |
 | /blog/b/places-with-promise-2026 | dash removed (builder copy rule) | Alright, let’s get into it. As we look ahead to 2026, the U.S. is seeing uneven recovery a | Alright, let’s get into it. As we look ahead to 2026, the U.S. is seeing uneven recovery a |
@@ -176,9 +122,6 @@
 | /blog/b/places-with-promise-2026 | no-cost wording (CEO call) | for a free consultation | for a consultation |
 | /blog/b/places-with-promise-2026 | dash removed (builder copy rule) | . Subscribe, review, and share—we’ll see you next time! | . Subscribe, review, and share, we’ll see you next time! |
 | /blog/b/places-with-promise-2026 | dash removed (builder copy rule) | In this episode, we reveal the top five mid- and large-sized U.S. markets with the brighte | In this episode, we reveal the top five mid- and large-sized U.S. markets with the brighte |
-| /blog/b/places-with-promise-2026 | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /blog/b/places-with-promise-2026 | typo (CEO call) | Micheal | Michael |
-| /blog/b/places-with-promise-2026 | typo (CEO call) | over the. years | over the years |
 | /blog/b/places-with-promise-2026 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/kiss-of-death-locations-for-2026 | link fix | http://KFF.org | https://www.kff.org |
 | /blog/b/kiss-of-death-locations-for-2026 | dash removed (builder copy rule) | Alright, let's dive into today’s topic: "Kiss of Death Locations for 2026." If you’re thin | Alright, let's dive into today’s topic: "Kiss of Death Locations for 2026." If you’re thin |
@@ -195,9 +138,6 @@
 | /blog/b/kiss-of-death-locations-for-2026 | dash removed (builder copy rule) | Whew, that’s our list of eight kiss of death locations for 2026. Remember, these aren’t ho | Whew, that’s our list of eight kiss of death locations for 2026. Remember, these aren’t ho |
 | /blog/b/kiss-of-death-locations-for-2026 | no-cost wording (CEO call) | for a free consultation | for a consultation |
 | /blog/b/kiss-of-death-locations-for-2026 | dash removed (builder copy rule) | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026" – 8 markets  | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026", 8 markets ( |
-| /blog/b/kiss-of-death-locations-for-2026 | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /blog/b/kiss-of-death-locations-for-2026 | typo (CEO call) | Micheal | Michael |
-| /blog/b/kiss-of-death-locations-for-2026 | typo (CEO call) | over the. years | over the years |
 | /blog/b/kiss-of-death-locations-for-2026 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | dash removed (builder copy rule) | Today, we’re talking about something critical for anyone planning to open their first prac | Today, we’re talking about something critical for anyone planning to open their first prac |
 | /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | dash removed (builder copy rule) | When you’re opening your first practice, you’re not just setting up a business—you’re buil | When you’re opening your first practice, you’re not just setting up a business, you’re bui |
@@ -208,9 +148,6 @@
 | /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | no-cost wording (CEO call) | for a free consultation | for a consultation |
 | /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | dash removed (builder copy rule) | Next, align your services and marketing with your findings. For example, if you’re in a fa | Next, align your services and marketing with your findings. For example, if you’re in a fa |
 | /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | dash removed (builder copy rule) | ! By understanding population growth, age demographics, income levels, cultural diversity, | ! By understanding population growth, age demographics, income levels, cultural diversity, |
-| /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | typo (CEO call) | Micheal | Michael |
-| /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | typo (CEO call) | over the. years | over the years |
 | /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/demographic-marketing | Gavin decision (since 1983, Scott now retired) | As a marketer with 30 years of experience—15 of those as a demographic marketer with Scott McDonald at Doctor Demographics— | As a marketer, and as a demographic marketer with Scott McDonald at Doctor Demographics,  |
 | /blog/b/demographic-marketing | dash removed (builder copy rule) | As a marketer, and as a demographic marketer with Scott McDonald at Doctor Demographics, I | As a marketer, and as a demographic marketer with Scott McDonald at Doctor Demographics, I |
@@ -235,26 +172,15 @@
 | /blog/b/demographic-marketing | dash removed (builder copy rule) |  – A dentist who took over a long-established practice modernized marketing efforts with d | , A dentist who took over a long-established practice modernized marketing efforts with di |
 | /blog/b/demographic-marketing | dash removed (builder copy rule) |  – A practice initially targeted upscale socialites but was actually situated in a neighbo | , A practice initially targeted upscale socialites but was actually situated in a neighbor |
 | /blog/b/demographic-marketing | dash removed (builder copy rule) | Tune in next week, when we’ll discuss psychographics—the secret sauce in marketing success | Tune in next week, when we’ll discuss psychographics, the secret sauce in marketing succes |
-| /blog/b/demographic-marketing | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /blog/b/demographic-marketing | typo (CEO call) | Micheal | Michael |
-| /blog/b/demographic-marketing | typo (CEO call) | over the. years | over the years |
 | /blog/b/demographic-marketing | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /contact | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /contact | typo (CEO call) | Micheal | Michael |
-| /contact | typo (CEO call) | over the. years | over the years |
+| /contact | Gavin design (Oct 30) | two plain text cards | phone and email icon cards plus report icon links |
 | /contact | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /privacy-policy | typo (CEO call) | shall by governed | shall be governed |
 | /privacy-policy | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /eula | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /partner | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /partner | typo (CEO call) | Micheal | Michael |
-| /partner | typo (CEO call) | over the. years | over the years |
 | /partner | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /book | Mike decision | prelaunch reserve form (expected December 2024) | Buy on Amazon: https://www.amazon.com/dp/B0F89QHSWP |
 | /book | no-cost wording (CEO call) | Reserve Your Free Copy | Reserve Your Copy |
-| /book | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /book | typo (CEO call) | Micheal | Michael |
-| /book | typo (CEO call) | over the. years | over the years |
 | /book | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /mike | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /apex-seo-draft | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |

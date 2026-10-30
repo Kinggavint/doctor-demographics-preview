@@ -5,6 +5,9 @@ Run from the repo root: python3 build/gen.py
 """
 import html, json, os, re, csv, shutil
 from bs4 import BeautifulSoup, NavigableString, Comment
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from icons import ICONS  # Lucide, ISC License (build/LICENSE-lucide.txt)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'build', 'data')
@@ -206,6 +209,22 @@ def ghl_booking(cid):
             f'<script src="https://link.msgsndr.com/js/form_embed.js"></script>'
             f'<p class="embed-note">This is the live GoHighLevel booking calendar ({cid}). Preview reviewers: please do not book a slot.</p></div>')
 
+# ---------------------------------------------------------------- icons
+# One Lucide icon per report, used everywhere a report is named (Gavin, Oct 30).
+REPORT_ICON = {'telephone-consultation': 'phone', 'marketing-report': 'trending-up', 'best-sites-report': 'map-pin',
+               'site-viability-report': 'clipboard-check', 'comp-report': 'trophy', 'quick-view-report': 'eye'}
+SAMPLE_OF = {'best-sites-report-sample': 'best-sites-report', 'site-viability-report-sample': 'site-viability-report',
+             'marketing-report-sample': 'marketing-report', 'competition-report-sample': 'comp-report',
+             'quick-view-report-sample': 'quick-view-report'}
+
+def icon(name, cls='ico'):
+    """Decorative inline SVG (aria-hidden). Lucide, ISC License."""
+    return (f'<span class="{cls}" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" '
+            f'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">{ICONS[name]}</svg></span>')
+
+def ricon(slug, cls='ico'):
+    return icon(REPORT_ICON[slug.strip('/')], cls)
+
 # ---------------------------------------------------------------- layout
 NAV_REPORTS = [('Best Sites Report', '/best-sites-report'), ('Site Viability Report', '/site-viability-report'),
                ('Marketing Report', '/marketing-report'), ('Competition Report', '/comp-report'),
@@ -221,7 +240,7 @@ def header():
     def nl(label, href):
         ac = ' aria-current="page"' if href == cur else ''
         return f'<a href="{u(href)}"{ac}>{label}</a>'
-    dd = ''.join(f'<a href="{u(h)}">{l}</a>' for l, h in NAV_REPORTS)
+    dd = ''.join(f'<a href="{u(h)}">{ricon(h, "ico sm")}{l}</a>' for l, h in NAV_REPORTS)
     return f'''<a class="skip" href="#main">Skip to content</a>
 <div class="preview-bar">Preview build for review only. Not the live site. Forms and order buttons connect to the live GoHighLevel system, so please do not submit them. <a href="{u('/preview-notes')}">Review notes and open items</a></div>
 <div class="topbar"><div class="wrap"><a href="{PHONE_TEL}">{PHONE}</a><a href="mailto:{EMAIL}">{EMAIL}</a></div></div>
@@ -237,17 +256,35 @@ def header():
 <a class="apex" href="https://apexailabs.ai/" target="_blank" rel="noopener" aria-label="Powered by ApexAI Labs">ApexAI</a>
 </nav></div></header>'''
 
-def leadership(h1=False):
-    tag = 'h1' if h1 else 'h2'
-    scott = ln('home', 'Demographics is more than')
-    mike = ln('home', 'Mike Green is a seasoned')
+def _q(x):
+    return x.strip().strip('"').strip()
+
+def leadership_short():
+    """Home only: short blurbs trimmed from the existing client text, plus a link to About."""
+    scott = _q(ln('home', 'Demographics is more than')).split(' Markets change')[0]
+    mike = _q(ln('home', 'Mike Green is a seasoned')).split(' He empowers')[0]
+    def blk(im, alt, name, role, txt):
+        return (f'<div class="card leader-s">{img(im, alt)}<div><h3>{name}</h3><p class="role">{role}</p>'
+                f'<p>{t(txt)}</p><a class="more" href="{u("/about")}">More info<span class="sr-only"> about {name}</span></a></div></div>')
     return f'''<section class="section alt leaders" aria-labelledby="lead-h"><div class="wrap">
-<{tag} id="lead-h" class="center">Our Leadership</{tag}>
+<h2 id="lead-h" class="center">Our Leadership</h2>
 <div class="grid g2">
-<div class="card person"><div class="person">{img('631c160e05c40c6f83ebc915.jpg', 'Scott McDonald')}
-<div><blockquote>"{t(scott)}"</blockquote><h3>Scott McDonald</h3><p class="role">Founder, Doctor Demographics (now retired)</p></div></div></div>
-<div class="card person"><div class="person">{img('mike_profile_26.jpg', 'Mike Green')}
-<div><blockquote>"{t(mike)}"</blockquote><h3>Mike Green</h3><p class="role">Owner &amp; Lead Demographer, Doctor Demographics</p></div></div></div>
+{blk('631c160e05c40c6f83ebc915.jpg', 'Scott McDonald', 'Scott McDonald', 'Founder, Doctor Demographics (now retired)', scott)}
+{blk('mike_profile_26.jpg', 'Mike Green', 'Mike Green', 'Owner &amp; Lead Demographer, Doctor Demographics', mike)}
+</div></div></section>'''
+
+def leadership_full():
+    """About page: full width rows, Mike on top, Scott below."""
+    scott = _q(ln('home', 'Demographics is more than'))
+    mike = _q(ln('home', 'Mike Green is a seasoned'))
+    def row(im, alt, name, role, txt, quote):
+        body_ = f'<blockquote><p>"{t(txt)}"</p></blockquote>' if quote else p(txt)
+        return (f'<article class="card leader-l">{img(im, alt)}<div><h3>{name}</h3><p class="role">{role}</p>{body_}</div></article>')
+    return f'''<section class="section alt leaders" aria-labelledby="lead-h"><div class="wrap">
+<h2 id="lead-h">Our Leadership</h2>
+<div class="leader-stack">
+{row('mike_profile_26.jpg', 'Mike Green', 'Mike Green', 'Owner &amp; Lead Demographer, Doctor Demographics', mike, False)}
+{row('631c160e05c40c6f83ebc915.jpg', 'Scott McDonald', 'Scott McDonald', 'Founder, Doctor Demographics (now retired)', scott, True)}
 </div></div></section>'''
 
 def footer():
@@ -257,7 +294,7 @@ def footer():
     return f'''<footer class="site-footer"><div class="wrap"><div class="cols">
 <div><img class="logo" src="{u('assets/img/logo-white.svg')}" alt="Doctor Demographics" loading="lazy" style="height:54px;width:auto;margin-bottom:1rem">
 <p>{t('For over 40 years, the Doctor Demographics team have helped thousands of doctors and practice owners select the perfect place to set up their practice.')}</p></div>
-<div><h4>Quick Links</h4><ul>{''.join(f'<li><a href="{u(h)}">{l}</a></li>' for l, h in ql)}</ul></div>
+<div><h4>Quick Links</h4><ul>{''.join(f'<li><a href="{u(h)}">{ricon(h, "ico sm") if h.strip("/") in REPORT_ICON else ""}{l}</a></li>' for l, h in ql)}</ul></div>
 <div><h4>Contact Us</h4><ul><li><a href="{PHONE_TEL}"><strong>{PHONE}</strong></a></li><li><a href="mailto:{EMAIL}"><strong>{EMAIL}</strong></a></li></ul></div>
 <div><h4>Follow Us</h4><ul>{soc}</ul>
 </div>
@@ -268,7 +305,7 @@ def footer():
 
 FOOTER_TODOS_DONE = False
 
-def finish(title, desc, main, flag=None, lead=True, extra_head='', canonical=None, chrome=True):
+def finish(title, desc, main, flag=None, lead=False, extra_head='', canonical=None, chrome=True):
     path = CUR['path']
     canon = canonical or (LIVE + ('' if path == '/' else path))
     if path == '/':
@@ -287,7 +324,7 @@ def finish(title, desc, main, flag=None, lead=True, extra_head='', canonical=Non
 <link rel="stylesheet" href="{u('css/style.css')}">{extra_head}
 </head><body>'''
     if chrome:
-        doc = head + header() + fl + f'<main id="main">{main}</main>' + (leadership() if lead else '') + footer() + '</body></html>\n'
+        doc = head + header() + fl + f'<main id="main">{main}</main>' + (leadership_short() if lead and path == '/' else '') + footer() + '</body></html>\n'
     else:
         doc = head + f'<main id="main">{main}</main></body></html>\n'
     rel = path.strip('/')
@@ -312,10 +349,12 @@ def flag_hidden(extra=''):
     TODOS.append((CUR['path'], 'hidden page', 'Hidden on live, kept unlinked. Keep, update, or retire? ' + extra))
     return f'<strong>Review flag.</strong> {HIDDEN} {html.escape(extra)}'
 
-def hero(h1, sub='', kicker='', small=True, actions=''):
+def hero(h1, sub='', kicker='', small=True, actions='', ico=''):
     k = f'<p class="kicker">{kicker}</p>' if kicker else ''
+    if ico:
+        h1 = f'{ico}<span>{h1}</span>'
     s = f'<p>{sub}</p>' if sub else ''
-    return f'<section class="hero{" small" if small else ""}"><div class="wrap">{k}<h1>{h1}</h1>{s}{actions}</div></section>'
+    return f'<section class="hero{" small" if small else ""}"><div class="wrap">{k}<h1{' class="with-ico"' if ico else ''}>{h1}</h1>{s}{actions}</div></section>'
 # ---------------------------------------------------------------- pages
 def page_home():
     begin('/')
@@ -328,7 +367,7 @@ def page_home():
 <h2>{t(L(s,19))}</h2>{p(L(s,20))}{p(L(s,21))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div>
 <div>{img('62748d21ea2ab126f720248c.png', 'Doctors and team members smiling')}</div></div></section>
 <section class="section alt"><div class="wrap"><h2 class="center">{t(L(s,23))}</h2><div class="grid g4">
-{''.join(f'<div class="card benefit"><p>{t(x)}</p></div>' for x in L(s,24,27))}</div></div></section>
+{''.join(f'<div class="card benefit">{icon(ic, "ico lg")}<p>{t(x)}</p></div>' for x, ic in zip(L(s,24,27), ('pen-line', 'messages-square', 'map', 'scale')))}</div></div></section>
 <section class="section"><div class="wrap split"><div>{img('d584a9f2-537d-4611-ae13-77848e700c56.png', 'Practice owners reviewing plans together')}</div>
 <div class="prose"><h2>{t(L(s,28))}</h2>{p(L(s,29))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div></div></section>
 <section class="section dark"><div class="wrap split"><div class="prose"><h2>{t(L(s,31))}</h2>{p(L(s,32))}
@@ -338,15 +377,16 @@ def page_home():
     cards = [(39, 40, '/best-sites-report', '64adb6bd1aa4669e1a404704.jpg'), (43, 44, '/site-viability-report', '65258de43fd52c3674559fc6.jpg'),
              (47, 48, '/marketing-report', '68e832bde22f982ba43459c3.jpg'), (51, 52, '/telephone-consultation', '68e833334d2dffc79b33fde1.jpg')]
     for h, d, href, im in cards:
-        m += f'<div class="card">{img(im, fx(L(s,h)).strip(), "thumb")}<h3>{t(L(s,h))}</h3>{p(L(s,d))}<div class="actions">{btn("More Infomation", href)}</div></div>'
+        m += f'<div class="card report-card">{ricon(href, "ico xl")}<h3>{t(L(s,h))}</h3>{p(L(s,d))}<div class="actions">{btn("More Infomation", href)}</div></div>'
     m += '</div></div></section>'
-    finish(title_of(s, 'Doctor Demographics'), desc_of(s), m)
+    CHANGES.append(('/', 'Gavin design (Oct 30)', 'video thumbnails on report cards', 'report icons'))
+    finish(title_of(s, 'Doctor Demographics'), desc_of(s), m, lead=True)
 
 def page_about():
     begin('/about')
     m = hero('About Doctor Demographics', t('For over 40 years, the Doctor Demographics team have helped thousands of doctors and practice owners select the perfect place to set up their practice.'))
-    m += leadership(h1=False)
-    finish('About Doctor Demographics', 'Meet the leadership team at Doctor Demographics.', m, lead=False)
+    m += leadership_full()
+    finish('About Doctor Demographics', 'Meet the leadership team at Doctor Demographics.', m)
 
 PRODUCTS = {
     'best-sites-report': dict(order='/best-sites-report-form', sample='/best-sites-report-sample'),
@@ -372,14 +412,12 @@ def reports_page():
         acts = btn('More Info', '/' + slug, 'ghost')
         o = PRODUCTS[slug]['order']
         acts += btn('Order a report', ('/' + slug + o) if o.startswith('#') else O(o))
-        if PRODUCTS[slug]['sample']:
-            acts += btn('See sample report', PRODUCTS[slug]['sample'], 'ghost')
-        m += f'<div class="card"><h3>{t(title)}</h3>{p(L(s,d))}<div class="actions">{acts}</div></div>'
-    m += f'''</div>
-<div class="btn-row">{btn('Order a Sample Report', '/sample-reports', 'gold')}</div></div></section>
+        m += f'<div class="card report-card">{ricon(slug, "ico xl")}<h3>{t(title)}</h3>{p(L(s,d))}<div class="actions">{acts}</div></div>'
+    m += f'''</div></div></section>
 <section class="section alt"><div class="wrap grid g2"><div><h3>Contact Us by Phone</h3><p><a href="{PHONE_TEL}"><strong>{PHONE}</strong></a></p></div>
 <div><h3>Contact Us by Email</h3><p><a href="mailto:{EMAIL}"><strong>{EMAIL}</strong></a></p></div></div></section>'''
-    CHANGES.append(('/reports', 'client OEDIT d92ae0d', 'card buttons', 'added "Order a report" and "See sample report" next to More Info (no sample for Telephone, per OEDIT f66af04)'))
+    CHANGES.append(('/reports', 'client OEDIT d92ae0d', 'card buttons', 'added "Order a report" next to More Info'))
+    CHANGES.append(('/reports', 'Gavin design (Oct 30)', 'sample report buttons on each block and the Order a Sample Report button', 'removed; report icons added to all 5 blocks'))
     finish(title_of(s, 'Demographic Reports'), desc_of(s), m)
 
 def need_list(items, sub_after=None, sub=None):
@@ -398,7 +436,7 @@ def product(slug, h1, media, feat_head, price_html, feats, order_label, sample_l
     pr = PRODUCTS[slug]
     sample = f'<p><a href="{u(pr["sample"])}">{t(sample_label)}</a></p>' if sample_label else ''
     order_btn = btn(order_label, ohref(slug), 'gold') if order_label else ''
-    m = hero(t(h1))
+    m = hero(t(h1), ico=ricon(slug, 'ico hero-ico'))
     m += f'''<section class="section"><div class="wrap split"><div>{media}{top_extra}</div>
 <div class="features"><h2 style="font-size:var(--text-lg)">{t(feat_head)}</h2><div class="price">{price_html}</div>{feats}{feat_extra}
 <div class="btn-row">{order_btn}</div>{sample}</div></div></section>
@@ -466,14 +504,18 @@ def sample_hub():
     h2, rest = intro.split('ReportsAt ', 1)
     h2 += 'Reports'; rest = 'At ' + rest
     m = hero(t(L(s, 15)))
-    blocks = ''.join(f'<div class="card"><h3>{t(L(s,a).rstrip(":"))}</h3>{p(L(s,a+1))}</div>' for a in (17, 19, 21, 23))
-    m += f'''<section class="section"><div class="wrap"><div class="prose"><h2>{t(h2)}</h2>{p(rest)}</div>
-<div class="grid g2" style="margin-top:1.5rem">{blocks}</div></div></section>'''
     targets = ['/site-viability-report-sample', '/marketing-report-sample', '/best-sites-report-sample', '/competition-report-sample']
-    m += '<section class="section alt"><div class="wrap"><div class="grid g4">'
-    for a, tg in zip((25, 27, 29, 31), targets):
-        m += f'<div class="card"><h3>{t(L(s,a))}</h3><div class="actions">{btn(L(s,a+1), tg)}</div></div>'
+    rslug = ['site-viability-report', 'marketing-report', 'best-sites-report', 'comp-report']
+    # Order links first (Gavin, Oct 30), descriptions below, same icons on both.
+    m += '<section class="section"><div class="wrap"><div class="grid g4 order-row">'
+    for a, tg, rs in zip((25, 27, 29, 31), targets, rslug):
+        m += f'<div class="card report-card">{ricon(rs, "ico xl")}<h3>{t(L(s,a))}</h3><div class="actions">{btn(L(s,a+1), tg)}</div></div>'
     m += '</div></div></section>'
+    blocks = ''.join(f'<div class="card desc-card">{ricon(rs, "ico lg")}<div><h3>{t(L(s,a).rstrip(":"))}</h3>{p(L(s,a+1))}</div></div>'
+                     for a, rs in zip((17, 19, 21, 23), rslug))
+    m += f'''<section class="section alt"><div class="wrap"><div class="prose"><h2>{t(h2)}</h2>{p(rest)}</div>
+<div class="grid desc-grid" style="margin-top:1.5rem">{blocks}</div></div></section>'''
+    CHANGES.append(('/sample-reports', 'Gavin design (Oct 30)', 'descriptions above the order links', 'order links at the top, descriptions below, report icons on both'))
     why = re.split(r'(?<=[.!])(?=[A-Z][A-Za-z ]+:)', L(s, 34))
     items = []
     for w in why:
@@ -498,7 +540,7 @@ def samples():
             fl = flag_hidden('Only linked from the Quick View page (partners only, per Mike).')
         elif note:
             extra = todo(note)
-        m = hero(t(h)) + f'<section class="section"><div class="wrap prose">{extra}{ghl_form(fid, h + " form")}</div></section>'
+        m = hero(t(h), ico=ricon(SAMPLE_OF[slug], 'ico hero-ico')) + f'<section class="section"><div class="wrap prose">{extra}{ghl_form(fid, h + " form")}</div></section>'
         finish(title_of(slug, h), desc_of(slug, h), m, flag=fl)
 
 def page_dental():
@@ -510,8 +552,8 @@ def page_dental():
     m += f'''<section class="section"><div class="wrap split"><div class="prose">{p(L(s,17))}{p(L(s,18))}
 <h2>{t(L(s,19))}</h2>{p(L(s,20))}</div><div>{img('67adf6c345496e764b44a6b3.jpg', 'Smiling dentist in a dental office')}</div></div></section>
 <section class="section alt"><div class="wrap"><h2 class="center">{t(L(s,21))}</h2><div class="grid g2">
-<div class="card">{img('67adf42190796256c5f5834a.jpg', 'Best Sites Report', 'thumb')}<h3>{t(L(s,22))}</h3>{p(L(s,23))}<div class="actions">{btn(L(s,24), '/best-sites-report')}</div></div>
-<div class="card">{img('67adf5a6dd8c5c69890b2d05.jpg', 'Practice Site Viability Report', 'thumb')}<h3>{t(L(s,25))}</h3>{p(L(s,26))}<div class="actions">{btn(L(s,27), '/site-viability-report')}</div></div>
+<div class="card">{img('67adf42190796256c5f5834a.jpg', 'Best Sites Report', 'thumb')}<h3 class="with-ico">{ricon('best-sites-report')}<span>{t(L(s,22))}</span></h3>{p(L(s,23))}<div class="actions">{btn(L(s,24), '/best-sites-report')}</div></div>
+<div class="card">{img('67adf5a6dd8c5c69890b2d05.jpg', 'Practice Site Viability Report', 'thumb')}<h3 class="with-ico">{ricon('site-viability-report')}<span>{t(L(s,25))}</span></h3>{p(L(s,26))}<div class="actions">{btn(L(s,27), '/site-viability-report')}</div></div>
 </div></div></section>
 <section class="section"><div class="wrap prose"><h2>{t(L(s,28))}</h2><p>{t(L(s,29).replace('over 250 episodes', 'over 290 episodes').replace('well over 100K downloads', '100K+ downloads'))} {todo('Episode count updated to over 290 (the podcast page numbers episodes up to 292). Download count shown as 100K+ per decision on Oct 30.', 'done')}</p>{p(L(s,30))}
 <div class="badges"><a href="{SPOTIFY}" target="_blank" rel="noopener">{img('67adf9f516725e5ab4fc8ddf.png', 'Listen on Spotify')}</a>
@@ -695,10 +737,13 @@ def blog_posts():
 def page_contact():
     begin('/contact')
     m = hero('Contact Us')
-    m += f'''<section class="section"><div class="wrap split"><div class="grid">
-<div class="card"><h2 style="font-size:var(--text-lg)">Contact Us by Phone</h2><p><a href="{PHONE_TEL}"><strong>{PHONE}</strong></a></p></div>
-<div class="card"><h2 style="font-size:var(--text-lg)">Contact Us by Email</h2><p><a href="mailto:{EMAIL}"><strong>{EMAIL}</strong></a></p></div></div>
-<div>{img('67b8a4a9f4c6849f1db0854b.jpg', 'Doctor Demographics: our team is ready to help')}</div></div></section>'''
+    m += f'''<section class="section"><div class="wrap split contact"><div class="grid">
+<a class="card contact-card" href="{PHONE_TEL}">{icon('phone', 'ico xl')}<span><span class="lbl">Contact Us by Phone</span><strong>{PHONE}</strong></span></a>
+<a class="card contact-card" href="mailto:{EMAIL}">{icon('mail', 'ico xl')}<span><span class="lbl">Contact Us by Email</span><strong>{EMAIL}</strong></span></a></div>
+<div>{img('67b8a4a9f4c6849f1db0854b.jpg', 'Doctor Demographics: our team is ready to help', 'contact-img')}</div></div></section>
+<section class="section alt"><div class="wrap"><h2 class="center">Demographic Reports</h2><div class="grid g5 report-links">
+{''.join(f'<a class="card report-link" href="{u(h)}">{ricon(h, "ico lg")}<span>{l}</span></a>' for l, h in NAV_REPORTS)}</div></div></section>'''
+    CHANGES.append(('/contact', 'Gavin design (Oct 30)', 'two plain text cards', 'phone and email icon cards plus report icon links'))
     finish(title_of('contact', 'Contact Us'), desc_of('contact'), m)
 
 def legal(slug, h1):

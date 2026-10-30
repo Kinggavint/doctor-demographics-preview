@@ -121,9 +121,20 @@ ul.plain{padding-left:1.25rem}
 .badges img{height:48px;width:auto}
 
 /* leadership + footer */
-.leaders .person{display:grid;grid-template-columns:140px 1fr;gap:1.25rem;align-items:start}
-.leaders .person img{width:140px;height:140px;object-fit:cover;border-radius:50%;border:4px solid var(--accent)}
-@media (max-width:600px){.leaders .person{grid-template-columns:1fr}}
+/* leadership: Home (short) and About (full width rows) */
+.leader-s{display:grid;grid-template-columns:112px 1fr;gap:1.25rem;align-items:start}
+.leader-s img,.leader-l img{object-fit:cover;border-radius:50%;border:4px solid var(--accent);aspect-ratio:1}
+.leader-s img{width:112px;height:112px}
+.leader-s h3,.leader-l h3{margin-bottom:.15em}
+.leader-s .role,.leader-l .role{margin-bottom:.6rem}
+.leader-s p:last-of-type{margin-bottom:.5rem}
+.more{font-weight:700;text-decoration:none}.more::after{content:" \2192"}.more:hover{text-decoration:underline}
+.leader-stack{display:grid;gap:1.5rem}
+.leader-l{display:grid;grid-template-columns:160px 1fr;gap:2rem;align-items:start;padding:2rem}
+.leader-l img{width:160px;height:160px}
+.leader-l blockquote p,.leader-l p{max-width:none}
+@media (max-width:600px){.leader-s{grid-template-columns:72px 1fr;gap:1rem}.leader-s img{width:72px;height:72px;border-width:3px}
+  .leader-l{grid-template-columns:1fr;gap:1rem;padding:1.5rem}.leader-l img{width:112px;height:112px}}
 blockquote{margin:0 0 .75rem;font-style:italic;color:var(--text)}
 .role{font-weight:700;color:var(--primary);font-size:var(--text-sm)}
 .site-footer{background:var(--dark-2);color:#CBD5E1;padding:3rem 0 1.5rem;font-size:var(--text-sm)}
@@ -149,3 +160,36 @@ table.tbl th,table.tbl td{border:1px solid var(--divider);padding:.5rem;text-ali
 main a,main p,main li,main td,main h1,main h2,main h3{overflow-wrap:anywhere}
 .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 .tbl-wrap table.tbl{min-width:560px}
+
+/* icons (Lucide, ISC License, see assets/LICENSE-lucide.txt) */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.ico{display:inline-flex;align-items:center;justify-content:center;flex:none;color:var(--primary)}
+.ico svg{width:1.25em;height:1.25em;display:block}
+.ico.sm{margin-right:.5rem;vertical-align:-.2em}.ico.sm svg{width:1.05em;height:1.05em}
+.site-footer .ico.sm{color:var(--accent)}
+.ico.lg,.ico.xl{background:var(--primary-hl);border-radius:var(--r-lg)}
+.ico.lg{width:2.75rem;height:2.75rem}.ico.lg svg{width:1.4rem;height:1.4rem}
+.ico.xl{width:3.5rem;height:3.5rem;border-radius:var(--r-xl)}.ico.xl svg{width:1.8rem;height:1.8rem}
+.hero h1.with-ico{display:flex;align-items:center;gap:1rem}
+.ico.hero-ico{width:3.5rem;height:3.5rem;border-radius:var(--r-xl);background:rgba(255,255,255,.12);color:var(--accent)}
+.ico.hero-ico svg{width:2rem;height:2rem}
+h3.with-ico{display:flex;align-items:center;gap:.6rem}
+.benefit{display:flex;flex-direction:column;gap:.75rem}
+.benefit .ico.lg{background:var(--accent-hl);color:#8A6A12}
+.report-card .ico.xl{margin-bottom:1rem}
+.desc-card{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start}
+.desc-card p{margin:0}
+.contact-card{flex-direction:row;align-items:center;gap:1.25rem;text-decoration:none;color:var(--text)}
+.contact-card:hover{border-color:var(--primary)}
+.contact-card .lbl{display:block;font-weight:800;color:var(--dark-2);font-size:var(--text-lg);margin-bottom:.2rem}
+.contact-card strong{color:var(--primary);text-decoration:underline;overflow-wrap:anywhere}
+.contact-img{border-radius:var(--r-xl);box-shadow:var(--shadow);width:100%}
+.g5{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.report-link{flex-direction:row;align-items:center;gap:.85rem;text-decoration:none;color:var(--dark-2);font-weight:700;padding:1rem 1.25rem}
+.report-link span{overflow-wrap:normal}
+.report-link:hover{border-color:var(--primary);color:var(--primary)}
+@media (max-width:600px){.hero h1.with-ico{gap:.75rem}.ico.hero-ico{width:2.75rem;height:2.75rem}.ico.hero-ico svg{width:1.5rem;height:1.5rem}
+  .contact-card{gap:1rem;padding:1.25rem}.ico.xl{width:3rem;height:3rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.desc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:760px){.desc-grid{grid-template-columns:1fr}}
