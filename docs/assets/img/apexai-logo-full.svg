@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none">
+  <!-- Dark background -->
+  <rect width="280" height="64" rx="8" fill="#0a0a0a"/>
+
+  <!-- Lightning bolt icon -->
+  <g transform="translate(14, 10) scale(1.375)">
+    <path d="M18 2L6 18h8l-2 12 12-16h-8l2-12z" fill="#f97316"/>
+  </g>
+
+  <!-- ApexAI Labs text -->
+  <text x="58" y="30" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#ffffff" letter-spacing="-0.3">ApexAI Labs</text>
+
+  <!-- by Doctor Demographics -->
+  <text x="58" y="46" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="10" font-weight="400" fill="#6b7280" letter-spacing="0.5">by Doctor Demographics</text>
+</svg>

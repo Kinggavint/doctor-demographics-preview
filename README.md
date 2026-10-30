@@ -10,4 +10,4 @@ Preview: https://kinggavint.github.io/doctor-demographics-preview/
 - Build: `python3 build/gen.py` then `build/verify.sh docs`
 - Published folder: `docs/` (Pages source: branch `preview`, path `/docs`). build/, TODO.md, CHANGES.md, REDIRECTS.csv and this README are not published.
 - Open items: TODO.md. Copy changes: CHANGES.md. Redirect plan: REDIRECTS.csv.
-- Pages: 79 generated. Podcast episodes listed: 62.
+- Pages: 80 generated. Podcast episodes listed: 62.

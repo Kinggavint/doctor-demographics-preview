@@ -254,7 +254,7 @@ def header():
 {nl('Sample Reports', '/sample-reports')}{nl('Podcast', '/podcast')}{nl('Blog', '/blog')}
 <a class="ext" href="{O('/getsocial')}" target="_blank" rel="noopener">Training</a>
 {nl('Contact', '/contact')}
-<a class="apex" href="https://apexailabs.ai/" target="_blank" rel="noopener" aria-label="Powered by ApexAI Labs">ApexAI</a>
+<a class="apex" href="{u('/apex-ai-labs')}"{' aria-current="page"' if cur == '/apex-ai-labs' else ''}><img src="{u('assets/img/apexai-logo-nav.svg')}" alt="Apex AI Labs" width="70" height="33"></a>
 </nav></div></header>'''
 
 def _q(x):
@@ -899,6 +899,54 @@ def page_apex_draft():
 <div class="btn-row">{btn("Talk to Apex AI Labs", "https://apexailabs.ai/", "gold")}</div></div></section>'''
     finish('DRAFT: Apex AI Labs SEO with Doctor Demographics Data', 'Draft landing page: Apex AI Labs and Doctor Demographics data for local SEO.', m, flag=fl, lead=False, canonical=PREVIEW_BASE + 'apex-seo-draft/')
 
+# Apex AI Labs page (Gavin request Oct 30 2026). Navy .dx-* style, scoped extras .apx-*. Linked from the menu logo.
+#  apex-hero-laptop-stethoscope-unsplash-nci.webp: Photo "Stethoscope and Laptop Computer" by National Cancer Institute (@nci)
+#    on Unsplash (photographer Daniel Sone), https://unsplash.com/photos/person-sitting-while-using-laptop-computer-and-green-stethoscope-near-NFvdKIhxYlU
+#    (Unsplash License, https://unsplash.com/license). Cropped 4:3, mild cool grade, 720x540 WebP q76 (16KB).
+#  Menu logo: apexai-logo-full.svg is the original from https://apexailabs.ai/images/apexai-logo-full.svg (280x64).
+#    apexai-logo-nav.svg is a compact copy: same dark badge, bolt and wordmark, subline dropped, wordmark stacked on two lines (135x64), text as paths (Inter Bold).
+# Gavin's line "the only company in the world with that level of detail" is softened until there is a source (see TODO).
+APEX_URL = 'https://apexailabs.ai'
+APEX_HERO_IMG = ('apex-hero-laptop-stethoscope-unsplash-nci.webp',
+                 'Hands typing on a laptop beside a stethoscope on a desk')
+
+def page_apex_ai_labs():
+    begin('/apex-ai-labs')
+    TODOS.append(('/apex-ai-labs', 'CEO', 'Gavin\'s line "Apex AI Labs is the only company in the world with that level of detail on its clients, their patients and potential patients" is softened on the page until there is a source for it. Apex and Mike to sign off on the copy.'))
+    newtab = '<span class="sr-only"> (opens in a new tab)</span>'
+    visit = btn('Visit Apex AI Labs' + newtab, APEX_URL, 'gold', raw=True)
+    sub = ('<p>Apex AI Labs harnesses the power of Doctor Demographics. It uses demographic, deep demographic and psychographic '
+           'research to direct its SEO and AEO (AI answer) work for healthcare practices.</p>'
+           '<p>That means Apex AI Labs starts with an unusual level of detail about each client, their patients and their potential patients.</p>')
+    m = dx_hero('Apex AI Labs: marketing guided by Doctor Demographics research',
+                img(*APEX_HERO_IMG, 'dx-hero-img', lazy=False, wh=(720, 540)),
+                after=f'{sub}<div class="btn-row">{visit}</div>', cls='apx-hero')
+    layers = [('database', 'Demographic research', 'Who lives around a practice: the population, ages, incomes and households, and how the area is changing.'),
+              ('map-pin', 'Deep demographic research', 'A closer look at the neighborhoods a practice draws from, the competition nearby and how far patients travel.'),
+              ('users', 'Psychographic research', 'What local patients value, how they choose a provider and what they look for when they need care.')]
+    m += '<section class="section dx-light apx-s"><div class="wrap"><h2 class="center">Three layers of research</h2><div class="dx-cards dx-3 apx-cards">'
+    for ic, h, d in layers:
+        m += f'<article class="card dx-card"><div class="dx-card-top">{icon(ic, "ico xl dx-ico")}</div><div class="dx-card-body"><h3>{h}</h3><p>{d}</p></div></article>'
+    m += '</div></div></section>'
+    work = [('monitor-smartphone', 'AI-powered websites', 'Websites built around the patients a practice wants to reach, with pages, wording and services shaped by who lives and searches nearby.'),
+            ('search', 'SEO', 'Keywords, location pages and local listings chosen from the research, so search work focuses on the people and places most likely to become patients.'),
+            ('sparkles', 'AI answer visibility (AEO)', 'Clear, well organized answers to the questions local patients ask, so AI assistants and answer engines can find, understand and mention the practice.')]
+    items = ''.join(f'<li class="card dx-why apx-why">{icon(ic, "ico xl dx-ico")}<h3>{h}</h3><p>{d}</p></li>' for ic, h, d in work)
+    m += f'''<section class="section dx-light apx-s"><div class="wrap"><h2 class="center">How the research guides the work</h2>
+<p class="center apx-lede">Apex AI Labs builds online visibility for healthcare practices. The research decides where that effort goes.</p><ul class="dx-why-grid">{items}</ul></div></section>'''
+    steps = [('clipboard-check', 'Start with the research', 'A Doctor Demographics report maps the area around the practice: who lives there, how it is changing and where the opportunity is.'),
+             ('sliders-horizontal', 'Turn it into a plan', 'Apex AI Labs uses the demographic, deep demographic and psychographic findings to choose which patients, services and areas to focus on.'),
+             ('trending-up', 'Build and refine', 'Apex AI Labs builds the website, SEO and AI answer work around that plan, then checks it against the same research as the practice grows.')]
+    blocks = ''.join(f'<li class="dx-glass">{icon(ic, "ico dx-gold-ico")}<div><h3>{h}</h3><p>{d}</p></div></li>' for ic, h, d in steps)
+    m += f'''<section class="section dx-navy"><div class="wrap"><div class="dx-intro"><h2>How it pairs with Doctor Demographics reports</h2>
+<p>The reports and the marketing work from the same research, in three short steps.</p></div>
+<ol class="dx-glass-grid apx-steps">{blocks}</ol></div></section>
+<section class="section dx-cta-wrap"><div class="wrap"><div class="dx-cta apx-cta"><div class="dx-cta-txt"><h2>See what the research can do for your practice</h2>
+<p>Learn more about Apex AI Labs, or contact the Doctor Demographics team with your questions.</p></div>
+<div class="dx-cta-btns">{visit}{btn('Contact Us', '/contact', 'apx-light')}</div></div></div></section>'''
+    finish('Apex AI Labs | Doctor Demographics',
+           'Apex AI Labs uses Doctor Demographics research to guide AI-powered websites, SEO and AI answer visibility for healthcare practices.', m)
+
 def page_mike():
     begin('/mike')
     m = hero(t(L('mike', 15))) + f'<section class="section"><div class="wrap">{ghl_booking("D2uIZQR7ouj2vEbarqac")}</div></section>'
@@ -1108,13 +1156,13 @@ KEEP_PATHS = {'/', '/about', '/reports', '/best-sites-report', '/site-viability-
               '/telephone-consultation', '/quick-view-report', '/sample-reports',
               '/best-sites-report-sample', '/site-viability-report-sample', '/marketing-report-sample', '/quick-view-report-sample',
               '/competition-report-sample', '/dental-demographics', '/podcast', '/blog', '/contact', '/privacy-policy', '/eula',
-              '/partner', '/book', '/mike', '/apex-seo-draft'} | {'/blog/b/' + b for b, _ in BLOGS}
+              '/partner', '/book', '/mike', '/apex-seo-draft', '/apex-ai-labs'} | {'/blog/b/' + b for b, _ in BLOGS}
 
 if __name__ == '__main__':
     page_home(); page_about(); reports_page(); products(); sample_hub(); samples(); page_dental()
     eps = page_podcast(); blog_index(); blog_posts(); page_contact()
     legal('privacy-policy', 'Privacy Policy'); legal('eula', 'Terms and Conditions')
-    page_partner(); page_book(); page_mike(); page_apex_draft()
+    page_partner(); page_book(); page_mike(); page_apex_draft(); page_apex_ai_labs()
     for s_, d_, w_ in REDIRECTS:
         redirect_stub(s_, d_, w_)
     for r in ghl_rows():

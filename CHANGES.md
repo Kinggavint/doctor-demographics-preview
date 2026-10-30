@@ -185,6 +185,7 @@
 | /book | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /mike | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /apex-seo-draft | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /apex-ai-labs | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /home-9727 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /best-sites-report-general-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /site-viabilty-report-general-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |

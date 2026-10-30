@@ -466,3 +466,17 @@ p.dx-cta-btns{margin:0}
 .home-band .home-rcard .ico.xl{background:var(--accent);color:var(--dark-2)}
 @media (max-width:860px){.home-s{padding:3.5rem 0}.home-pod-wrap{padding-bottom:3.5rem}}
 @media (prefers-reduced-motion:reduce){.home-band .home-rcard{transition:none}.home-band .home-rcard:hover{transform:none}}
+
+/* Apex AI Labs page + menu logo (Gavin, Oct 30). Scoped: .apx-*, .nav .apex */
+.nav a.apex{display:flex;align-items:center;padding:.2rem .15rem}
+.nav a.apex img{display:block;height:33px;width:auto;max-width:none}
+.nav a.apex:hover,.nav a.apex[aria-current]{background:var(--offset)}
+.nav a.apex:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+@media (max-width:900px){.nav a.apex{align-self:flex-start;margin-top:.35rem;padding:.3rem .5rem}.nav a.apex img{height:44px}}
+.apx-lede{max-width:46rem;margin:.75rem auto 0;color:var(--text);font-size:var(--text-lg)}
+.apx-why h3{color:var(--dark-2);font-size:var(--text-lg);margin:0 0 .4rem}
+.apx-cards{margin-top:2.25rem}
+.apx-s .dx-card-body p{margin:0;color:var(--text);line-height:1.65}
+@media (min-width:1001px){.dx-glass-grid.apx-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.btn.apx-light{background:#fff;border-color:#fff;color:var(--primary)}
+.btn.apx-light:hover{background:var(--offset);border-color:var(--offset);color:var(--primary-hover)}

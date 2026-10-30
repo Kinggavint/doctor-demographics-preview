@@ -51,6 +51,7 @@
 - [CEO] Apex landing page is a DRAFT: Apex to supply its SEO process, results, pricing and contact path. The "only SEO company in the world" claim stays out until sourced. (/apex-seo-draft)
 - [CEO] Apex: describe how the data shapes keywords, location pages and Google Business Profile work. Placeholder copy. (/apex-seo-draft)
 - [CEO] Apex to confirm these steps, and add results or case studies only with a source. (/apex-seo-draft)
+- [CEO] Gavin's line "Apex AI Labs is the only company in the world with that level of detail on its clients, their patients and potential patients" is softened on the page until there is a source for it. Apex and Mike to sign off on the copy. (/apex-ai-labs)
 
 ## GoHighLevel side bugs (report only, nothing changed)
 
