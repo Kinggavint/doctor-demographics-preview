@@ -366,7 +366,7 @@ def benefits_home(s):
         f'<div class="kb-txt"><h3>{html.escape(hd, quote=False)}</h3><p>{t(x).replace('/', '/<wbr>')}</p></div></li>'
         for i, ((ic, hd), x) in enumerate(zip(BENEFITS, L(s, 24, 27)), 1))
     return (f'<section class="section kb" aria-labelledby="kb-title"><div class="wrap kb-grid">'
-            f'<div class="kb-intro"><p class="kb-kicker">Dental · Medical · Veterinary · Optometric</p>'
+            f'<div class="kb-intro">'
             f'<h2 id="kb-title">{t(L(s,23))}</h2>'
             f'<figure class="kb-fig">{img("a3f4f699-56ba-4b33-ba83-e0f60b7e19f8.jpeg", "Team reviewing findings together around a table")}'
             f'<figcaption class="kb-chip">{icon("messages-square", "ico kb-chip-ico")}<span>Every report includes a live one-on-one follow-up</span></figcaption></figure></div>'
