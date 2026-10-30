@@ -20,8 +20,11 @@ EMAIL = 'support@doctordemographics.com'
 APPLE = 'https://podcasts.apple.com/us/podcast/doctor-demographics-podcast/id800840123'
 APPLE_HOME = 'https://podcasts.apple.com/us/podcast/doctordemographics-podcast/id800840123'
 SPOTIFY = 'https://open.spotify.com/show/5y2MWJfrbhhp8z3fC0AnVT'
+AMAZON_BOOK = 'https://www.amazon.com/dp/B0F89QHSWP'
+# Podcast playlist on the YouTube channel (newest episode first). The embed always opens on the newest item, no API key.
+POD_PLAYLIST = 'PLxxIgza2sWVsRp5kidLl5D3J9jr6uBsEr'
 YT_FOOTER = 'https://www.youtube.com/@doctordemographicslive2702'
-SOCIALS = [('Facebook', 'https://www.facebook.com/doctordemographics'),
+SOCIALS = [('Facebook', 'https://www.facebook.com/doctordemograhics'),
            ('Instagram', 'https://www.instagram.com/doctordemographics/'),
            ('X', 'https://x.com/Dr_Demographics'),
            ('LinkedIn', 'https://www.linkedin.com/company/doctor-demographics'),
@@ -176,6 +179,12 @@ def lite(vid, alt):
     return (f'<a class="lite" href="https://www.youtube.com/watch?v={vid}" target="_blank" rel="noopener">'
             f'<img src="https://img.youtube.com/vi/{vid}/hqdefault.jpg" alt="{a_(alt)}" loading="lazy"></a>')
 
+def latest_episode():
+    """Newest podcast episode, picked client side by YouTube: the playlist embed opens on the first (newest) item."""
+    return (f'<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/videoseries?list={POD_PLAYLIST}" '
+            f'title="Latest podcast episode" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" '
+            f'allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>')
+
 def video(src, poster=None, title='Product video'):
     if 'vimeo' in src:
         return f'<div class="video"><iframe src="{src}" title="{a_(title)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>'
@@ -217,12 +226,12 @@ def header():
 <div class="preview-bar">Preview build for review only. Not the live site. Forms and order buttons connect to the live GoHighLevel system, so please do not submit them. <a href="{u('/preview-notes')}">Review notes and open items</a></div>
 <div class="topbar"><div class="wrap"><a href="{PHONE_TEL}">{PHONE}</a><a href="mailto:{EMAIL}">{EMAIL}</a></div></div>
 <header class="site-header"><div class="wrap">
-<a class="logo" href="{u('/')}"><img src="{u('assets/img/68a3b42d10041847e0bead17.png')}" alt="Doctor Demographics"></a>
+<a class="logo" href="{u('/')}"><img src="{u('assets/img/logo.svg')}" alt="Doctor Demographics" width="226" height="55"></a>
 <button class="menu-toggle" aria-expanded="false" aria-controls="nav" onclick="var n=document.getElementById('nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">Menu</button>
 <nav class="nav" id="nav" aria-label="Main">
 {nl('Home', '/')}{nl('About', '/about')}
 <div class="dd"><a href="{u('/reports')}">Demographic Reports</a><div class="dd-menu">{dd}</div></div>
-{nl('Sample Reports', '/sample-reports')}{nl('Podcast', '/podcast')}
+{nl('Sample Reports', '/sample-reports')}{nl('Podcast', '/podcast')}{nl('Blog', '/blog')}
 <a class="ext" href="{O('/getsocial')}" target="_blank" rel="noopener">Training</a>
 {nl('Contact', '/contact')}
 <a class="apex" href="https://apexailabs.ai/" target="_blank" rel="noopener" aria-label="Powered by ApexAI Labs">ApexAI</a>
@@ -238,8 +247,7 @@ def leadership(h1=False):
 <div class="card person"><div class="person">{img('631c160e05c40c6f83ebc915.jpg', 'Scott McDonald')}
 <div><blockquote>"{t(scott)}"</blockquote><h3>Scott McDonald</h3><p class="role">Founder, Doctor Demographics (now retired)</p></div></div></div>
 <div class="card person"><div class="person">{img('mike_profile_26.jpg', 'Mike Green')}
-<div><blockquote>"{t(mike)}"</blockquote><h3>Mike Green</h3><p class="role">Owner &amp; Lead Demographer, Doctor Demographics</p>
-{todo("Mike's own year count was removed under the since 1983 rule. Add a figure for Mike back?")}</div></div></div>
+<div><blockquote>"{t(mike)}"</blockquote><h3>Mike Green</h3><p class="role">Owner &amp; Lead Demographer, Doctor Demographics</p></div></div></div>
 </div></div></section>'''
 
 def footer():
@@ -247,13 +255,12 @@ def footer():
           ('Telephone Consultation', '/telephone-consultation'), ('Marketing Report', '/marketing-report'), ('Contact Us', '/contact')]
     soc = ''.join(f'<li><a href="{h}" target="_blank" rel="noopener">{n}</a></li>' for n, h in SOCIALS)
     return f'''<footer class="site-footer"><div class="wrap"><div class="cols">
-<div><img class="logo" src="{u('assets/img/DD_WHITE.png')}" alt="Doctor Demographics" loading="lazy" style="height:54px;width:auto;margin-bottom:1rem">
+<div><img class="logo" src="{u('assets/img/logo-white.svg')}" alt="Doctor Demographics" loading="lazy" style="height:54px;width:auto;margin-bottom:1rem">
 <p>{t('For over 40 years, the Doctor Demographics team have helped thousands of doctors and practice owners select the perfect place to set up their practice.')}</p></div>
 <div><h4>Quick Links</h4><ul>{''.join(f'<li><a href="{u(h)}">{l}</a></li>' for l, h in ql)}</ul></div>
 <div><h4>Contact Us</h4><ul><li><a href="{PHONE_TEL}"><strong>{PHONE}</strong></a></li><li><a href="mailto:{EMAIL}"><strong>{EMAIL}</strong></a></li></ul></div>
 <div><h4>Follow Us</h4><ul>{soc}</ul>
-{todo('Facebook link corrected from doctordemograhics to doctordemographics; could_not_verify which page is the real one.', 'ceo')}
-{todo('ApexAI link kept in the main menu; confirm it stays.', 'ceo')}</div>
+</div>
 </div>
 <div class="legal"><span>&copy; Copyright 2026. Doctor Demographics, LLC. | All Rights Reserved |</span>
 <span><a href="{u('/privacy-policy')}">Privacy Policy</a> | <a href="{u('/eula')}">Terms and Conditions</a></span></div>
@@ -299,6 +306,9 @@ def desc_of(slug, fallback=''):
 
 HIDDEN = 'Hidden page on the live site: no navigation link points here. Kept in the preview unlinked and noindexed. Decision pending (keep, update, or retire).'
 def flag_hidden(extra=''):
+    if extra.startswith('Mike'):
+        TODOS.append((CUR['path'], 'hidden page (decided)', extra))
+        return f'<strong>Review flag.</strong> Hidden page: no navigation link points here. Kept unlinked and noindexed. {html.escape(extra)}'
     TODOS.append((CUR['path'], 'hidden page', 'Hidden on live, kept unlinked. Keep, update, or retire? ' + extra))
     return f'<strong>Review flag.</strong> {HIDDEN} {html.escape(extra)}'
 
@@ -323,23 +333,20 @@ def page_home():
 <div class="prose"><h2>{t(L(s,28))}</h2>{p(L(s,29))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div></div></section>
 <section class="section dark"><div class="wrap split"><div class="prose"><h2>{t(L(s,31))}</h2>{p(L(s,32))}
 <div class="btn-row">{btn("Subscribe Here", APPLE_HOME, "gold")}</div><p class="note">Weekly Episode in Your Inbox</p></div>
-<div><h3>Here's Our Most Recent Episode:</h3>{lite('RlPfnmyHmLs', 'Play the most recent episode video')}
-{todo('Live home shows the Episode 252 video. The podcast page lists a newer most recent episode (10/14/2026, video 0QxDdSgI0VY). Which should show here?')}</div></div></section>
+<div><h3>Here's Our Most Recent Episode:</h3>{latest_episode()}</div></div></section>
 <section class="section"><div class="wrap"><h2 class="center">{t(L(s,36))}</h2><div class="grid g4">'''
     cards = [(39, 40, '/best-sites-report', '64adb6bd1aa4669e1a404704.jpg'), (43, 44, '/site-viability-report', '65258de43fd52c3674559fc6.jpg'),
              (47, 48, '/marketing-report', '68e832bde22f982ba43459c3.jpg'), (51, 52, '/telephone-consultation', '68e833334d2dffc79b33fde1.jpg')]
     for h, d, href, im in cards:
         m += f'<div class="card">{img(im, fx(L(s,h)).strip(), "thumb")}<h3>{t(L(s,h))}</h3>{p(L(s,d))}<div class="actions">{btn("More Infomation", href)}</div></div>'
     m += '</div></div></section>'
-    TODOS.append(('/', 'note', 'Live home also has a hidden popup ("Weekly Practice Placement, Promotion, and Profit Tips", Book prelaunch form s7hud67kdZaPKZmuYwDE, "Join 2,000+ Doctors"). Hidden on live, left out of the preview. Add it?'))
     finish(title_of(s, 'Doctor Demographics'), desc_of(s), m)
 
 def page_about():
     begin('/about')
     m = hero('About Doctor Demographics', t('For over 40 years, the Doctor Demographics team have helped thousands of doctors and practice owners select the perfect place to set up their practice.'))
-    m += f'<div class="wrap" style="padding-top:1rem">{todo("Live /about shows only the leadership block and has no page title. Title and heading here are placeholders.", "open")}</div>'
     m += leadership(h1=False)
-    finish('About | Doctor Demographics', 'Meet the leadership team at Doctor Demographics.', m, lead=False)
+    finish('About Doctor Demographics', 'Meet the leadership team at Doctor Demographics.', m, lead=False)
 
 PRODUCTS = {
     'best-sites-report': dict(order='/best-sites-report-form', sample='/best-sites-report-sample'),
@@ -348,7 +355,6 @@ PRODUCTS = {
     'comp-report': dict(order='/comp-report-form', sample='/competition-report-sample'),
     'telephone-consultation': dict(order='#order', sample=None),
     'quick-view-report': dict(order='/quick-view-report-form', sample='/quick-view-report-sample'),
-    'state-briefings': dict(order='/state-briefing-order', sample='/site-viability-report-sample'),
 }
 def ohref(slug):
     o = PRODUCTS[slug]['order']
@@ -369,8 +375,8 @@ def reports_page():
         if PRODUCTS[slug]['sample']:
             acts += btn('See sample report', PRODUCTS[slug]['sample'], 'ghost')
         m += f'<div class="card"><h3>{t(title)}</h3>{p(L(s,d))}<div class="actions">{acts}</div></div>'
-    m += f'''</div><p style="margin-top:1.5rem">{todo('Quick View Report and State Briefings are not listed here on live (hidden pages). Add them to this hub?', 'open')}</p>
-<div class="btn-row">{btn('Order a Free Sample Report', '/sample-reports', 'gold')}</div></div></section>
+    m += f'''</div>
+<div class="btn-row">{btn('Order a Sample Report', '/sample-reports', 'gold')}</div></div></section>
 <section class="section alt"><div class="wrap grid g2"><div><h3>Contact Us by Phone</h3><p><a href="{PHONE_TEL}"><strong>{PHONE}</strong></a></p></div>
 <div><h3>Contact Us by Email</h3><p><a href="mailto:{EMAIL}"><strong>{EMAIL}</strong></a></p></div></div></section>'''
     CHANGES.append(('/reports', 'client OEDIT d92ae0d', 'card buttons', 'added "Order a report" and "See sample report" next to More Info (no sample for Telephone, per OEDIT f66af04)'))
@@ -401,6 +407,15 @@ def product(slug, h1, media, feat_head, price_html, feats, order_label, sample_l
 <div>{need_html}</div></div></section>{after}'''
     finish(title_of(slug, h1), desc_of(slug), m, flag=flag)
 
+# Written from the Marketing Report video on /marketing-report (GCS 68e83148fd24b5fd49c5f4fb.mp4), per Mike.
+MKT_FEATURES = ['Built around your street address or cross streets, so the plan fits your exact site.',
+                'Profiles of your local competition and of the population you are most likely to draw from.',
+                'Drive time and traffic past your site.',
+                'A review of your current website, advertising, and what has been used before.',
+                'Fits a practice transition: buying a practice, losing a partner, or taking on a new partner.',
+                'Built for your goals, from maintaining your practice to growing dramatically or changing your patient base.',
+                'Your patient counts by zip code (no names or addresses) set the real geographic radius around your practice.']
+
 def products():
     s = 'best-sites-report'
     begin('/best-sites-report')
@@ -415,10 +430,11 @@ def products():
     s = 'marketing-report'
     begin('/marketing-report')
     product(s, L(s, 15), video(GCS + '68e83148fd24b5fd49c5f4fb.mp4', title='Marketing Report video'), L(s, 17), t(L(s, 18)),
-            ul(L(s, 19, 22)), L(s, 23), L(s, 24), L(s, 25), ''.join(p(x) for x in L(s, 26, 27)),
+            ul(MKT_FEATURES + [L(s, 22)]), L(s, 23), L(s, 24), L(s, 25), ''.join(p(x) for x in L(s, 26, 27)),
             f'<div class="need"><h3>{t(L(s,28))}</h3>{need_list(L(s,29,33))}<p class="note">{t(L(s,34))}</p></div>',
             after=f'<section class="section" id="order"><div class="wrap prose"><h2>{t(L(s,35))}</h2>{p(L(s,36))}{ghl_form("RnzOfCKPUBs3omXWcT7J", "Marketing Report form")}</div></section>',
-            feat_extra=todo('On live, this features list is identical to the Site Viability list. Confirm the Marketing Report features.', 'open'))
+            feat_extra=todo('Marketing Report features written from the Marketing Report video on this page, as Mike asked. The 20 minute call line is kept from the live page. Please check the wording.', 'Mike decision'))
+    CHANGES.append(('/marketing-report', 'Mike decision (features from the page video)', 'Site Viability features list (live)', ' / '.join(MKT_FEATURES)))
     s = 'comp-report'
     begin('/comp-report')
     product(s, L(s, 15), video(FS + '69b8614e9379cf3f4dc0cf65.mp4', 'e12832a2aa8ca86a.jpg', 'Competition Report video'), L(s, 17),
@@ -429,7 +445,7 @@ def products():
     CHANGES.append(('/comp-report', 'wrong button target fixed (CEO call)', '/site-viabilty-report-form', '/comp-report-form'))
     s = 'telephone-consultation'
     begin('/telephone-consultation')
-    price = f'Price: $149 {todo("Telephone price $149 (decided by Mike). The GHL checkout still shows $90 until Mike updates the product in GHL.", "Mike decision")}'
+    price = f'Price: $149 {todo("Telephone price $149 (decided by Mike). The GHL checkout still shows $90 and the $75 video upgrade, which Mike asked to remove. GHL change pending.", "Mike decision")}'
     desc = (f'<h3>{t(L(s,28))}</h3>{p(L(s,29))}{ul([x.lstrip("- ") for x in L(s,30,32)], "plain")}'
             + ''.join(p(x) for x in L(s, 33, 35)) + f'<h3>{t(L(s,36))}</h3>{ul(L(s,37,40), "plain")}')
     product(s, L(s, 15), video(FS + '68e831484d2dff19aa33a36b.mp4', title='Telephone Consultation video'), L(s, 17), price,
@@ -440,31 +456,18 @@ def products():
     product(s, L(s, 15), img('635195d6b495690eab7a6fa0.jpg', 'Analyst reviewing a report at a desk'), L(s, 16), t(L(s, 17)),
             ul(L(s, 18, 22)), L(s, 23), L(s, 24), L(s, 25), p(L(s, 26)),
             f'<div class="need"><h3>{t(L(s,28))}</h3>{need_list(L(s,29,31))}<p class="note">{t(L(s,32))}</p></div>',
-            flag=flag_hidden())
-    s = 'state-briefings'
-    begin('/state-briefings')
-    states = [x.strip() for x in L(s, 34, 58)]
-    i = states.index('New York'); states[i:i + 2] = ['New York (City)']
-    feats = ul(L(s, 19, 23))
-    desc = (''.join(p(x) for x in L(s, 27, 29)) + f'<h3>{t(L(s,30))}</h3>{ul([L(s,31)])}<div class="btn-row">{btn(L(s,32), ohref(s), "gold")}</div>'
-            + f'<h3>{t(L(s,33))}</h3><ul class="states">' + ''.join(f'<li>{t(x)}</li>' for x in states) + '</ul>'
-            + todo('Texas is listed as both available and coming soon.', 'open') + f'<p class="note">{t(L(s,59))}</p>')
-    product(s, L(s, 15), todo('CEO call, pending Gavin: the dead State Briefing Vimeo video (792399334, dead on live too) is removed from the preview. For Mike\'s team: supply a working video if one should show here.', 'CEO call, pending Gavin'), L(s, 17), t(L(s, 18)),
-            feats, L(s, 24), L(s, 25), L(s, 26), desc, '',
-            top_extra=f'<p style="margin-top:1rem"><strong>{t(L(s,16))}</strong> {todo("Dated: says Updated for 2023.", "open")}</p>',
-            feat_extra=todo('The sample link goes to the Site Viability sample (as on live). No State Briefing sample exists.'),
-            flag=flag_hidden('Also dated (Updated for 2023).'))
+            flag=flag_hidden('Mike: partners only, not for retail. Stays unlisted.'))
 
 def sample_hub():
     begin('/sample-reports')
     s = 'sample-reports'
-    intro = L(s, 16)
+    intro = L(s, 16).replace('developed three exclusive', 'developed four exclusive')
+    CHANGES.append(('/sample-reports', 'Mike decision', 'three exclusive sample reports', 'four exclusive sample reports'))
     h2, rest = intro.split('ReportsAt ', 1)
     h2 += 'Reports'; rest = 'At ' + rest
     m = hero(t(L(s, 15)))
     blocks = ''.join(f'<div class="card"><h3>{t(L(s,a).rstrip(":"))}</h3>{p(L(s,a+1))}</div>' for a in (17, 19, 21, 23))
-    m += f'''<section class="section"><div class="wrap"><div class="prose"><h2>{t(h2)}</h2>{p(rest)}
-{todo('The intro says three exclusive sample reports, but four are listed.', 'open')}</div>
+    m += f'''<section class="section"><div class="wrap"><div class="prose"><h2>{t(h2)}</h2>{p(rest)}</div>
 <div class="grid g2" style="margin-top:1.5rem">{blocks}</div></div></section>'''
     targets = ['/site-viability-report-sample', '/marketing-report-sample', '/best-sites-report-sample', '/competition-report-sample']
     m += '<section class="section alt"><div class="wrap"><div class="grid g4">'
@@ -492,16 +495,17 @@ def samples():
         fl = None
         extra = ''
         if note == 'hidden':
-            fl = flag_hidden('Only linked from the hidden Quick View page.')
+            fl = flag_hidden('Only linked from the Quick View page (partners only, per Mike).')
         elif note:
             extra = todo(note)
         m = hero(t(h)) + f'<section class="section"><div class="wrap prose">{extra}{ghl_form(fid, h + " form")}</div></section>'
         finish(title_of(slug, h), desc_of(slug, h), m, flag=fl)
 
 def page_dental():
+    CHANGES.append(('/dental-demographics', 'Mike decision (update counts)', 'over 250 episodes', 'over 290 episodes'))
     begin('/dental-demographics')
     s = 'dental-demographics'
-    fl = flag_hidden()
+    fl = flag_hidden('Mike asked for the link: ' + PREVIEW_BASE + 'dental-demographics/ (live: ' + LIVE + '/dental-demographics).')
     m = hero(t(L(s, 15)), t(L(s, 16)))
     m += f'''<section class="section"><div class="wrap split"><div class="prose">{p(L(s,17))}{p(L(s,18))}
 <h2>{t(L(s,19))}</h2>{p(L(s,20))}</div><div>{img('67adf6c345496e764b44a6b3.jpg', 'Smiling dentist in a dental office')}</div></div></section>
@@ -509,24 +513,28 @@ def page_dental():
 <div class="card">{img('67adf42190796256c5f5834a.jpg', 'Best Sites Report', 'thumb')}<h3>{t(L(s,22))}</h3>{p(L(s,23))}<div class="actions">{btn(L(s,24), '/best-sites-report')}</div></div>
 <div class="card">{img('67adf5a6dd8c5c69890b2d05.jpg', 'Practice Site Viability Report', 'thumb')}<h3>{t(L(s,25))}</h3>{p(L(s,26))}<div class="actions">{btn(L(s,27), '/site-viability-report')}</div></div>
 </div></div></section>
-<section class="section"><div class="wrap prose"><h2>{t(L(s,28))}</h2><p>{t(L(s,29))} {todo('Download and episode counts are live claims and look dated. Confirm or remove.', 'open')}</p>{p(L(s,30))}
+<section class="section"><div class="wrap prose"><h2>{t(L(s,28))}</h2><p>{t(L(s,29).replace('over 250 episodes', 'over 290 episodes'))} {todo('Episode count updated to over 290 (the podcast page numbers episodes up to 292). The download count (well over 100K) is kept as published: no public source for a newer number. Mike, please send the current download total.', 'open')}</p>{p(L(s,30))}
 <div class="badges"><a href="{SPOTIFY}" target="_blank" rel="noopener">{img('67adf9f516725e5ab4fc8ddf.png', 'Listen on Spotify')}</a>
 <a href="{APPLE}" target="_blank" rel="noopener">{img('67adffc74478e192700f4248.png', 'Apple Podcasts')}</a>
 <a class="btn ghost ext" href="{YT_FOOTER}" target="_blank" rel="noopener">YouTube</a></div></div></section>'''
     finish(title_of(s, 'Dental Demographics'), desc_of(s), m, flag=fl)
 
-POD_VIDEOS = {292: 'DLRUQ0ugVMA', 291: None, 290: 'UBmlxksls5Q', 289: 'yDTjof2sIII', 288: 'CTvdj7PVWN4', 287: 'axQAnZh-mDg',
+POD_VIDEOS = {292: 'DLRUQ0ugVMA', 291: '0pK3TDC90V0', 290: 'UBmlxksls5Q', 289: 'yDTjof2sIII', 288: 'CTvdj7PVWN4', 287: 'axQAnZh-mDg',
   286: 'iJBQwi3FZtA', 285: 'vAhCjC1FjzM', 284: '7ULHhxkbkiw', 283: 'zq0joirpLTI', 282: 'vjwg3XhGbzM', 281: 'viiWr4cWQp0',
   280: 'nlNjbWqcYLI', 279: 'TDBOGw668-8', 278: '-2zQNXdhd70', 277: 'CYyRiZRHZNA', 276: 'nqmaNhJOiXc', 275: 'NiB5TKiOHbo',
   274: '-bZQ7BynbIY', 273: 'FhkavTfclCA', 272: '_bGqGG8tm08', 271: '16DU0Jx_ecs', 270: 'McF2OJSkCjE', 269: 'QecVd90QOtA',
   267: 'wsF8FJCLh_c', 266: 'Ss6_O-VOw_w', 265: 'XMz4_FLpz24', 264: 'qQPcW9m-LBo', 263: 'Ajlet_7dyGw', 262: 'SOe8DMw4LyQ',
-  261: 'DvF14ZfnMiw', 260: 'pW22JzGUgCI', 259: None, 258: 'U0CoXJR5r64', 257: 'fGMEBqRBmtA', 256: 'eA-TMrL2k5k',
+  261: 'DvF14ZfnMiw', 260: 'pW22JzGUgCI', 259: 'VpVAP_W7sdw', 258: 'U0CoXJR5r64', 257: 'fGMEBqRBmtA', 256: 'eA-TMrL2k5k',
   255: 'N-hRgnoCTaw', 254: 'Fb7rAIPV-Sk', 253: 'dQ5GwwFDlj4', 252: 'RlPfnmyHmLs', 251: 'IZ12MUzc5Sg', 250: '3C4HgTNXL_g',
-  249: 'xSOmNkxfv-4', 248: 'I6izLXOwo0w', 247: 'r3OThTZjXXQ', 246: None, 245: 'oFVZ4Hq597k', 244: 'cQzjwIWogX4',
+  249: 'xSOmNkxfv-4', 248: 'I6izLXOwo0w', 247: 'r3OThTZjXXQ', 246: 'BmYjJb1Vgn8', 245: 'oFVZ4Hq597k', 244: 'cQzjwIWogX4',
   243: '-5IWzS1YPL8', 242: 'XU3aCGGqd0Q', 241: 'nWK35tnBi_0', 240: 'KZ_RXp6GKKU', 239: 'pc-P1Fhfvkc', 238: 'e-7VHUjtcCs',
   237: '7OVQE2H9pZI', 236: 'ybneRcOrQU0', 235: 'TIItjpf3z1c', 234: 'Bp7-fbmG_BI', 233: 'jC1rbHxh2XI', 232: 'uPmHTgDKQAk',
   231: 'skgTEmW1YKw', 230: 'DsEiipV3GfU'}
-WRONG = {291: 'the Episode 290 video', 259: 'the Episode 258 video', 246: 'the Episode 247 video'}
+WRONG = {}
+# Matched by title on YouTube (Mike): 291 'The Top Southern States to Open a Practice in 2027', 259 'Timing Your Growth: When to Expand To A Second Location',
+# 246 'Pros and Cons of Opening a Professional Practice in Southern California'.
+# Episode 258 description: the YouTube description of 'Site Selection for Specialists' (U0CoXJR5r64), copied word for word.
+DESC_FIX = {258: ['There are some very important factors to consider when selecting a site if you are a specialist. In this video, Mike Green from Doctor Demographics reviews 5 tips you will want to consider when selecting your practice site.']}
 
 def episodes():
     eps, cur = [], None
@@ -543,8 +551,8 @@ def page_podcast():
     eps = episodes()
     m = hero('The Perfect Place to Put a Practice Podcast', '',
              actions=f'<div class="badges"><a href="{APPLE}" target="_blank" rel="noopener">{img("67adffc74478e192700f4248.png", "Apple Podcasts")}</a><a href="{SPOTIFY}" target="_blank" rel="noopener">{img("67adf9f516725e5ab4fc8ddf.png", "Listen on Spotify")}</a></div>')
-    m += f'''<section class="section"><div class="wrap split"><div><h2>Our Most Recent Episode</h2><p class="meta">(10/14/2026)</p></div>
-<div>{lite('0QxDdSgI0VY', 'Play the most recent episode')}</div></div></section>
+    m += f'''<section class="section"><div class="wrap split"><div><h2>Our Most Recent Episode</h2></div>
+<div>{latest_episode()}</div></div></section>
 <section class="section alt"><div class="wrap"><h2>Previous Podcast Episodes</h2>'''
     nums = [e[0] for e in eps]
     for n, title, desc in eps:
@@ -556,19 +564,20 @@ def page_podcast():
         else:
             media = todo('Video could_not_verify.')
         extra = ''
-        if n in (257, 258):
-            extra = todo('Episodes 257 and 258 share the same description on live.', 'open')
+        if n in DESC_FIX:
+            CHANGES.append(('/podcast', 'Mike decision (match by title on YouTube)', 'Episode %d description (same as 257 on live)' % n, DESC_FIX[n][0][:90]))
+            desc = DESC_FIX[n]
         m += f'<article class="episode"><div>{media}</div><div><h3>{t("Episode %d: %s" % (n, title))}</h3>{"".join(p(d) for d in desc)}{extra}</div></article>'
     TODOS.append(('/podcast', 'CEO call, pending Gavin', 'CEO call, pending Gavin: the Episode 278 title is kept as published (decided). verify.sh copy check flags it once, by design.'))
     if 268 not in nums:
-        m += f'<p style="margin-top:1rem">{todo("Episode 268 is missing from the live list.", "open")}</p>'
+        TODOS.append(('/podcast', 'open', 'Episode 268: no episode between 267 and 269 on either YouTube channel or in the podcast feed (Jul 1 and Jul 8, 2025 are back to back). Looks like a numbering gap. Mike, confirm or send the link.'))
     m += '</div></section>'
     finish(title_of('podcast', 'Podcast'), 'The Perfect Place to Put a Practice podcast from Doctor Demographics with Scott McDonald and Mike Green.', m)
     return eps
 
-BLOGS = [('relocate-or-revamp', '68b5e065419f89ab7b17b8f3.jpg'), ('big-city-exodus', '68ae36a93ba6188b15e093ae.jpg'),
-         ('places-with-promise-2026', '68a862537dc6b074cb6ee577.jpg'), ('kiss-of-death-locations-for-2026', '689bba15b52dae7d965071d5.jpg'),
-         ('launch-smart-5-demographic-factors-for-your-new-practice', '6892773400987beaf980e0fc.jpg'), ('demographic-marketing', '67b50b86aea6db7f0ba29683.jpg')]
+BLOGS = [('relocate-or-revamp', 'banner-mike-68b5e065419f89ab7b17b8f3.jpg'), ('big-city-exodus', 'banner-mike-68ae36a93ba6188b15e093ae.jpg'),
+         ('places-with-promise-2026', 'banner-mike-68a862537dc6b074cb6ee577.jpg'), ('kiss-of-death-locations-for-2026', 'banner-mike-689bba15b52dae7d965071d5.jpg'),
+         ('launch-smart-5-demographic-factors-for-your-new-practice', 'banner-mike-6892773400987beaf980e0fc.jpg'), ('demographic-marketing', 'banner-mike-67b50b86aea6db7f0ba29683.jpg')]
 
 def blog_index():
     begin('/blog')
@@ -588,7 +597,8 @@ def blog_index():
               f'<h3>{t(title)}</h3>{p(exc)}<div class="actions"><a href="{u("/blog/b/" + slug)}">...more</a></div></div>')
         BLOGMETA[slug] = (title, cats, date, rt)
     m += '</div></div></section>'
-    finish(title_of(s, 'Blog'), desc_of(s), m, flag=flag_hidden('The blog is not linked from the live menu.'))
+    CHANGES.append(('/blog', 'Mike decision', 'blog not in the menu', 'Blog added to the main menu'))
+    finish(title_of(s, 'Blog'), desc_of(s), m)
 BLOGMETA = {}
 
 ALLOWED = {'h2', 'h3', 'h4', 'p', 'ul', 'ol', 'li', 'strong', 'b', 'em', 'i', 'a', 'blockquote', 'br', 'img', 'table', 'thead', 'tbody', 'tr', 'td', 'th'}
@@ -677,11 +687,10 @@ def blog_posts():
 {img(im, title)}<h1>{t(title)}</h1><p class="meta">{t(", ".join(cats))} | {t(date)} | {t(rt)}</p>
 {content}
 {('<p>' + todo('CEO call, pending Gavin: one sentence reworded so it no longer refers to the removed on-location report. It now reads: The idea came to me years ago while consulting with a struggling practice in Washington.', 'CEO call, pending Gavin') + '</p>') if slug == 'demographic-marketing' else ''}
-<div class="card" style="margin-top:2rem"><h3>Mike Green</h3>{p(bio) if bio else ''}
-{todo('The header banners on blog posts show a different man labeled Micheal Green than the Mike Green photo used elsewhere. could_not_verify who is pictured.', 'open')}</div>
+<div class="card" style="margin-top:2rem"><h3>Mike Green</h3>{p(bio) if bio else ''}</div>
 <p style="margin-top:1.5rem"><a href="{u('/blog')}">Back to Blog</a></p></div></section>'''
         TODOS.append((CUR['path'], 'note', 'Live canonical points to a placeholder domain (GHL blog setting). Preview canonical uses doctordemographics.com.'))
-        finish(title_of(key, title), desc_of(key), m, flag=flag_hidden('The blog is not linked from the live menu.'))
+        finish(title_of(key, title), desc_of(key), m)
 
 def page_contact():
     begin('/contact')
@@ -713,23 +722,10 @@ def legal(slug, h1):
     m = hero(t(h1)) + f'<section class="section"><div class="wrap prose"><h2>{t(sub)}</h2>{out}</div></section>'
     finish(title_of(slug, h1), desc_of(slug), m, lead=False)
 
-def page_webinars():
-    begin('/webinars')
-    s = 'webinars'
-    fl = flag_hidden('Also dated: the listed webinars were Sep 24 and Oct 1, 2025.')
-    m = hero(t(L(s, 15) + ' ' + L(s, 16)), t(L(s, 17)))
-    cards = [(20, 21, '/webinar-cincinnati', '9ba39d25-b30f-46b7-a6d9-5e1bde1c3641.jpg', 'Cincinnati riverfront bridge'),
-             (23, 24, '/webinar-austin', '75cc39c2-9d4f-4271-8ea7-35d58df5df5f.jpg', 'Painted bull sculpture in Austin')]
-    m += f'<section class="section"><div class="wrap"><h2>{t(L(s,18))}</h2><h3>{t(L(s,19))}</h3><div class="grid g2">'
-    for h, d, tg, im, alt in cards:
-        m += f'<div class="card">{img(im, alt, "thumb")}<h3>{t(L(s,h))}</h3>{p(L(s,d))}<div class="actions">{btn(L(s,22), O(tg))}</div></div>'
-    m += f'</div><p style="margin-top:1rem">{todo("Both webinar dates have passed (2025). Update or retire.", "open")}</p></div></section>'
-    finish(title_of(s, 'Weekly Webinar Series'), desc_of(s), m, flag=fl)
-
 def page_partner():
     begin('/partner')
     s = 'partner'
-    fl = flag_hidden()
+    fl = flag_hidden('Mike: hide this page for now.')
     m = hero(t(L(s, 15) + ' ' + L(s, 16)), t(L(s, 17)), actions=f'<div class="btn-row">{btn(L(s,18), "#apply", "gold")}</div>')
     m += f'''<section class="section"><div class="wrap split"><div class="prose"><h2>{t(L(s,19))}</h2><h3>{t(L(s,20))}</h3><h3>{t(L(s,21))}</h3>{ul(L(s,22,26))}
 {todo('Live shows a client quote image here (signed, about referring to Doctor Demographics for over 25 years). Left out under the no testimonials rule. Keep it?', 'open')}</div>
@@ -741,23 +737,45 @@ def page_partner():
 def page_book():
     begin('/book')
     s = 'book'
-    fl = flag_hidden('Also dated: says the book is expected December 2024.')
-    m = hero(t(L(s, 15)))
+    fl = flag_hidden('Not in the menu. The prelaunch form and the December 2024 date are replaced by the Amazon link Mike sent.')
+    m = hero('Dental Marketing Mastery', actions=f'<div class="btn-row">{btn("Buy on Amazon", AMAZON_BOOK, "gold")}</div>')
     m += f'''<section class="section"><div class="wrap split"><div>{img('67095a97de5f5d41d9cfa18d.jpg', 'Dental Marketing Mastery book cover')}</div>
-<div class="prose"><h2>{t(L(s,16))}</h2><p>{t(L(s,17))} {todo('Dated: publication was expected December 2024. The blog says the book is on Amazon now. Update or retire.', 'open')}</p>
-{ghl_form('s7hud67kdZaPKZmuYwDE', 'Join Book Prelaunch', 420)}</div></div></section>'''
-    finish(title_of(s, 'Book'), desc_of(s), m, flag=fl)
+<div class="prose"><h2>Dental Marketing Mastery is available on Amazon.</h2>
+<div class="btn-row">{btn("Buy on Amazon", AMAZON_BOOK)}</div></div></div></section>'''
+    CHANGES.append(('/book', 'Mike decision', 'prelaunch reserve form (expected December 2024)', 'Buy on Amazon: ' + AMAZON_BOOK))
+    finish('Dental Marketing Mastery | Doctor Demographics', desc_of(s), m, flag=fl)
+
+def page_apex_draft():
+    """Mike asked for an Apex landing page. DRAFT only: noindex, not in the menu, no claims without a source."""
+    begin('/apex-seo-draft')
+    fl = ('<strong>DRAFT for review.</strong> Apex landing page requested by Mike. Not in the menu, noindexed. '
+          'Every statement needs Apex and Mike sign off before launch. Mike\'s line "Apex is the only SEO company in the world that has that level of demographic detail" '
+          'is left out until there is a source for it.')
+    TODOS.append(('/apex-seo-draft', 'CEO', 'Apex landing page is a DRAFT: Apex to supply its SEO process, results, pricing and contact path. The "only SEO company in the world" claim stays out until sourced.'))
+    m = hero('SEO Zeroed In with Doctor Demographics Data', 'Apex AI Labs uses Doctor Demographics data to focus SEO for its clients on the places and people that matter most to each practice.',
+             kicker='Apex AI Labs and Doctor Demographics',
+             actions=f'<div class="btn-row">{btn("Visit Apex AI Labs", "https://apexailabs.ai/", "gold")}{btn("See the Demographic Reports", "/reports", "ghost")}</div>')
+    m += f'''<section class="section"><div class="wrap split"><div class="prose"><h2>Why demographics matter for SEO</h2>
+<p>Search works best when it speaks to the patients who actually live and drive near a practice. Doctor Demographics has studied practice locations since 1983. Apex brings that same local detail to search.</p>
+{todo('Apex: describe how the data shapes keywords, location pages and Google Business Profile work. Placeholder copy.', 'CEO')}</div>
+<div class="card"><h3>What Doctor Demographics data covers</h3>{ul(['The population around a practice and the patients it is most likely to draw from.',
+ 'Local competition.', 'Drive time and traffic around a street address.', 'Patient counts by zip code that show the real geographic radius of a practice.'])}
+<p class="note">From the Doctor Demographics report pages.</p></div></div></section>
+<section class="section alt"><div class="wrap prose"><h2>How it works</h2>{ul(['A Doctor Demographics report defines the area and the patients that matter for the practice.',
+ 'Apex builds the SEO plan around that area.', 'Results are reviewed against the same local data.'], 'plain')}
+{todo('Apex to confirm these steps, and add results or case studies only with a source.', 'CEO')}
+<div class="btn-row">{btn("Talk to Apex AI Labs", "https://apexailabs.ai/", "gold")}</div></div></section>'''
+    finish('DRAFT: Apex AI Labs SEO with Doctor Demographics Data', 'Draft landing page: Apex AI Labs and Doctor Demographics data for local SEO.', m, flag=fl, lead=False, canonical=PREVIEW_BASE + 'apex-seo-draft/')
 
 def page_mike():
     begin('/mike')
     m = hero(t(L('mike', 15))) + f'<section class="section"><div class="wrap">{ghl_booking("D2uIZQR7ouj2vEbarqac")}</div></section>'
-    finish("Mike Green's Calendar | Doctor Demographics", "Book a time with Mike Green from Doctor Demographics.", m, flag=flag_hidden(), lead=False)
+    finish("Mike Green's Calendar | Doctor Demographics", "Book a time with Mike Green from Doctor Demographics.", m, flag=flag_hidden('Mike: keep, but stay hidden.'), lead=False)
 
 # ---------------------------------------------------------------- stubs
 REDIRECTS = [('/home-9727', '/', 'duplicate home page'),
              ('/best-sites-report-general-form', O('/best-sites-report-form'), 'duplicate form page'),
              ('/site-viabilty-report-general-form', O('/site-viabilty-report-form'), 'duplicate form page'),
-             ('/marketing-report-order-2598', O('/marketing-report-order'), 'duplicate order page with no products (left out per CEO call)'),
              ('/getsocial-102622', O('/getsocial'), 'duplicate training page'),
              ('/on-site-report', '/reports', 'removed product (Gavin decision). Target /reports is a CEO call, pending Gavin')]
 
@@ -772,7 +790,14 @@ def redirect_stub(src, dst, why):
 
 def ghl_rows():
     rows = list(csv.DictReader(open('/workspace/apex_hq/doctor-demographics/redo-2026-10/urls.csv')))
-    return [r for r in rows if r['plan'] == 'ghl' and r['path'].startswith('/')]
+    return [r for r in rows if r['plan'] == 'ghl' and r['path'].startswith('/') and r['path'] not in RETIRED and not r['path'].startswith('/webinar-')]
+
+# Retired per Mike (Oct 2026): variants, State Briefing, the 2598 order page, webinars. No stub pages; they fall to the 404.
+RETIRED = {'/best-sites-report-medical-form', '/best-sites-report-veterinary-form', '/site-viabilty-report-medical-form',
+           '/site-viabilty-report-veterinary-form', '/best-sites-report-medical-order', '/best-sites-report-veterinarian',
+           '/best-sites-specialist-order', '/site-viability-report-medical-order', '/site-viability-report-medical-order-form-9361-8813',
+           '/site-viability-report-veterinary-order', '/state-briefing-order', '/order-complete-state-briefing',
+           '/marketing-report-order-2598', '/state-briefings', '/webinars'}
 
 def ghl_stub(r):
     path = r['path']
@@ -787,17 +812,20 @@ def ghl_stub(r):
 
 # ---------------------------------------------------------------- notes and docs
 GHL_BUGS = [
-    'The /comp-report-form form sends people on to /site-viability-order instead of /comp-report-order.',
-    'The Competition sample form sends people to the Best Sites sample PDF.',
-    '/marketing-report-order-2598 shows no products (duplicate order page).',
-    'The State Briefing thank you page (/order-complete-state-briefing) shows a blank sender name.',
-    'GHL form footers link Privacy Policy and Terms to a placeholder domain.',
+    'Set up order.doctordemographics.com as the funnel domain (Mike approved the name and offered account access).',
+    'Telephone Consultation checkout: change $90 to $149 and remove the $75 video upgrade (Mike).',
+    'The /comp-report-form form sends people on to /site-viability-order instead of /comp-report-order (Mike: you fix it).',
+    'The Competition sample form sends people to the Best Sites sample PDF (Mike: you fix it).',
+    'Retire the medical, veterinary and specialist forms, order pages and products (Mike: one price per product).',
+    'Delete /marketing-report-order-2598 (Mike: eliminate).',
+    'Retire the State Briefing order page, the State Briefing thank you page and the State Briefings product (Mike).',
+    'Retire the webinar funnels (/webinar-*) (Mike: remove).',
+    'Form footers: point Privacy Policy to https://doctordemographics.com/privacy-policy and Terms to https://doctordemographics.com/eula (Mike).',
     'Blog post canonicals point to a placeholder domain (GHL blog setting).',
-    'Unknown paths on doctordemographics.com redirect to prodemographics.com.',
-    'Podcast page plays the wrong video on Episodes 291, 259 and 246.',
-    'The home page "most recent episode" is stale (Episode 252).',
+    'Unknown paths on doctordemographics.com redirect to prodemographics.com. Mike wants a normal page not found page at cutover.',
     'The Site Viability form says "Comparision".',
-    'The form for the removed on-location report (HVWSBqGPEBYVxwgBzyRG) shows a raw label "common.other_option". The product is removed from the new site (Gavin decision), so this only matters while the live page stays up.',
+    'Podcast page on live still plays the wrong video on Episodes 291, 259 and 246 (fixed in the preview).',
+    'The form for the removed on-location report (HVWSBqGPEBYVxwgBzyRG) shows a raw label "common.other_option". Only matters while the live page stays up.',
 ]
 
 def dedupe_todos():
@@ -837,7 +865,16 @@ Forms and calendars are the live GoHighLevel embeds and order buttons go to the 
 <li>YouTube: {html.escape(YT_FOOTER)} everywhere.</li></ul>
 <h2>Decided by Mike</h2><ul>
 <li>Competition Report: $350 per site (matches the checkout).</li>
-<li>Telephone Consultation: $149 (not $90). The GHL checkout product still needs to change to $149 on Mike's side.</li></ul>
+<li>Telephone Consultation: $149 (not $90). Remove the $75 video upgrade. The GHL checkout still needs both changes.</li>
+<li>Medical, veterinary and specialist versions, State Briefings, the /marketing-report-order-2598 page and the webinars are retired. Their preview pages are gone.</li>
+<li>Quick View Report: partners only, stays unlisted. /mike stays hidden. /partner is hidden for now. The newsletter pop up stays hidden.</li>
+<li>Marketing Report features: written from the video on that page.</li>
+<li>Sample Reports says four. Site copy drops that word (Mike). About page title: About Doctor Demographics. Since 1983 for the company, no separate count for Mike.</li>
+<li>Blog banners now use Mike's usual photo. Logo recreated as SVG from the existing design. Phone and email only, no street address.</li>
+<li>Home and podcast pages show the latest episode automatically (the YouTube Podcast playlist, newest first). Episodes 291, 259 and 246 matched by title on YouTube. Episode 258 description from YouTube.</li>
+<li>Book: Buy on Amazon. Blog is in the menu. Facebook: {html.escape(SOCIALS[0][1])} (the page name has the typo). Typo fixes kept.</li>
+<li>Unknown addresses show a normal page not found page.</li>
+<li>Dental Demographics link: <a href="{u('/dental-demographics')}">{PREVIEW_BASE}dental-demographics/</a> (live: {LIVE}/dental-demographics).</li></ul>
 <h2>Decisions made by the APEX CEO</h2><p>Each one is a CEO call, pending Gavin/Mike review.</p>
 <div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'ceo')}</table></div>
 <h2>CEO calls (Oct 29), pending Gavin</h2><div class="tbl-wrap"><table class="tbl"><tr><th>Kind</th><th>Item</th><th>Pages</th></tr>{rows(lambda k: k == 'CEO call, pending Gavin')}</table></div>
@@ -855,7 +892,12 @@ Forms and calendars are the live GoHighLevel embeds and order buttons go to the 
 def page_404():
     home = open(os.path.join(SITE, 'index.html')).read()
     begin('/')
-    m = hero('Page not found', 'That page does not exist in this preview.', actions=f'<div class="btn-row"><a class="btn gold" href="{PREVIEW_BASE}">Go to the home page</a></div>')
+    links = [('Home', ''), ('Demographic Reports', 'reports/'), ('Sample Reports', 'sample-reports/'), ('Podcast', 'podcast/'), ('Blog', 'blog/'), ('Contact Us', 'contact/')]
+    m = hero('Page not found', 'Sorry, we could not find that page. It may have moved or the address may be mistyped.',
+             actions=f'<div class="btn-row"><a class="btn gold" href="{PREVIEW_BASE}">Go to the home page</a><a class="btn ghost" href="{PREVIEW_BASE}contact/">Contact us</a></div>')
+    m += ('<section class="section"><div class="wrap prose"><h2>Popular pages</h2><ul class="check">'
+          + ''.join(f'<li><a href="{PREVIEW_BASE}{h}">{l}</a></li>' for l, h in links)
+          + f'</ul><p>Questions? Call <a href="{PHONE_TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p></div></section>')
     CUR['depth'] = 0
     finish('Page not found | Doctor Demographics', 'Page not found.', m, lead=False)
     PAGES.pop()
@@ -873,7 +915,13 @@ def docs(eps):
                 f'- YouTube: {YT_FOOTER} everywhere.\n\n'
                 '## Decided by Mike (Oct 29, 2026)\n\n'
                 '- Competition Report $350 per site (matches checkout).\n'
-                '- Telephone Consultation $149, not $90. GHL checkout product change is on Mike\'s side.\n\n')
+                '- Telephone Consultation $149, not $90. GHL checkout product change is on Mike\'s side.\n\n'
+                '## Decided by Mike (Doc answers, Oct 30, 2026)\n\n'
+                '- Remove the $75 video upgrade, the medical/vet/specialist versions, /marketing-report-order-2598, State Briefings and webinars.\n'
+                '- Quick View: partners only, unlisted. /mike stays hidden, /partner hidden, newsletter pop up hidden.\n'
+                '- Marketing Report features from the page video. Four sample reports. No "free". About title. Since 1983.\n'
+                '- Mike photo in blog banners, SVG logo, phone and email only, latest episode on home, Amazon book link, Blog in menu.\n'
+                '- Facebook: https://www.facebook.com/doctordemograhics. Normal 404 page. Apex landing page drafted at /apex-seo-draft (DRAFT, noindex, unlinked).\n\n')
         for label, fn in (('CEO calls, pending Gavin/Mike review', lambda k: k == 'ceo'),
                           ('CEO calls (Oct 29), pending Gavin', lambda k: k == 'CEO call, pending Gavin'),
                           ('Open questions', lambda k: k == 'open'),
@@ -914,16 +962,16 @@ Preview: {PREVIEW_BASE}
 
 # ---------------------------------------------------------------- main
 KEEP_PATHS = {'/', '/about', '/reports', '/best-sites-report', '/site-viability-report', '/marketing-report', '/comp-report',
-              '/telephone-consultation', '/quick-view-report', '/state-briefings', '/sample-reports',
+              '/telephone-consultation', '/quick-view-report', '/sample-reports',
               '/best-sites-report-sample', '/site-viability-report-sample', '/marketing-report-sample', '/quick-view-report-sample',
               '/competition-report-sample', '/dental-demographics', '/podcast', '/blog', '/contact', '/privacy-policy', '/eula',
-              '/webinars', '/partner', '/book', '/mike'} | {'/blog/b/' + b for b, _ in BLOGS}
+              '/partner', '/book', '/mike', '/apex-seo-draft'} | {'/blog/b/' + b for b, _ in BLOGS}
 
 if __name__ == '__main__':
     page_home(); page_about(); reports_page(); products(); sample_hub(); samples(); page_dental()
     eps = page_podcast(); blog_index(); blog_posts(); page_contact()
     legal('privacy-policy', 'Privacy Policy'); legal('eula', 'Terms and Conditions')
-    page_webinars(); page_partner(); page_book(); page_mike()
+    page_partner(); page_book(); page_mike(); page_apex_draft()
     for s_, d_, w_ in REDIRECTS:
         redirect_stub(s_, d_, w_)
     for r in ghl_rows():

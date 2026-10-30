@@ -24,7 +24,6 @@
 | /about | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /reports | Gavin decision (since 1983, Scott now retired) | with 40+ years of experience | with expertise built since 1983 |
 | /reports | typo (CEO call) | nessecity | necessity |
-| /reports | no-cost wording (CEO call) | Order a Free Sample Report | Order a Sample Report |
 | /reports | client OEDIT d92ae0d | card buttons | added "Order a report" and "See sample report" next to More Info (no sample for Telephone, per OEDIT f66af04) |
 | /reports | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
 | /reports | typo (CEO call) | Micheal | Michael |
@@ -45,6 +44,7 @@
 | /marketing-report | typo (CEO call) | Micheal | Michael |
 | /marketing-report | typo (CEO call) | over the. years | over the years |
 | /marketing-report | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /marketing-report | Mike decision (features from the page video) | Site Viability features list (live) | Built around your street address or cross streets, so the plan fits your exact site. / Profiles of your local competition and of the population you are most likely to draw from. / Drive time and traffic past your site. / A review of your current website, advertising, and what has been used before. / Fits a practice transition: buying a practice, losing a partner, or taking on a new partner. / Built for your goals, from maintaining your practice to growing dramatically or changing your patient base. / Your patient counts by zip code (no names or addresses) set the real geographic radius around your practice. |
 | /comp-report | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
 | /comp-report | typo (CEO call) | Micheal | Michael |
 | /comp-report | typo (CEO call) | over the. years | over the years |
@@ -62,13 +62,7 @@
 | /quick-view-report | typo (CEO call) | Micheal | Michael |
 | /quick-view-report | typo (CEO call) | over the. years | over the years |
 | /quick-view-report | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /state-briefings | typo (CEO call) | give doctor's a little | give doctors a little |
-| /state-briefings | typo (CEO call) | to make a decisions | to make decisions |
-| /state-briefings | typo (CEO call) | to make a decisions | to make decisions |
-| /state-briefings | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /state-briefings | typo (CEO call) | Micheal | Michael |
-| /state-briefings | typo (CEO call) | over the. years | over the years |
-| /state-briefings | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /sample-reports | Mike decision | three exclusive sample reports | four exclusive sample reports |
 | /sample-reports | no-cost wording (CEO call) | Free Sample Reports | Sample Reports |
 | /sample-reports | no-cost wording (CEO call) | Our Free Sample Reports | Our Sample Reports |
 | /sample-reports | no-cost wording (CEO call) | Order Free Sample  | Order a Sample  |
@@ -102,6 +96,7 @@
 | /competition-report-sample | typo (CEO call) | Micheal | Michael |
 | /competition-report-sample | typo (CEO call) | over the. years | over the years |
 | /competition-report-sample | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /dental-demographics | Mike decision (update counts) | over 250 episodes | over 290 episodes |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 30 Years, Doctor Demographics has | Since 1983, Doctor Demographics has |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | Our founder, Scott McDonald pioneered | Our founder, Scott McDonald (now retired), pioneered |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
@@ -125,6 +120,7 @@
 | /podcast | dash removed (builder copy rule) | Is your practice keeping up with your city’s demographic shifts? In this episode of The Pe | Is your practice keeping up with your city’s demographic shifts? In this episode of The Pe |
 | /podcast | dash removed (builder copy rule) | Are you a dentist, veterinarian, or optometrist looking for the perfect spot to start or g | Are you a dentist, veterinarian, or optometrist looking for the perfect spot to start or g |
 | /podcast | dash removed (builder copy rule) | In this episode of The Perfect Place to Put a Practice, Mike Green dives into a critical q | In this episode of The Perfect Place to Put a Practice, Mike Green dives into a critical q |
+| /podcast | Mike decision (match by title on YouTube) | Episode 258 description (same as 257 on live) | There are some very important factors to consider when selecting a site if you are a speci |
 | /podcast | dash removed (builder copy rule) | Choosing the right location for your new practice is one of the most critical decisions yo | Choosing the right location for your new practice is one of the most critical decisions yo |
 | /podcast | Gavin decision (since 1983, Scott now retired) | a company with over 30 years of experience in assisting doctors with these very questions | a company that has been assisting doctors with these very questions since 1983 |
 | /podcast | dash removed (builder copy rule) | Are you thinking about opening your own practice this year? The journey might seem dauntin | Are you thinking about opening your own practice this year? The journey might seem dauntin |
@@ -135,6 +131,7 @@
 | /podcast | typo (CEO call) | over the. years | over the years |
 | /podcast | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog | dash removed (builder copy rule) | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026" – 8 markets  | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026", 8 markets ( |
+| /blog | Mike decision | blog not in the menu | Blog added to the main menu |
 | /blog | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
 | /blog | typo (CEO call) | Micheal | Michael |
 | /blog | typo (CEO call) | over the. years | over the years |
@@ -249,73 +246,38 @@
 | /privacy-policy | typo (CEO call) | shall by governed | shall be governed |
 | /privacy-policy | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /eula | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /webinars | no-cost wording (CEO call) | Weekly Free Webinar | Weekly Webinar |
-| /webinars | no-cost wording (CEO call) | These FREE webinars | These webinars |
-| /webinars | no-cost wording (CEO call) | Weekly Free Webinar | Weekly Webinar |
-| /webinars | no-cost wording (CEO call) | Free Weekly Webinar | Weekly Webinar |
-| /webinars | dash removed (builder copy rule) | Weekly Webinar Series - Prime Practice Locations | Weekly Webinar Series, Prime Practice Locations |
-| /webinars | dash removed (builder copy rule) | Prime Practice Locations - Cincinnati, OH | Prime Practice Locations, Cincinnati, OH |
-| /webinars | no-cost wording (CEO call) | Register for Free Webinar | Register for Webinar |
-| /webinars | dash removed (builder copy rule) | Prime Practice Locations - Austin, TX | Prime Practice Locations, Austin, TX |
-| /webinars | no-cost wording (CEO call) | Register for Free Webinar | Register for Webinar |
-| /webinars | no-cost wording (CEO call) | Join our free weekly | Join our weekly |
-| /webinars | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /webinars | typo (CEO call) | Micheal | Michael |
-| /webinars | typo (CEO call) | over the. years | over the years |
-| /webinars | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /partner | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
 | /partner | typo (CEO call) | Micheal | Michael |
 | /partner | typo (CEO call) | over the. years | over the years |
 | /partner | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /book | no-cost wording (CEO call) | Reserve Your Free Copy | Reserve Your Copy |
-| /book | no-cost wording (CEO call) | get your free copy | get your copy |
+| /book | Mike decision | prelaunch reserve form (expected December 2024) | Buy on Amazon: https://www.amazon.com/dp/B0F89QHSWP |
 | /book | no-cost wording (CEO call) | Reserve Your Free Copy | Reserve Your Copy |
 | /book | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
 | /book | typo (CEO call) | Micheal | Michael |
 | /book | typo (CEO call) | over the. years | over the years |
 | /book | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /mike | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /apex-seo-draft | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /home-9727 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /best-sites-report-general-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /site-viabilty-report-general-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /marketing-report-order-2598 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /getsocial-102622 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /on-site-report | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /getsocial | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /webinar-austin | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /webinar-broadcast-austin | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /webinar-broadcast-cincinnati | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /webinar-cincinnati | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /webinar-confirmation-austin | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /webinar-confirmation-cincinnati | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /webinar-registration-austin | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /webinar-registration-cincinnati | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /accessdso | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /apexchat | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /ppschedule | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /best-sites-report-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /best-sites-report-medical-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /best-sites-report-veterinary-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /comp-report-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /quick-view-report-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /site-viabilty-report-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /site-viabilty-report-medical-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /site-viabilty-report-veterinary-form | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /best-sites-report-medical-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /best-sites-report-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /best-sites-report-veterinarian | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /best-sites-specialist-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /comp-report-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /marketing-report-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /quick-view-report-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /site-viability-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /site-viability-report-medical-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /site-viability-report-medical-order-form-9361-8813 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /site-viability-report-veterinary-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /state-briefing-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /telephone-consultation-order | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /order-complete | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /order-complete-state-briefing | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /order-complete-telephone | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /preview-notes | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | / | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |

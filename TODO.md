@@ -11,67 +11,62 @@
 - Competition Report $350 per site (matches checkout).
 - Telephone Consultation $149, not $90. GHL checkout product change is on Mike's side.
 
+## Decided by Mike (Doc answers, Oct 30, 2026)
+
+- Remove the $75 video upgrade, the medical/vet/specialist versions, /marketing-report-order-2598, State Briefings and webinars.
+- Quick View: partners only, unlisted. /mike stays hidden, /partner hidden, newsletter pop up hidden.
+- Marketing Report features from the page video. Four sample reports. No "free". About title. Since 1983.
+- Mike photo in blog banners, SVG logo, phone and email only, latest episode on home, Amazon book link, Blog in menu.
+- Facebook: https://www.facebook.com/doctordemograhics. Normal 404 page. Apex landing page drafted at /apex-seo-draft (DRAFT, noindex, unlinked).
+
 ## CEO calls, pending Gavin/Mike review
 
-- [ceo] Facebook link corrected from doctordemograhics to doctordemographics; could_not_verify which page is the real one. (every page)
-- [ceo] ApexAI link kept in the main menu; confirm it stays. (every page)
 - [ceo] One live Order button went to the Site Viability form. Both now go to /comp-report-form. (/comp-report)
 
 ## CEO calls (Oct 29), pending Gavin
 
-- [CEO call, pending Gavin] the dead State Briefing Vimeo video (792399334, dead on live too) is removed from the preview. For Mike's team: supply a working video if one should show here. (/state-briefings)
 - [CEO call, pending Gavin] the Episode 278 title is kept as published (decided). verify.sh copy check flags it once, by design. (/podcast)
 - [CEO call, pending Gavin] one sentence reworded so it no longer refers to the removed on-location report. It now reads: The idea came to me years ago while consulting with a struggling practice in Washington. (/blog/b/demographic-marketing)
 - [CEO call, pending Gavin] this old URL redirects to /reports. (/on-site-report)
 
 ## Open questions
 
-- [open] Live /about shows only the leadership block and has no page title. Title and heading here are placeholders. (/about)
-- [open] Quick View Report and State Briefings are not listed here on live (hidden pages). Add them to this hub? (/reports)
-- [open] On live, this features list is identical to the Site Viability list. Confirm the Marketing Report features. (/marketing-report)
-- [open] Texas is listed as both available and coming soon. (/state-briefings)
-- [open] Dated: says Updated for 2023. (/state-briefings)
-- [open] The intro says three exclusive sample reports, but four are listed. (/sample-reports)
-- [open] Download and episode counts are live claims and look dated. Confirm or remove. (/dental-demographics)
-- [open] Episodes 257 and 258 share the same description on live. (/podcast)
-- [open] Episode 268 is missing from the live list. (/podcast)
-- [open] The header banners on blog posts show a different man labeled Micheal Green than the Mike Green photo used elsewhere. could_not_verify who is pictured. (/blog/b/big-city-exodus, /blog/b/demographic-marketing, /blog/b/kiss-of-death-locations-for-2026, /blog/b/launch-smart-5-demographic-factors-for-your-new-practice, /blog/b/places-with-promise-2026, /blog/b/relocate-or-revamp)
-- [open] Both webinar dates have passed (2025). Update or retire. (/webinars)
+- [open] Episode count updated to over 290 (the podcast page numbers episodes up to 292). The download count (well over 100K) is kept as published: no public source for a newer number. Mike, please send the current download total. (/dental-demographics)
+- [open] Episode 268: no episode between 267 and 269 on either YouTube channel or in the podcast feed (Jul 1 and Jul 8, 2025 are back to back). Looks like a numbering gap. Mike, confirm or send the link. (/podcast)
 - [open] Live shows a client quote image here (signed, about referring to Doctor Demographics for over 25 years). Left out under the no testimonials rule. Keep it? (/partner)
-- [open] Dated: publication was expected December 2024. The blog says the book is on Amazon now. Update or retire. (/book)
 - [open] Needs the order.doctordemographics.com subdomain set up in GHL at cutover. No DNS change made. (every page)
 
 ## Other TODOs
 
-- [todo] Live home shows the Episode 252 video. The podcast page lists a newer most recent episode (10/14/2026, video 0QxDdSgI0VY). Which should show here? (/)
-- [note] Live home also has a hidden popup ("Weekly Practice Placement, Promotion, and Profit Tips", Book prelaunch form s7hud67kdZaPKZmuYwDE, "Join 2,000+ Doctors"). Hidden on live, left out of the preview. Add it? (/)
-- [todo] Mike's own year count was removed under the since 1983 rule. Add a figure for Mike back? (every page)
+- [Mike decision] Marketing Report features written from the Marketing Report video on this page, as Mike asked. The 20 minute call line is kept from the live page. Please check the wording. (/marketing-report)
 - [Mike decision] Competition price $350 per site (confirmed by Mike), matches the checkout. (/comp-report)
-- [Mike decision] Telephone price $149 (decided by Mike). The GHL checkout still shows $90 until Mike updates the product in GHL. (/telephone-consultation)
-- [hidden page] Hidden on live, kept unlinked. Keep, update, or retire?  (/dental-demographics, /mike, /partner, /quick-view-report)
-- [todo] The sample link goes to the Site Viability sample (as on live). No State Briefing sample exists. (/state-briefings)
-- [hidden page] Hidden on live, kept unlinked. Keep, update, or retire? Also dated (Updated for 2023). (/state-briefings)
-- [hidden page] Hidden on live, kept unlinked. Keep, update, or retire? Only linked from the hidden Quick View page. (/quick-view-report-sample)
+- [Mike decision] Telephone price $149 (decided by Mike). The GHL checkout still shows $90 and the $75 video upgrade, which Mike asked to remove. GHL change pending. (/telephone-consultation)
+- [hidden page (decided)] Mike: partners only, not for retail. Stays unlisted. (/quick-view-report)
+- [hidden page] Hidden on live, kept unlinked. Keep, update, or retire? Only linked from the Quick View page (partners only, per Mike). (/quick-view-report-sample)
 - [todo] GHL side: after submit, this form sends people to the Best Sites sample PDF, not the Competition sample. Fix in GHL. (/competition-report-sample)
-- [todo] Correct video needed: on live this episode plays the Episode 290 video. (/podcast)
-- [todo] Correct video needed: on live this episode plays the Episode 258 video. (/podcast)
-- [todo] Correct video needed: on live this episode plays the Episode 247 video. (/podcast)
-- [hidden page] Hidden on live, kept unlinked. Keep, update, or retire? The blog is not linked from the live menu. (/blog, /blog/b/big-city-exodus, /blog/b/demographic-marketing, /blog/b/kiss-of-death-locations-for-2026, /blog/b/launch-smart-5-demographic-factors-for-your-new-practice, /blog/b/places-with-promise-2026, /blog/b/relocate-or-revamp)
+- [hidden page (decided)] Mike asked for the link: https://kinggavint.github.io/doctor-demographics-preview/dental-demographics/ (live: https://doctordemographics.com/dental-demographics). (/dental-demographics)
 - [note] Live canonical points to a placeholder domain (GHL blog setting). Preview canonical uses doctordemographics.com. (/blog/b/big-city-exodus, /blog/b/demographic-marketing, /blog/b/kiss-of-death-locations-for-2026, /blog/b/launch-smart-5-demographic-factors-for-your-new-practice, /blog/b/places-with-promise-2026, /blog/b/relocate-or-revamp)
-- [hidden page] Hidden on live, kept unlinked. Keep, update, or retire? Also dated: the listed webinars were Sep 24 and Oct 1, 2025. (/webinars)
+- [hidden page (decided)] Mike: hide this page for now. (/partner)
 - [todo] GHL side: the form footer Privacy Policy and Terms links point to a placeholder domain. Fix in GHL. (/partner)
-- [hidden page] Hidden on live, kept unlinked. Keep, update, or retire? Also dated: says the book is expected December 2024. (/book)
+- [hidden page] Hidden on live, kept unlinked. Keep, update, or retire? Not in the menu. The prelaunch form and the December 2024 date are replaced by the Amazon link Mike sent. (/book)
+- [hidden page (decided)] Mike: keep, but stay hidden. (/mike)
+- [CEO] Apex landing page is a DRAFT: Apex to supply its SEO process, results, pricing and contact path. The "only SEO company in the world" claim stays out until sourced. (/apex-seo-draft)
+- [CEO] Apex: describe how the data shapes keywords, location pages and Google Business Profile work. Placeholder copy. (/apex-seo-draft)
+- [CEO] Apex to confirm these steps, and add results or case studies only with a source. (/apex-seo-draft)
 
 ## GoHighLevel side bugs (report only, nothing changed)
 
-- The /comp-report-form form sends people on to /site-viability-order instead of /comp-report-order.
-- The Competition sample form sends people to the Best Sites sample PDF.
-- /marketing-report-order-2598 shows no products (duplicate order page).
-- The State Briefing thank you page (/order-complete-state-briefing) shows a blank sender name.
-- GHL form footers link Privacy Policy and Terms to a placeholder domain.
+- Set up order.doctordemographics.com as the funnel domain (Mike approved the name and offered account access).
+- Telephone Consultation checkout: change $90 to $149 and remove the $75 video upgrade (Mike).
+- The /comp-report-form form sends people on to /site-viability-order instead of /comp-report-order (Mike: you fix it).
+- The Competition sample form sends people to the Best Sites sample PDF (Mike: you fix it).
+- Retire the medical, veterinary and specialist forms, order pages and products (Mike: one price per product).
+- Delete /marketing-report-order-2598 (Mike: eliminate).
+- Retire the State Briefing order page, the State Briefing thank you page and the State Briefings product (Mike).
+- Retire the webinar funnels (/webinar-*) (Mike: remove).
+- Form footers: point Privacy Policy to https://doctordemographics.com/privacy-policy and Terms to https://doctordemographics.com/eula (Mike).
 - Blog post canonicals point to a placeholder domain (GHL blog setting).
-- Unknown paths on doctordemographics.com redirect to prodemographics.com.
-- Podcast page plays the wrong video on Episodes 291, 259 and 246.
-- The home page "most recent episode" is stale (Episode 252).
+- Unknown paths on doctordemographics.com redirect to prodemographics.com. Mike wants a normal page not found page at cutover.
 - The Site Viability form says "Comparision".
-- The form for the removed on-location report (HVWSBqGPEBYVxwgBzyRG) shows a raw label "common.other_option". The product is removed from the new site (Gavin decision), so this only matters while the live page stays up.
+- Podcast page on live still plays the wrong video on Episodes 291, 259 and 246 (fixed in the preview).
+- The form for the removed on-location report (HVWSBqGPEBYVxwgBzyRG) shows a raw label "common.other_option". Only matters while the live page stays up.
