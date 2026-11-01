@@ -858,6 +858,96 @@ def blog_posts():
         TODOS.append((CUR['path'], 'note', 'Live canonical points to a placeholder domain (GHL blog setting). Preview canonical uses doctordemographics.com.'))
         finish(title_of(key, title), desc_of(key), m)
 
+# ---------------------------------------------------------------- page JSON-LD (Product/Service + Offer, FAQPage, PodcastSeries, BlogPosting)
+# Built only from what each page already shows: H1, meta description, the price line, the episode list, post dates and author.
+SCHEMA_PUBLISHER = {'@type': 'Organization', '@id': LIVE + '/#organization', 'name': 'Doctor Demographics', 'url': LIVE + '/'}
+# Public report and service pages (Quick View is partners only and stays out). Telephone Consultation is a service, the rest are reports.
+SCHEMA_OFFERS = {'/best-sites-report': 'Product', '/site-viability-report': 'Product', '/marketing-report': 'Product',
+                 '/comp-report': 'Product', '/telephone-consultation': 'Service'}
+
+def schema_graph(objs):
+    doc = {'@context': 'https://schema.org', '@graph': objs}
+    return '\n<script type="application/ld+json">' + json.dumps(doc, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>'
+
+def _iso_date(d):
+    import datetime
+    return datetime.datetime.strptime(d.strip(), '%B %d, %Y').date().isoformat()
+
+def _txt(node):
+    return re.sub(r'\s+', ' ', node.get_text(' ', strip=True)).strip()
+
+def page_schema(path, title, desc, main, canon):
+    sp = BeautifulSoup(main, 'html.parser')
+    for f_ in sp.select('.todo, .flag'):
+        f_.decompose()  # preview only review notes are never schema facts
+    h1 = sp.find('h1')
+    name = _txt(h1) if h1 else title
+    desc = re.sub(r'\s+', ' ', desc).strip()
+    if path in SCHEMA_OFFERS:
+        pr = sp.select_one('.price')
+        price_line = _txt(pr) if pr else ''
+        mm = re.search(r'\$([\d,]+(?:\.\d\d)?)', price_line)
+        if not mm:
+            return ''
+        offer = {'@type': 'Offer', 'price': mm.group(1).replace(',', ''), 'priceCurrency': 'USD', 'url': canon,
+                 'description': price_line, 'seller': {'@id': SCHEMA_PUBLISHER['@id']}}
+        kind = SCHEMA_OFFERS[path]
+        item = {'@type': kind, '@id': canon + '#offer-item', 'name': name, 'description': desc, 'url': canon, 'offers': offer}
+        if kind == 'Product':
+            item['brand'] = {'@type': 'Brand', 'name': 'Doctor Demographics'}
+        else:
+            item['provider'] = {'@id': SCHEMA_PUBLISHER['@id']}
+            item['serviceType'] = name
+        return schema_graph([item, SCHEMA_PUBLISHER])
+    if path == '/sample-reports':
+        # The only question and answer shown on the site: "Why Choose Doctor Demographics?" and its three points.
+        q = next((h for h in sp.find_all('h2') if h.get_text(strip=True).endswith('?')), None)
+        ans = [_txt(li) for li in sp.select('li.dx-why')]
+        if not q or not ans:
+            return ''
+        faq = {'@type': 'FAQPage', '@id': canon + '#faq', 'url': canon, 'mainEntity': [
+            {'@type': 'Question', 'name': _txt(q), 'acceptedAnswer': {'@type': 'Answer', 'text': ' '.join(ans)}}]}
+        return schema_graph([faq])
+    if path == '/podcast':
+        eps = []
+        for art in sp.select('article.dx-ep'):
+            h3 = art.find('h3')
+            mm = re.match(r'Episode (\d+): (.*)', _txt(h3)) if h3 else None
+            a = art.select_one('a.lite')
+            if not mm:
+                continue
+            ep = {'@type': 'PodcastEpisode', 'episodeNumber': int(mm.group(1)), 'name': mm.group(2)}
+            d = ' '.join(_txt(x) for x in art.find_all('p'))
+            if d:
+                ep['description'] = d
+            if a:
+                ep['url'] = a['href']
+            eps.append(ep)
+        series = {'@type': 'PodcastSeries', '@id': canon + '#podcast', 'name': name, 'description': desc, 'url': canon,
+                  'sameAs': [APPLE, SPOTIFY], 'actor': [{'@type': 'Person', 'name': 'Scott McDonald'}, {'@type': 'Person', 'name': 'Mike Green'}],
+                  'publisher': {'@id': SCHEMA_PUBLISHER['@id']}, 'hasPart': eps}
+        return schema_graph([series, SCHEMA_PUBLISHER])
+    if path.startswith('/blog/b/'):
+        slug = path.rsplit('/', 1)[1]
+        if slug not in BLOGMETA:
+            return ''
+        btitle, cats, date, rt = BLOGMETA[slug]
+        im = dict(BLOGS).get(slug)
+        post = {'@type': 'BlogPosting', '@id': canon + '#post', 'headline': name, 'description': desc, 'url': canon,
+                'mainEntityOfPage': canon, 'datePublished': _iso_date(date),
+                'author': {'@type': 'Person', 'name': 'Mike Green', 'url': LIVE + '/about'},
+                'publisher': {'@id': SCHEMA_PUBLISHER['@id']}, 'articleSection': list(cats)}
+        if im:
+            post['image'] = LIVE + '/assets/img/' + im
+        crumbs = {'@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': LIVE + '/'},
+            {'@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': LIVE + '/blog'},
+            {'@type': 'ListItem', 'position': 3, 'name': name, 'item': canon}]}
+        return schema_graph([post, crumbs, SCHEMA_PUBLISHER])
+    return ''
+
+HEAD_HOOKS.append(page_schema)
+
 def page_contact():
     begin('/contact')
     m = dx_hero('Contact Us')
