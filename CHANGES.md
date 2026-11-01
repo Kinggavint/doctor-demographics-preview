@@ -179,7 +179,7 @@
 | /contact | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /privacy-policy | typo (CEO call) | shall by governed | shall be governed |
 | /privacy-policy | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
-| /eula | client request (Mike, Oct 31) | purchased from EASI Demographics Systems and EBIS-ESRI Data | purchased from EBIS-ESRI Data |
+| /eula | client request (Mike + Gavin, Oct 31) | vendor list naming a former data vendor (two names) | purchased from EBIS-ESRI Data (and other resource providers) |
 | /eula | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /partner | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /book | Mike decision | prelaunch reserve form (expected December 2024) | Buy on Amazon: https://www.amazon.com/dp/B0F89QHSWP |

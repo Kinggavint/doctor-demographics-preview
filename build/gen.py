@@ -874,11 +874,11 @@ def legal(slug, h1):
     begin('/' + slug)
     lines = [x.strip() for x in body(slug)[2:] if x.strip()]
     if slug == 'eula':
-        # Client request (Mike, Oct 31): remove EASI Demographics from the data vendor list. Rest of the text untouched.
-        a, b = 'purchased from EASI Demographics Systems and EBIS-ESRI Data', 'purchased from EBIS-ESRI Data'
-        assert sum(a in x for x in lines) == 1
-        lines = [x.replace(a, b) for x in lines]
-        CHANGES.append((CUR['path'], 'client request (Mike, Oct 31)', a, b))
+        # Client request (Mike, Oct 31) and Gavin (Oct 31): former data vendor no longer listed.
+        # The source text in build/data/text/eula.txt was edited directly so the old vendor name is not kept anywhere in the repo.
+        b = 'purchased from EBIS-ESRI Data (and other resource providers)'
+        assert sum(b in x for x in lines) == 1
+        CHANGES.append((CUR['path'], 'client request (Mike + Gavin, Oct 31)', 'vendor list naming a former data vendor (two names)', b))
     paras, buf = [], ''
     for x in lines:
         buf = (buf + ' ' + x).strip() if buf else x
