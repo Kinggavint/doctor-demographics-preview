@@ -78,7 +78,9 @@ def ln(slug, prefix):
             return l
     raise KeyError((slug, prefix))
 
-TYPOS = [('Micheal', 'Michael'), ('Infomation', 'Information'), ('Viabililty', 'Viability'),
+# Client request (Mike via George, Oct 31): show 'Mike', never 'Michael' (or the 'Micheal' typo), in visible copy.
+NAME = [('Micheal', 'Mike'), ('Michael', 'Mike')]
+TYPOS = [('Infomation', 'Information'), ('Viabililty', 'Viability'),
          ('Comparision', 'Comparison'), ('Governemnts', 'Governments'), ('over the. years', 'over the years'),
          ('nessecity', 'necessity'), ("doctor's of all kinds", 'doctors of all kinds'),
          ("give doctor's a little", 'give doctors a little'), ('in the follow situations', 'in the following situations'),
@@ -121,6 +123,9 @@ def fx(s):
     for a, b in YEARS:
         if a in s:
             s = s.replace(a, b); CHANGES.append((CUR['path'], 'Gavin decision (since 1983, Scott now retired)', a, b))
+    for a, b in NAME:
+        if a in s:
+            s = s.replace(a, b); CHANGES.append((CUR['path'], 'client request (Mike, Oct 31)', a, b))
     for a, b in TYPOS:
         if a in s:
             s = s.replace(a, b); CHANGES.append((CUR['path'], 'typo (CEO call)', a, b))
@@ -361,8 +366,13 @@ def prod_links(doc):
     # Pages are served as /<path>/ (CloudFront 301s /<path> to /<path>/), so absolute site links and canonicals use the slash form.
     return re.sub(r'(https://doctordemographics\.com/[A-Za-z0-9_/-]*[A-Za-z0-9_-])(?=["?#])', r'\1/', doc)
 
+# Client request (Mike, Oct 31): titles keep Scott McDonald and add Mike Green.
+TITLE_FIX = {'home': ('Doctor Demographics | Scott McDonald | Dental Optometry Veterinary',
+                      'Doctor Demographics | Scott McDonald | Mike Green | Dental Optometry Veterinary')}
 def title_of(slug, fallback):
     tt = META.get(slug, {}).get('title') or fallback
+    if slug in TITLE_FIX and tt == TITLE_FIX[slug][0]:
+        tt = TITLE_FIX[slug][1]; CHANGES.append((CUR['path'], 'client request (Mike, Oct 31)', TITLE_FIX[slug][0], tt))
     return fx(tt)
 
 def desc_of(slug, fallback=''):
@@ -863,6 +873,12 @@ def page_contact():
 def legal(slug, h1):
     begin('/' + slug)
     lines = [x.strip() for x in body(slug)[2:] if x.strip()]
+    if slug == 'eula':
+        # Client request (Mike, Oct 31) and Gavin (Oct 31): former data vendor no longer listed.
+        # The source text in build/data/text/eula.txt was edited directly so the old vendor name is not kept anywhere in the repo.
+        b = 'purchased from EBIS-ESRI Data (and other resource providers)'
+        assert sum(b in x for x in lines) == 1
+        CHANGES.append((CUR['path'], 'client request (Mike + Gavin, Oct 31)', 'vendor list naming a former data vendor (two names)', b))
     paras, buf = [], ''
     for x in lines:
         buf = (buf + ' ' + x).strip() if buf else x

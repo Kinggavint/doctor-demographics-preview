@@ -13,12 +13,13 @@
 | / | typo (CEO call) | Infomation | Information |
 | / | Gavin design (Oct 30) | video thumbnails on report cards | report icons |
 | / | Gavin design (Oct 30) | Key Benefits: 4 small icon cards | navy editorial split: photo + numbered benefit rows with short headlines (copy unchanged) |
+| / | client request (Mike, Oct 31) | Doctor Demographics / Scott McDonald / Dental Optometry Veterinary | Doctor Demographics / Scott McDonald / Mike Green / Dental Optometry Veterinary |
 | / | Gavin decision (since 1983, Scott now retired) | For over 40 years, the team at Doctor Demographics has | Since 1983, the team at Doctor Demographics has |
 | / | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
 | / | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /about | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /about | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
-| /about | typo (CEO call) | Micheal | Michael |
+| /about | client request (Mike, Oct 31) | Micheal | Mike |
 | /about | typo (CEO call) | over the. years | over the years |
 | /about | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /reports | Gavin decision (since 1983, Scott now retired) | with 40+ years of experience | with expertise built since 1983 |
@@ -178,6 +179,7 @@
 | /contact | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /privacy-policy | typo (CEO call) | shall by governed | shall be governed |
 | /privacy-policy | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /eula | client request (Mike + Gavin, Oct 31) | vendor list naming a former data vendor (two names) | purchased from EBIS-ESRI Data (and other resource providers) |
 | /eula | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /partner | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /book | Mike decision | prelaunch reserve form (expected December 2024) | Buy on Amazon: https://www.amazon.com/dp/B0F89QHSWP |
