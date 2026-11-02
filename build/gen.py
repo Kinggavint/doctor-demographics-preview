@@ -347,6 +347,7 @@ def finish(title, desc, main, flag=None, lead=False, extra_head='', canonical=No
         doc = head + f'<main id="main">{main}</main></body></html>\n'
     if PROD:
         doc = prod_links(doc)
+        doc = doc.replace('</body></html>', chat_widget() + '</body></html>', 1)
     rel = path.strip('/')
     out = os.path.join(SITE, rel, 'index.html') if rel else os.path.join(SITE, 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
@@ -1250,6 +1251,16 @@ def org_ld(path, title, desc, main, canon):
     return ld({'@context': 'https://schema.org', '@graph': [organization(), site]})
 
 HEAD_HOOKS += [ga4_tag, org_ld]
+
+# GoHighLevel (LeadConnector) chat bubble, Doctor Demographics sub-account widget 668e066cdad1ad2c973c3aba.
+# Production only, once per page just before </body> (Gavin, Nov 2 2026: chat help for visitors who have trouble ordering).
+CHAT_WIDGET_ID = '668e066cdad1ad2c973c3aba'
+
+def chat_widget():
+    if not PROD or not CHAT_WIDGET_ID:
+        return ''
+    return ('<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"'
+            f' data-widget-id="{CHAT_WIDGET_ID}"></script>')
 
 def llms_txt():
     """/llms.txt: plain summary for AI crawlers, facts and prices as shown on the site."""
