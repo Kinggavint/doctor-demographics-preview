@@ -482,3 +482,11 @@ p.dx-cta-btns{margin:0}
 .btn.apx-light:hover{background:var(--offset);border-color:var(--offset);color:var(--primary-hover)}
 .apx-hero .dx-hero-txt>p{margin:1.25rem 0 0}
 @media (max-width:900px){.nav.open{flex-wrap:nowrap;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);overflow-y:auto}.nav.open>*{flex-shrink:0}}
+
+/* Responsive hero and portrait pictures (LCP image work). picture wraps the existing .dx-hero-img / leader img. */
+.dx-hero-aside picture,
+.dx-post-hero picture,
+picture:has(> .dx-hero-img){display:block;width:100%;max-width:100%}
+.leaders picture{display:block;width:100%}
+.leader-s picture{width:112px;height:112px}
+.leader-l picture{width:160px;height:160px}

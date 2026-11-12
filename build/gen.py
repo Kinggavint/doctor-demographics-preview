@@ -48,7 +48,7 @@ META = json.load(open(os.path.join(DATA, 'meta.json')))
 CHANGES = []   # (page, kind, before, after)
 TODOS = []     # (page, kind, text)
 PAGES = []     # generated paths
-CUR = {'path': '', 'depth': 0}
+CUR = {'path': '', 'depth': 0, 'preload': ''}
 
 # ---------------------------------------------------------------- text
 def body(slug):
@@ -182,11 +182,68 @@ def btn(text, href, cls='', ext=None, raw=False):
     c = 'btn' + (' ' + cls if cls else '') + (' ext' if ext else '')
     return f'<a class="{c}" href="{a_(u(href))}"{extra}>{label}</a>'
 
-def img(name, alt, cls='', lazy=True, w=None, wh=None):
+# Responsive variants made by build/optimize_heroes.py. Same photographs as the originals.
+# widths: pixel widths of the stem-{w}w.webp / .jpg files next to the source.
+IMG_VARIANTS = {
+    '635195d6b495690eab7a6fa0.jpg': {'wh': (1345, 1345), 'widths': (480, 840, 1200),
+                                     'sizes_hero': '(max-width: 860px) min(100vw, 440px), 420px',
+                                     'sizes': '(max-width: 800px) 100vw, 50vw'},
+    'banner-mike-68b5e065419f89ab7b17b8f3.jpg': {'wh': (1280, 720), 'widths': (640, 1040, 1280)},
+    'banner-mike-68ae36a93ba6188b15e093ae.jpg': {'wh': (1138, 654), 'widths': (640, 1040, 1138)},
+    'banner-mike-68a862537dc6b074cb6ee577.jpg': {'wh': (1600, 900), 'widths': (640, 1040, 1600)},
+    'banner-mike-689bba15b52dae7d965071d5.jpg': {'wh': (1102, 617), 'widths': (640, 1040, 1102)},
+    'banner-mike-6892773400987beaf980e0fc.jpg': {'wh': (1103, 619), 'widths': (640, 1040, 1103)},
+    'banner-mike-67b50b86aea6db7f0ba29683.jpg': {'wh': (1280, 720), 'widths': (640, 1040, 1280)},
+    'mike_profile_26.jpg': {'wh': (1008, 1024), 'widths': (320, 480, 800)},
+    '631c160e05c40c6f83ebc915.jpg': {'wh': (610, 643), 'widths': (320, 480, 610)},
+}
+POST_HERO_SIZES = '(max-width: 860px) min(100vw, 520px), 520px'
+PORTRAIT_ABOUT_SIZES = '160px'
+PORTRAIT_HOME_SIZES = '112px'
+
+
+def img(name, alt, cls='', lazy=True, w=None, wh=None, priority=False, sizes=None, responsive=False):
+    """Emit an img, or a picture+srcset when variants exist and priority/responsive/sizes is set.
+
+    LCP heroes: priority=True (fetchpriority=high, no lazy, decoding=async, preload).
+    Below-the-fold portraits: responsive=True and keep lazy.
+    """
+    meta = IMG_VARIANTS.get(name)
+    if meta and wh is None:
+        wh = meta['wh']
+    if priority:
+        lazy = False
     c = f' class="{cls}"' if cls else ''
     lz = ' loading="lazy"' if lazy else ''
+    pri = ' fetchpriority="high"' if priority else ''
+    dec = ' decoding="async"' if (priority or responsive or (meta and sizes)) else ''
     d = f' width="{wh[0]}" height="{wh[1]}"' if wh else ''
-    return f'<img{c} src="{u("assets/img/" + name)}" alt="{a_(alt)}"{d}{lz}>'
+    use_picture = bool(meta) and (priority or responsive or sizes)
+    if not use_picture:
+        src = u("assets/img/" + name)
+        if priority and not CUR.get('preload'):
+            typ = ' type="image/webp"' if name.endswith('.webp') else ''
+            CUR['preload'] = f'\n<link rel="preload" as="image"{typ} href="{src}" fetchpriority="high">'
+        return f'<img{c} src="{src}" alt="{a_(alt)}"{d}{lz}{pri}{dec}>'
+    if not sizes:
+        if priority and 'dx-hero-img' in (cls or '') and 'dx-portrait' not in (cls or '') and name.startswith('banner-mike'):
+            sizes = POST_HERO_SIZES
+        else:
+            sizes = meta.get('sizes_hero' if priority else 'sizes') or POST_HERO_SIZES
+    stem = name.rsplit('.', 1)[0]
+    webp_ss = ', '.join(f'{u("assets/img/" + stem + "-" + str(w) + "w.webp")} {w}w' for w in meta['widths'])
+    jpg_ss = ', '.join(f'{u("assets/img/" + stem + "-" + str(w) + "w.jpg")} {w}w' for w in meta['widths'])
+    fallback = u('assets/img/' + name)
+    if priority and not CUR.get('preload'):
+        default_w = meta['widths'][min(1, len(meta['widths']) - 1)]
+        default_href = u('assets/img/' + stem + '-' + str(default_w) + 'w.webp')
+        CUR['preload'] = (f'\n<link rel="preload" as="image" type="image/webp" href="{default_href}" '
+                          f'imagesrcset="{webp_ss}" imagesizes="{sizes}" fetchpriority="high">')
+    return (f'<picture>'
+            f'<source type="image/webp" srcset="{webp_ss}" sizes="{sizes}">'
+            f'<source type="image/jpeg" srcset="{jpg_ss}" sizes="{sizes}">'
+            f'<img{c} src="{fallback}" alt="{a_(alt)}"{d}{lz}{pri}{dec}>'
+            f'</picture>')
 
 def p(s):
     return f'<p>{t(s)}</p>'
@@ -250,6 +307,7 @@ def begin(path):
     path = path.strip('/')
     CUR['path'] = '/' + path if path else '/'
     CUR['depth'] = len(path.split('/')) if path else 0
+    CUR['preload'] = ''
 
 PREVIEW_BAR = '<div class="preview-bar">Preview build for review only. Not the live site. Forms and order buttons connect to the live GoHighLevel system, so please do not submit them. <a href="{notes}">Review notes and open items</a></div>\n'
 
@@ -281,7 +339,7 @@ def leadership_short():
     scott = _q(ln('home', 'Demographics is more than')).split(' Markets change')[0]
     mike = _q(ln('home', 'Mike Green is a seasoned')).split(' He empowers')[0]
     def blk(im, alt, name, role, txt):
-        return (f'<div class="card leader-s">{img(im, alt)}<div><h3>{name}</h3><p class="role">{role}</p>'
+        return (f'<div class="card leader-s">{img(im, alt, sizes=PORTRAIT_HOME_SIZES, responsive=True)}<div><h3>{name}</h3><p class="role">{role}</p>'
                 f'<p>{t(txt)}</p><a class="more" href="{u("/about")}">More info<span class="sr-only"> about {name}</span></a></div></div>')
     return f'''<section class="section alt leaders" aria-labelledby="lead-h"><div class="wrap">
 <h2 id="lead-h" class="center">Our Leadership</h2>
@@ -296,7 +354,7 @@ def leadership_full():
     mike = _q(ln('home', 'Mike Green is a seasoned'))
     def row(im, alt, name, role, txt, quote):
         body_ = f'<blockquote><p>"{t(txt)}"</p></blockquote>' if quote else p(txt)
-        return (f'<article class="card leader-l">{img(im, alt)}<div><h3>{name}</h3><p class="role">{role}</p>{body_}</div></article>')
+        return (f'<article class="card leader-l">{img(im, alt, sizes=PORTRAIT_ABOUT_SIZES, responsive=True)}<div><h3>{name}</h3><p class="role">{role}</p>{body_}</div></article>')
     return f'''<section class="section alt leaders" aria-labelledby="lead-h"><div class="wrap">
 <h2 id="lead-h">Our Leadership</h2>
 <div class="leader-stack">
@@ -329,6 +387,7 @@ def finish(title, desc, main, flag=None, lead=False, extra_head='', canonical=No
         canon = LIVE + '/'
     fl = f'<div class="flag"><div class="wrap">{flag}</div></div>' if flag and not PROD else ''
     robots = 'noindex, nofollow' if (not PROD or path in PROD_NOINDEX) else 'index, follow'
+    extra_head = (CUR.get('preload') or '') + extra_head
     head = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -444,7 +503,7 @@ def page_home():
     sub = t(L(s, 17).replace('VETERINARIANS, and optometrists', 'veterinarians, optometrists, and audiologists'))
     CHANGES.append(('/', 'client OEDIT d9e575d', 'VETERINARIANS, and optometrists', 'veterinarians, optometrists, and audiologists'))
     m = dx_hero('Helping doctors find the perfect place to practice',
-                img(*HOME_HERO_IMG, 'dx-hero-img home-hero-img', lazy=HOME_HERO_LAZY, wh=(720, 540)),
+                img(*HOME_HERO_IMG, 'dx-hero-img home-hero-img', lazy=HOME_HERO_LAZY, wh=(720, 540), priority=True),
                 after=f'<p>{sub}</p><div class="btn-row">{btn("Order a Demographic Report", "/reports", "gold")}</div>', cls='home-hero')
     m += f'''<section class="section dx-light dx-pull home-s"><div class="wrap"><div class="home-card split"><div class="prose">
 <h2>{t(L(s,19))}</h2>{p(L(s,20))}{p(L(s,21))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div>
@@ -486,7 +545,7 @@ def ohref(slug):
 def reports_page():
     begin('/reports')
     s = 'reports'
-    m = dx_hero('Demographic Reports', img('635195d6b495690eab7a6fa0.jpg', 'Analyst reviewing a report at a desk', 'dx-hero-img', lazy=False))
+    m = dx_hero('Demographic Reports', img('635195d6b495690eab7a6fa0.jpg', 'Analyst reviewing a report at a desk', 'dx-hero-img', lazy=False, priority=True))
     items = [('telephone-consultation', 16, 17), ('site-viability-report', 19, 20), ('marketing-report', 22, 24),
              ('best-sites-report', 26, 28), ('comp-report', 30, 31)]
     m += '<section class="section dx-light"><div class="wrap"><div class="dx-cards dx-5">'
@@ -576,7 +635,7 @@ def products():
             after=f'<section class="section" id="order"><div class="wrap prose"><h2>{t(L(s,41))}</h2>{ghl_form("edICwOvB663uJ8lbtCRO", "Telephone Consultation form")}</div></section>')
     s = 'quick-view-report'
     begin('/quick-view-report')
-    product(s, L(s, 15), img('635195d6b495690eab7a6fa0.jpg', 'Analyst reviewing a report at a desk'), L(s, 16), t(L(s, 17)),
+    product(s, L(s, 15), img('635195d6b495690eab7a6fa0.jpg', 'Analyst reviewing a report at a desk', responsive=True), L(s, 16), t(L(s, 17)),
             ul(L(s, 18, 22)), L(s, 23), L(s, 24), L(s, 25), p(L(s, 26)),
             f'<div class="need"><h3>{t(L(s,28))}</h3>{need_list(L(s,29,31))}<p class="note">{t(L(s,32))}</p></div>',
             flag=flag_hidden('Mike: partners only, not for retail. Stays unlisted.'))
@@ -685,7 +744,7 @@ def page_podcast():
     eps = episodes()
     badges = f'<div class="badges"><a href="{APPLE}" target="_blank" rel="noopener">{img("67adffc74478e192700f4248.png", "Apple Podcasts", lazy=False)}</a><a href="{SPOTIFY}" target="_blank" rel="noopener">{img("67adf9f516725e5ab4fc8ddf.png", "Listen on Spotify", lazy=False)}</a></div>'
     ptitle = 'The Perfect Place to Put a Practice Podcast'
-    m = dx_hero(ptitle, img(*POD_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680)), after=badges)
+    m = dx_hero(ptitle, img(*POD_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680), priority=True), after=badges)
     m += f'''<section class="section dx-light dx-pull"><div class="wrap"><div class="card dx-feature"><div class="dx-feature-txt">{icon('mic', 'ico xl dx-ico')}<h2>Our Most Recent Episode</h2></div>
 <div>{latest_episode()}</div></div></div></section>
 <section class="section dx-light dx-eps"><div class="wrap"><h2>Previous Podcast Episodes</h2><div class="dx-ep-list">'''
@@ -721,7 +780,7 @@ def blog_index():
     begin('/blog')
     s = 'blog'
     lines = [x.strip() for x in body(s)]
-    m = dx_hero(t(lines[0]), img(*BLOG_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680)))
+    m = dx_hero(t(lines[0]), img(*BLOG_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680), priority=True))
     m += '<section class="section dx-light dx-pull"><div class="wrap"><div class="dx-cards dx-3">'
     i = 1
     for slug, im in BLOGS:
@@ -849,7 +908,7 @@ def blog_posts():
             bio = ''
         crumb = f'<p class="dx-crumb"><a href="{u("/blog")}">{icon("arrow-left", "ico")}Articles and Podcasts</a></p>'
         meta = f'<p class="meta">{t(", ".join(cats))} | {t(date)} | {t(rt)}</p>'
-        m = dx_hero(t(title), img(im, title, 'dx-hero-img', lazy=False), pre=crumb, after=meta, cls='dx-post-hero')
+        m = dx_hero(t(title), img(im, title, 'dx-hero-img', lazy=False, priority=True), pre=crumb, after=meta, cls='dx-post-hero')
         m += f'''<section class="section dx-light dx-pull"><div class="wrap"><article class="card dx-article prose post">
 {content}
 {('<p>' + todo('CEO call, pending Gavin: one sentence reworded so it no longer refers to the removed on-location report. It now reads: The idea came to me years ago while consulting with a struggling practice in Washington.', 'CEO call, pending Gavin') + '</p>') if slug == 'demographic-marketing' else ''}
