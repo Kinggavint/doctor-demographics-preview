@@ -60,6 +60,9 @@
 | /quick-view-report-sample | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /competition-report-sample | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /dental-demographics | Mike decision (update counts) | over 250 episodes | over 290 episodes |
+| /dental-demographics | SEO (pending Gavin) | noindex, nofollow (hidden from the sitemap) | index, follow and listed in the production sitemap |
+| /dental-demographics | SEO (pending Gavin) | Dental Demographics | Dental Demographic Reports |
+| /dental-demographics | SEO title (pending Gavin) | Dental Demographics / Scott McDonald | Dental Demographic Reports |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 30 Years, Doctor Demographics has | Since 1983, Doctor Demographics has |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | Our founder, Scott McDonald pioneered | Our founder, Scott McDonald (now retired), pioneered |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |

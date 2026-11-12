@@ -25,7 +25,9 @@ GHL_PATHS = ['/getsocial', '/accessdso', '/apexchat', '/ppschedule', '/best-site
              '/marketing-report-order', '/quick-view-report-order', '/site-viability-order', '/telephone-consultation-order',
              '/order-complete', '/order-complete-telephone']
 # Hidden on live (decided): unlinked, noindex, left out of the sitemap in production.
-PROD_NOINDEX = {'/partner', '/book', '/mike', '/quick-view-report', '/quick-view-report-sample', '/dental-demographics'}
+# /dental-demographics is removed from this set (SEO PR3, pending Gavin) so production builds
+# emit index, follow and include the page in the sitemap. Title and heading wording are unchanged.
+PROD_NOINDEX = {'/partner', '/book', '/mike', '/quick-view-report', '/quick-view-report-sample'}
 PHONE, PHONE_TEL = '(844) 704-0499', 'tel:+18447040499'
 EMAIL = 'support@doctordemographics.com'
 APPLE = 'https://podcasts.apple.com/us/podcast/doctor-demographics-podcast/id800840123'
@@ -639,8 +641,16 @@ def page_dental():
     CHANGES.append(('/dental-demographics', 'Mike decision (update counts)', 'over 250 episodes', 'over 290 episodes'))
     begin('/dental-demographics')
     s = 'dental-demographics'
-    fl = flag_hidden('Mike asked for the link: ' + PREVIEW_BASE + 'dental-demographics/ (live: ' + LIVE + '/dental-demographics).')
-    m = hero(t(L(s, 15)), t(L(s, 16)))
+    # SEO PR3 (pending Gavin): indexable in production and in the sitemap.
+    # Title and H1 set to "Dental Demographic Reports"; the "| Scott McDonald" title suffix is removed.
+    TODOS.append((CUR['path'], 'SEO (pending Gavin)', 'Indexable in production and in the sitemap. Title and H1 are Dental Demographic Reports. The Scott McDonald title suffix is removed. No menu link points here yet.'))
+    fl = ('<strong>Review flag.</strong> SEO change, pending Gavin: this page is indexable in production and listed in the sitemap. '
+          'Title and H1 are Dental Demographic Reports. The Scott McDonald title suffix is removed. No menu link points here yet.')
+    CHANGES.append(('/dental-demographics', 'SEO (pending Gavin)', 'noindex, nofollow (hidden from the sitemap)', 'index, follow and listed in the production sitemap'))
+    h1 = 'Dental Demographic Reports'
+    CHANGES.append(('/dental-demographics', 'SEO (pending Gavin)', t(L(s, 15)), h1))
+    CHANGES.append(('/dental-demographics', 'SEO title (pending Gavin)', title_of(s, 'Dental Demographics'), h1))
+    m = hero(h1, t(L(s, 16)))
     m += f'''<section class="section"><div class="wrap split"><div class="prose">{p(L(s,17))}{p(L(s,18))}
 <h2>{t(L(s,19))}</h2>{p(L(s,20))}</div><div>{img('67adf6c345496e764b44a6b3.jpg', 'Smiling dentist in a dental office')}</div></div></section>
 <section class="section alt"><div class="wrap"><h2 class="center">{t(L(s,21))}</h2><div class="grid g2">
@@ -651,7 +661,7 @@ def page_dental():
 <div class="badges"><a href="{SPOTIFY}" target="_blank" rel="noopener">{img('67adf9f516725e5ab4fc8ddf.png', 'Listen on Spotify')}</a>
 <a href="{APPLE}" target="_blank" rel="noopener">{img('67adffc74478e192700f4248.png', 'Apple Podcasts')}</a>
 <a class="btn ghost ext" href="{YT_FOOTER}" target="_blank" rel="noopener">YouTube</a></div></div></section>'''
-    finish(title_of(s, 'Dental Demographics'), desc_of(s), m, flag=fl)
+    finish(h1, desc_of(s), m, flag=fl)
 
 POD_VIDEOS = {292: 'DLRUQ0ugVMA', 291: '0pK3TDC90V0', 290: 'UBmlxksls5Q', 289: 'yDTjof2sIII', 288: 'CTvdj7PVWN4', 287: 'axQAnZh-mDg',
   286: 'iJBQwi3FZtA', 285: 'vAhCjC1FjzM', 284: '7ULHhxkbkiw', 283: 'zq0joirpLTI', 282: 'vjwg3XhGbzM', 281: 'viiWr4cWQp0',
