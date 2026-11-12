@@ -25,7 +25,9 @@ GHL_PATHS = ['/getsocial', '/accessdso', '/apexchat', '/ppschedule', '/best-site
              '/marketing-report-order', '/quick-view-report-order', '/site-viability-order', '/telephone-consultation-order',
              '/order-complete', '/order-complete-telephone']
 # Hidden on live (decided): unlinked, noindex, left out of the sitemap in production.
-PROD_NOINDEX = {'/partner', '/book', '/mike', '/quick-view-report', '/quick-view-report-sample', '/dental-demographics'}
+# /dental-demographics is removed from this set (SEO PR3, pending Gavin) so production builds
+# emit index, follow and include the page in the sitemap. Title and heading wording are unchanged.
+PROD_NOINDEX = {'/partner', '/book', '/mike', '/quick-view-report', '/quick-view-report-sample'}
 PHONE, PHONE_TEL = '(844) 704-0499', 'tel:+18447040499'
 EMAIL = 'support@doctordemographics.com'
 APPLE = 'https://podcasts.apple.com/us/podcast/doctor-demographics-podcast/id800840123'
@@ -639,7 +641,11 @@ def page_dental():
     CHANGES.append(('/dental-demographics', 'Mike decision (update counts)', 'over 250 episodes', 'over 290 episodes'))
     begin('/dental-demographics')
     s = 'dental-demographics'
-    fl = flag_hidden('Mike asked for the link: ' + PREVIEW_BASE + 'dental-demographics/ (live: ' + LIVE + '/dental-demographics).')
+    # SEO PR3 (pending Gavin): indexable in production and in the sitemap. Title and heading wording are unchanged (waiting on Mike).
+    TODOS.append((CUR['path'], 'SEO (pending Gavin)', 'Indexable in production and in the sitemap. Title and heading wording are unchanged. No menu link points here yet.'))
+    fl = ('<strong>Review flag.</strong> SEO change, pending Gavin: this page is indexable in production and listed in the sitemap. '
+          'Title and heading wording are unchanged. No menu link points here yet.')
+    CHANGES.append(('/dental-demographics', 'SEO (pending Gavin)', 'noindex, nofollow (hidden from the sitemap)', 'index, follow and listed in the production sitemap'))
     m = hero(t(L(s, 15)), t(L(s, 16)))
     m += f'''<section class="section"><div class="wrap split"><div class="prose">{p(L(s,17))}{p(L(s,18))}
 <h2>{t(L(s,19))}</h2>{p(L(s,20))}</div><div>{img('67adf6c345496e764b44a6b3.jpg', 'Smiling dentist in a dental office')}</div></div></section>
