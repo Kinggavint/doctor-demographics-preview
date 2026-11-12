@@ -482,3 +482,9 @@ p.dx-cta-btns{margin:0}
 .btn.apx-light:hover{background:var(--offset);border-color:var(--offset);color:var(--primary-hover)}
 .apx-hero .dx-hero-txt>p{margin:1.25rem 0 0}
 @media (max-width:900px){.nav.open{flex-wrap:nowrap;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);overflow-y:auto}.nav.open>*{flex-shrink:0}}
+
+/* Related reports / pages / posts (internal links). Visible without JS. */
+.related-block{padding:2.75rem 0}
+.related-block h2{margin:0 0 1rem;font-size:var(--text-lg)}
+.related-list{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.65rem 1.5rem}
+.related-list a{font-weight:600}
