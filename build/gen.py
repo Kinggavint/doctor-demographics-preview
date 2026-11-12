@@ -216,7 +216,8 @@ def img(name, alt, cls='', lazy=True, w=None, wh=None, priority=False, sizes=Non
     c = f' class="{cls}"' if cls else ''
     lz = ' loading="lazy"' if lazy else ''
     pri = ' fetchpriority="high"' if priority else ''
-    dec = ' decoding="async"' if (priority or responsive or (meta and sizes)) else ''
+    # decoding=async can delay paint for the LCP image, so it is only used on non-priority portraits.
+    dec = ' decoding="async"' if (not priority and (responsive or (meta and sizes))) else ''
     d = f' width="{wh[0]}" height="{wh[1]}"' if wh else ''
     use_picture = bool(meta) and (priority or responsive or sizes)
     if not use_picture:
@@ -503,7 +504,7 @@ def page_home():
     sub = t(L(s, 17).replace('VETERINARIANS, and optometrists', 'veterinarians, optometrists, and audiologists'))
     CHANGES.append(('/', 'client OEDIT d9e575d', 'VETERINARIANS, and optometrists', 'veterinarians, optometrists, and audiologists'))
     m = dx_hero('Helping doctors find the perfect place to practice',
-                img(*HOME_HERO_IMG, 'dx-hero-img home-hero-img', lazy=HOME_HERO_LAZY, wh=(720, 540), priority=True),
+                img(*HOME_HERO_IMG, 'dx-hero-img home-hero-img', lazy=HOME_HERO_LAZY, wh=(720, 540)),
                 after=f'<p>{sub}</p><div class="btn-row">{btn("Order a Demographic Report", "/reports", "gold")}</div>', cls='home-hero')
     m += f'''<section class="section dx-light dx-pull home-s"><div class="wrap"><div class="home-card split"><div class="prose">
 <h2>{t(L(s,19))}</h2>{p(L(s,20))}{p(L(s,21))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div>
@@ -744,7 +745,7 @@ def page_podcast():
     eps = episodes()
     badges = f'<div class="badges"><a href="{APPLE}" target="_blank" rel="noopener">{img("67adffc74478e192700f4248.png", "Apple Podcasts", lazy=False)}</a><a href="{SPOTIFY}" target="_blank" rel="noopener">{img("67adf9f516725e5ab4fc8ddf.png", "Listen on Spotify", lazy=False)}</a></div>'
     ptitle = 'The Perfect Place to Put a Practice Podcast'
-    m = dx_hero(ptitle, img(*POD_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680), priority=True), after=badges)
+    m = dx_hero(ptitle, img(*POD_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680)), after=badges)
     m += f'''<section class="section dx-light dx-pull"><div class="wrap"><div class="card dx-feature"><div class="dx-feature-txt">{icon('mic', 'ico xl dx-ico')}<h2>Our Most Recent Episode</h2></div>
 <div>{latest_episode()}</div></div></div></section>
 <section class="section dx-light dx-eps"><div class="wrap"><h2>Previous Podcast Episodes</h2><div class="dx-ep-list">'''
@@ -780,7 +781,7 @@ def blog_index():
     begin('/blog')
     s = 'blog'
     lines = [x.strip() for x in body(s)]
-    m = dx_hero(t(lines[0]), img(*BLOG_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680), priority=True))
+    m = dx_hero(t(lines[0]), img(*BLOG_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680)))
     m += '<section class="section dx-light dx-pull"><div class="wrap"><div class="dx-cards dx-3">'
     i = 1
     for slug, im in BLOGS:
