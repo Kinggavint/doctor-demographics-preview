@@ -397,8 +397,7 @@ def finish(title, desc, main, flag=None, lead=False, extra_head='', canonical=No
 <meta name="robots" content="{robots}">
 <link rel="canonical" href="{canon}">
 <link rel="icon" href="{u('assets/img/68a3b42d10041847e0bead17.png')}">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap">
+<link rel="preload" as="font" type="font/woff2" href="{u('assets/fonts/plus-jakarta-sans-latin.woff2')}" crossorigin>
 <link rel="stylesheet" href="{u('css/style.css')}">{extra_head}{head_tags(path, title, desc, main, canon)}
 </head><body>'''
     if chrome:
