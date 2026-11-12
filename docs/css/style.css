@@ -508,3 +508,9 @@ p.dx-cta-btns{margin:0}
 /* George Nov 23 item 4: show-notes link under the latest episode (home + /podcast/) */
 .dx-ep-post{margin:.85rem 0 0;font-weight:600}
 .home-pod .dx-ep-post{color:#CBD5E1}.home-pod .dx-ep-post a{color:#fff;text-decoration:underline;text-underline-offset:3px}.home-pod .dx-ep-post a:hover{color:var(--accent)}
+
+/* Related reports / pages / posts (internal links). Visible without JS. */
+.related-block{padding:2.75rem 0}
+.related-block h2{margin:0 0 1rem;font-size:var(--text-lg)}
+.related-list{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.65rem 1.5rem}
+.related-list a{font-weight:600}
