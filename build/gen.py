@@ -469,6 +469,7 @@ def page_about():
     begin('/about')
     m = hero('About Doctor Demographics', t('For over 40 years, the Doctor Demographics team have helped thousands of doctors and practice owners select the perfect place to set up their practice.'))
     m += leadership_full()
+    m += related_pages_block('/about')
     finish('About Doctor Demographics', 'Meet the leadership team at Doctor Demographics.', m)
 
 PRODUCTS = {
@@ -515,6 +516,112 @@ def need_list(items, sub_after=None, sub=None):
             out.append(t(x))
     return '<ul class="check">' + ''.join(f'<li>{x}</li>' for x in out) + '</ul>'
 
+
+REPORT_LABEL = {
+    'site-viability-report': 'Site Viability Report',
+    'marketing-report': 'Marketing Report',
+    'best-sites-report': 'Best Sites Report',
+    'comp-report': 'Competition Report',
+    'telephone-consultation': 'Telephone Consultation',
+    'quick-view-report': 'Quick View Report',
+}
+# Two sister reports per product page (plus that report's sample, when it has one).
+RELATED_REPORTS = {
+    'site-viability-report': ('marketing-report', 'best-sites-report'),
+    'marketing-report': ('site-viability-report', 'comp-report'),
+    'best-sites-report': ('site-viability-report', 'comp-report'),
+    'comp-report': ('best-sites-report', 'site-viability-report'),
+    'telephone-consultation': ('site-viability-report', 'best-sites-report'),
+}
+# Two other posts plus the most relevant report. Picked from each post's topic.
+BLOG_RELATED = {
+    'relocate-or-revamp': (('launch-smart-5-demographic-factors-for-your-new-practice', 'big-city-exodus'), 'site-viability-report'),
+    'big-city-exodus': (('places-with-promise-2026', 'relocate-or-revamp'), 'best-sites-report'),
+    'places-with-promise-2026': (('kiss-of-death-locations-for-2026', 'big-city-exodus'), 'best-sites-report'),
+    'kiss-of-death-locations-for-2026': (('places-with-promise-2026', 'big-city-exodus'), 'site-viability-report'),
+    'launch-smart-5-demographic-factors-for-your-new-practice': (('relocate-or-revamp', 'demographic-marketing'), 'site-viability-report'),
+    'demographic-marketing': (('launch-smart-5-demographic-factors-for-your-new-practice', 'relocate-or-revamp'), 'marketing-report'),
+}
+BLOG_TITLES = {
+    'relocate-or-revamp': 'Relocate or Revamp',
+    'big-city-exodus': 'Big City Exodus',
+    'places-with-promise-2026': 'Places with Promise 2026',
+    'kiss-of-death-locations-for-2026': 'Kiss of Death Locations for 2026',
+    'launch-smart-5-demographic-factors-for-your-new-practice': 'Launch Smart: 5 Demographic Factors for Your New Practice',
+    'demographic-marketing': 'Demographic Marketing',
+}
+# Episodes that already have a matching article. 2023 episodes are not linked to the 2026 posts.
+EPISODE_ARTICLE = {
+    276: 'relocate-or-revamp',
+    275: 'big-city-exodus',
+    274: 'places-with-promise-2026',
+    273: 'kiss-of-death-locations-for-2026',
+    272: 'launch-smart-5-demographic-factors-for-your-new-practice',
+    256: 'demographic-marketing',
+}
+
+
+def related_list(heading, hid, items):
+    """Visible, no-JS list. items: list of (href_path, label)."""
+    if not items:
+        return ''
+    lis = ''.join(f'<li><a href="{a_(u(href))}">{t(label)}</a></li>' for href, label in items)
+    return (f'<section class="section related-block" aria-labelledby="{hid}">'
+            f'<div class="wrap"><h2 id="{hid}">{t(heading)}</h2>'
+            f'<ul class="related-list">{lis}</ul></div></section>')
+
+
+def related_reports_block(slug):
+    sisters = RELATED_REPORTS.get(slug)
+    if not sisters:
+        return ''
+    items = []
+    sample = PRODUCTS[slug].get('sample')
+    if sample:
+        items.append((sample, REPORT_LABEL[slug] + ' sample'))
+    for s_ in sisters:
+        items.append(('/' + s_, REPORT_LABEL[s_]))
+    return related_list('Related reports', 'related-reports-h', items)
+
+
+def related_pages_block(current=None):
+    items = [('/reports', 'Reports'), ('/blog', 'Blog'), ('/podcast', 'Podcast')]
+    items = [(path, label) for path, label in items if path != current]
+    return related_list('Related pages', 'related-pages-h', items)
+
+
+def related_blog_block(slug):
+    posts, report = BLOG_RELATED[slug]
+    items = [('/blog/b/' + ps, BLOG_TITLES[ps]) for ps in posts]
+    items.append(('/' + report, REPORT_LABEL[report]))
+    return related_list('Related', 'related-h', items)
+
+
+def link_named_reports(html, pairs):
+    """Wrap existing words with links. Does not add sentences or change the words."""
+    soup = BeautifulSoup('<div id="_linkwrap">' + html + '</div>', 'html.parser')
+    root = soup.find(id='_linkwrap')
+    for phrase, path in pairs:
+        href = u(path)
+        for node in list(root.find_all(string=True)):
+            if not isinstance(node, NavigableString) or phrase not in str(node):
+                continue
+            if node.parent and node.parent.name == 'a':
+                continue
+            text = str(node)
+            pieces = text.split(phrase)
+            rebuilt = []
+            for i, part in enumerate(pieces):
+                if part:
+                    rebuilt.append(NavigableString(part))
+                if i < len(pieces) - 1:
+                    a = soup.new_tag('a', href=href)
+                    a.string = phrase
+                    rebuilt.append(a)
+            node.replace_with(*rebuilt)
+    return root.decode_contents()
+
+
 def product(slug, h1, media, feat_head, price_html, feats, order_label, sample_label, desc_head, desc_html,
             need_html='', after='', flag=None, feat_extra='', top_extra=''):
     begin('/' + slug)
@@ -528,6 +635,7 @@ def product(slug, h1, media, feat_head, price_html, feats, order_label, sample_l
 <section class="section alt"><div class="wrap split"><div class="prose"><h2>{t(desc_head)}</h2>{desc_html}
 {('<div class="btn-row">' + btn(order_label, ohref(slug)) + '</div>') if order_label and pr['order'].startswith('/') else ''}</div>
 <div>{need_html}</div></div></section>{after}'''
+    m += related_reports_block(slug)
     finish(title_of(slug, h1), desc_of(slug), m, flag=flag)
 
 # Written from the Marketing Report video on /marketing-report (GCS 68e83148fd24b5fd49c5f4fb.mp4), per Mike.
@@ -632,7 +740,9 @@ def samples():
             fl = flag_hidden('Only linked from the Quick View page (partners only, per Mike).')
         elif note:
             extra = todo(note)
-        m = hero(t(h), ico=ricon(SAMPLE_OF[slug], 'ico hero-ico')) + f'<section class="section"><div class="wrap prose">{extra}{ghl_form(fid, h + " form")}</div></section>'
+        rs = SAMPLE_OF[slug]
+        sample_links = related_list('Related', 'related-h', [('/' + rs, REPORT_LABEL[rs]), ('/reports', 'All reports')])
+        m = hero(t(h), ico=ricon(rs, 'ico hero-ico')) + f'<section class="section"><div class="wrap prose">{extra}{ghl_form(fid, h + " form")}</div></section>' + sample_links
         finish(title_of(slug, h), desc_of(slug, h), m, flag=fl)
 
 def page_dental():
@@ -702,6 +812,9 @@ def page_podcast():
         if n in DESC_FIX:
             CHANGES.append(('/podcast', 'Mike decision (match by title on YouTube)', 'Episode %d description (same as 257 on live)' % n, DESC_FIX[n][0][:90]))
             desc = DESC_FIX[n]
+        art = EPISODE_ARTICLE.get(n)
+        if art:
+            extra += f'<p><a href="{u("/blog/b/" + art)}">Article: {t(BLOG_TITLES[art])}</a></p>'
         m += f'<article class="episode card dx-ep"><div class="dx-ep-media">{media}</div><div><h3>{t("Episode %d: %s" % (n, title))}</h3>{"".join(p(d) for d in desc)}{extra}</div></article>'
     TODOS.append(('/podcast', 'CEO call, pending Gavin', 'CEO call, pending Gavin: the Episode 278 title is kept as published (decided). verify.sh copy check flags it once, by design.'))
     if 268 not in nums:
@@ -710,6 +823,7 @@ def page_podcast():
     # Closing band (Gavin redesign Oct 30): repeats the page title and the same Apple/Spotify badges, no new copy.
     m += (f'<section class="section dx-cta-wrap"><div class="wrap"><div class="dx-cta"><div class="dx-cta-txt">{icon("mic", "ico dx-gold-ico")}'
           f'<p class="dx-cta-title">{ptitle}</p></div><div class="dx-cta-btns">{badges.replace("<img ", "<img loading=\"lazy\" ")}</div></div></div></section>')
+    m += related_pages_block('/podcast')
     finish(title_of('podcast', 'Podcast'), 'The Perfect Place to Put a Practice podcast from Doctor Demographics with Scott McDonald and Mike Green.', m)
     return eps
 
@@ -843,6 +957,11 @@ def blog_posts():
         title, cats, date, rt = BLOGMETA[slug]
         key = 'blog__b__' + slug
         content = wbr_urls(clean_post(slug))
+        if slug == 'demographic-marketing':
+            content = link_named_reports(content, (
+                ('Site Viability Report', '/site-viability-report'),
+                ('Marketing Report', '/marketing-report'),
+            ))
         try:
             bio = ln(key, 'Coming from a marketing background')
         except KeyError:
@@ -854,6 +973,7 @@ def blog_posts():
 {content}
 {('<p>' + todo('CEO call, pending Gavin: one sentence reworded so it no longer refers to the removed on-location report. It now reads: The idea came to me years ago while consulting with a struggling practice in Washington.', 'CEO call, pending Gavin') + '</p>') if slug == 'demographic-marketing' else ''}
 </article></div></section>
+{related_blog_block(slug)}
 <section class="section dx-cta-wrap"><div class="wrap"><div class="dx-cta dx-author">{img('mike_profile_26.jpg', 'Mike Green', 'dx-avatar')}<div class="dx-author-txt"><h3>Mike Green</h3>{p(bio) if bio else ''}</div>
 <p class="dx-cta-btns"><a class="btn gold" href="{u('/blog')}">Back to Blog</a></p></div></div></section>'''
         TODOS.append((CUR['path'], 'note', 'Live canonical points to a placeholder domain (GHL blog setting). Preview canonical uses doctordemographics.com.'))
@@ -869,6 +989,7 @@ def page_contact():
 <section class="section dx-cta-wrap"><div class="wrap"><div class="dx-cta dx-links-panel"><h2 class="center">Demographic Reports</h2><div class="grid g5 report-links dx-links">
 {''.join(f'<a class="card report-link" href="{u(h)}">{ricon(h, "ico lg")}<span>{l}</span></a>' for l, h in NAV_REPORTS)}</div></div></div></section>'''
     CHANGES.append(('/contact', 'Gavin design (Oct 30)', 'two plain text cards', 'phone and email icon cards plus report icon links'))
+    m += related_pages_block('/contact')
     finish(title_of('contact', 'Contact Us'), desc_of('contact'), m)
 
 def legal(slug, h1):
@@ -896,6 +1017,7 @@ def legal(slug, h1):
             out += p(x)
     sub = body(slug)[1].strip()
     m = hero(t(h1)) + f'<section class="section"><div class="wrap prose"><h2>{t(sub)}</h2>{out}</div></section>'
+    m += related_pages_block('/' + slug)
     finish(title_of(slug, h1), desc_of(slug), m, lead=False)
 
 def page_partner():
