@@ -26,7 +26,7 @@ GHL_PATHS = ['/getsocial', '/accessdso', '/apexchat', '/ppschedule', '/best-site
              '/order-complete', '/order-complete-telephone']
 # Hidden on live (decided): unlinked, noindex, left out of the sitemap in production.
 # /dental-demographics is removed from this set (SEO PR3, pending Gavin) so production builds
-# emit index, follow and include the page in the sitemap. Title and heading wording are unchanged.
+# emit index, follow and include the page in the sitemap. Title and H1 are Dental Demographic Reports.
 PROD_NOINDEX = {'/partner', '/book', '/mike', '/quick-view-report', '/quick-view-report-sample'}
 PHONE, PHONE_TEL = '(844) 704-0499', 'tel:+18447040499'
 EMAIL = 'support@doctordemographics.com'
