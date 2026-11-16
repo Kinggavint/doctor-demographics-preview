@@ -511,3 +511,7 @@ picture:has(> .dx-hero-img){display:block;width:100%;max-width:100%}
 .leaders picture{display:block;width:100%}
 .leader-s picture{width:112px;height:112px}
 .leader-l picture{width:160px;height:160px}
+@media (max-width:600px){
+  .leader-s picture{width:72px;height:72px}
+  .leader-l picture{width:112px;height:112px}
+}
