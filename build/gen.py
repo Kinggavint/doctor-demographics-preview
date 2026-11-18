@@ -1276,7 +1276,12 @@ def llms_txt():
            f'Doctor Demographics, LLC. Founder: Scott McDonald (now retired). Owner and Lead Demographer: Mike Green. Phone: {PHONE}. Email: {EMAIL}.', '',
            '## Reports and services', '', f'* {lk("All demographic reports", "/reports")}: overview of every report.']
     out += [f'* {lk(n, p_)}: {d}' for n, p_, d in reports]
-    out += ['', '## Learn', '',
+    out += ['', '## Practice types', '',
+            f'* {lk("Practice types", "/practice-types")}: specialties Doctor Demographics writes reports for.',
+            f'* {lk("Veterinary Demographic Reports", "/veterinary-demographics")}: site, market and competition reports for veterinary practices.',
+            f'* {lk("Optometry Demographic Reports", "/optometry-demographics")}: site, market and competition reports for optometry practices.',
+            f'* {lk("Orthodontic Demographic Reports", "/orthodontic-demographics")}: site, market and competition reports for orthodontic practices.',
+            '', '## Learn', '',
             f'* {lk("Sample Reports", "/sample-reports")}: sample pages from each report.',
             f'* {lk("The Perfect Place to Put a Practice Podcast", "/podcast")}: podcast with Scott McDonald and Mike Green. Also on [Apple Podcasts]({APPLE}), [Spotify]({SPOTIFY}) and [YouTube]({YT_FOOTER}).',
             f'* {lk("Blog", "/blog")}: articles on practice locations and demographics by Mike Green.',
@@ -1288,15 +1293,162 @@ def llms_txt():
     open(os.path.join(SITE, 'llms.txt'), 'w').write(txt)
 
 
+
+# ---------------------------------------------------------------- Wave 1 specialty pages + practice-types hub
+# Review-only drafts live in build/data/pages/. New public pages; not added to the main nav or footer
+# (that sitewide change would conflict with held PRs #7 and #8 and can follow after Gavin approves).
+# The unresolved turnaround FAQ is omitted until Mike/George and the live order pages are aligned.
+WAVE1_PAGES = [
+    {
+        'path': '/veterinary-demographics',
+        'src': 'veterinary-demographics.html',
+        'title': 'Veterinary Demographic Reports | Doctor Demographics',
+        'desc': 'Veterinary demographic reports from Doctor Demographics: hand-written site, market and competition analysis for veterinary practices, with a live consultation after every report.',
+        'name': 'Veterinary Demographic Reports',
+        'crumb': 'Veterinary',
+        'about': 'Veterinary practice location research',
+    },
+    {
+        'path': '/optometry-demographics',
+        'src': 'optometry-demographics.html',
+        'title': 'Optometry Demographic Reports | Doctor Demographics',
+        'desc': 'Optometry demographic reports from Doctor Demographics: hand-written site, market and competition analysis for optometry practices, with a live consultation after every report.',
+        'name': 'Optometry Demographic Reports',
+        'crumb': 'Optometry',
+        'about': 'Optometry practice location research',
+    },
+    {
+        'path': '/orthodontic-demographics',
+        'src': 'orthodontic-demographics.html',
+        'title': 'Orthodontic Demographic Reports | Doctor Demographics',
+        'desc': 'Orthodontic demographic reports from Doctor Demographics: hand-written site, market and competition analysis for orthodontic practices, with a live consultation after every report.',
+        'name': 'Orthodontic Demographic Reports',
+        'crumb': 'Orthodontic',
+        'about': 'Orthodontic practice location research',
+    },
+    {
+        'path': '/practice-types',
+        'src': 'practice-types.html',
+        'title': 'Practice Types | Doctor Demographics',
+        'desc': "Demographic reports for dentists, veterinarians, optometrists, orthodontists and other private practice owners. Every Doctor Demographics report is hand-written for the client's specialty.",
+        'name': 'Practice Types',
+        'crumb': None,
+        'about': 'Practice types served by Doctor Demographics',
+    },
+]
+WAVE1_SKIP_FAQ = {'How long does a report take?'}
+WAVE1_FLAG = ('<strong>New pages for review.</strong> Wave 1 specialty guides and the practice-types hub. '
+              'HOLD for Gavin (Section B: new pages). Not linked from the main nav or footer yet. '
+              'The turnaround FAQ is omitted until wording is aligned with the live order pages.')
+
+def _wave1_clean(main_html):
+    soup = BeautifulSoup(f'<div id="wave1-root">{main_html}</div>', 'lxml')
+    root = soup.find(id='wave1-root')
+    for c in root.find_all(string=lambda t: isinstance(t, Comment)):
+        c.extract()
+    for h3 in list(root.find_all('h3')):
+        if h3.get_text(' ', strip=True) in WAVE1_SKIP_FAQ:
+            nxt = h3.find_next_sibling()
+            h3.decompose()
+            if nxt and nxt.name == 'p':
+                nxt.decompose()
+    for ptag in list(root.find_all('p')):
+        if not ptag.get_text(strip=True) and not ptag.find('img') and not ptag.find('a'):
+            ptag.decompose()
+    for table in root.find_all('table'):
+        classes = list(table.get('class') or [])
+        if 'tbl' not in classes:
+            table['class'] = classes + ['tbl']
+        parent = table.parent
+        if not (parent and parent.name == 'div' and 'tbl-wrap' in (parent.get('class') or [])):
+            wrap = soup.new_tag('div', attrs={'class': 'tbl-wrap'})
+            table.replace_with(wrap)
+            wrap.append(table)
+    for node in root.find_all(string=True):
+        if node.parent and node.parent.name in ('script', 'style'):
+            continue
+        fixed = dashfix(str(node))
+        if fixed != str(node):
+            node.replace_with(fixed)
+    return root
+
+def _wave1_relink(root):
+    for a in root.find_all('a', href=True):
+        href = a['href']
+        if href.startswith('/') or href == '':
+            a['href'] = u(href)
+    return root
+
+def _wave1_faqs(root):
+    faqs = []
+    heading = None
+    for h2 in root.find_all('h2'):
+        if 'frequently asked questions' in h2.get_text(' ', strip=True).lower():
+            heading = h2
+            break
+    if heading is None:
+        return faqs
+    for sib in heading.find_all_next(['h2', 'h3']):
+        if sib.name == 'h2':
+            break
+        q = sib.get_text(' ', strip=True)
+        ans = sib.find_next_sibling('p')
+        if not q or ans is None:
+            continue
+        ans_txt = ' '.join(ans.get_text(' ', strip=True).split())
+        ans_txt = ans_txt.replace(' .', '.').replace(' ,', ',')
+        faqs.append({'@type': 'Question', 'name': q,
+                     'acceptedAnswer': {'@type': 'Answer', 'text': ans_txt}})
+    return faqs
+
+def _wave1_ld(spec, faqs):
+    url = LIVE + spec['path'] + '/'
+    graph = [{
+        '@type': 'WebPage',
+        '@id': url + '#webpage',
+        'url': url,
+        'name': spec['name'],
+        'isPartOf': {'@id': LIVE + '/#website'},
+        'publisher': {'@id': ORG_ID},
+        'about': {'@type': 'Thing', 'name': spec['about']},
+    }]
+    crumbs = [{'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': LIVE + '/'}]
+    if spec['crumb']:
+        crumbs.append({'@type': 'ListItem', 'position': 2, 'name': 'Practice types', 'item': LIVE + '/practice-types/'})
+        crumbs.append({'@type': 'ListItem', 'position': 3, 'name': spec['crumb']})
+    else:
+        crumbs.append({'@type': 'ListItem', 'position': 2, 'name': 'Practice types', 'item': url})
+    graph.append({'@type': 'BreadcrumbList', 'itemListElement': crumbs})
+    if faqs:
+        graph.append({'@type': 'FAQPage', '@id': url + '#faq', 'mainEntity': faqs})
+    return ld({'@context': 'https://schema.org', '@graph': graph})
+
+def page_wave1():
+    base = os.path.join(DATA, 'pages')
+    for spec in WAVE1_PAGES:
+        raw = open(os.path.join(base, spec['src']), encoding='utf-8').read()
+        parsed = BeautifulSoup(raw, 'lxml')
+        main_el = parsed.find('main')
+        if main_el is None:
+            raise SystemExit(f"Wave 1 source missing <main>: {spec['src']}")
+        inner = ''.join(str(c) for c in main_el.contents)
+        root = _wave1_clean(inner)
+        faqs = _wave1_faqs(root)
+        begin(spec['path'])
+        _wave1_relink(root)
+        body = ''.join(str(c) for c in root.contents).strip()
+        finish(spec['title'], spec['desc'], body, flag=WAVE1_FLAG, extra_head=_wave1_ld(spec, faqs))
+
 # ---------------------------------------------------------------- main
 KEEP_PATHS = {'/', '/about', '/reports', '/best-sites-report', '/site-viability-report', '/marketing-report', '/comp-report',
               '/telephone-consultation', '/quick-view-report', '/sample-reports',
               '/best-sites-report-sample', '/site-viability-report-sample', '/marketing-report-sample', '/quick-view-report-sample',
               '/competition-report-sample', '/dental-demographics', '/podcast', '/blog', '/contact', '/privacy-policy', '/eula',
-              '/partner', '/book', '/mike', '/apex-seo-draft', '/apex-ai-labs'} | {'/blog/b/' + b for b, _ in BLOGS}
+              '/partner', '/book', '/mike', '/apex-seo-draft', '/apex-ai-labs',
+              '/practice-types', '/veterinary-demographics', '/optometry-demographics', '/orthodontic-demographics'} | {'/blog/b/' + b for b, _ in BLOGS}
 
 if __name__ == '__main__':
-    page_home(); page_about(); reports_page(); products(); sample_hub(); samples(); page_dental()
+    page_home(); page_about(); reports_page(); products(); sample_hub(); samples(); page_dental(); page_wave1()
     eps = page_podcast(); blog_index(); blog_posts(); page_contact()
     legal('privacy-policy', 'Privacy Policy'); legal('eula', 'Terms and Conditions')
     page_partner(); page_book(); page_mike()
