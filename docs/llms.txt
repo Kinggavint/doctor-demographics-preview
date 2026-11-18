@@ -13,6 +13,13 @@ Doctor Demographics, LLC. Founder: Scott McDonald (now retired). Owner and Lead 
 * [Competition Report](https://doctordemographics.com/comp-report/): Analysis of the local competition for a professional practice. Price: $350 per site.
 * [Telephone Consultation](https://doctordemographics.com/telephone-consultation/): Live telephone consultation on practice placement, marketing and other challenges. Price: $149.
 
+## Practice types
+
+* [Practice types](https://doctordemographics.com/practice-types/): specialties Doctor Demographics writes reports for.
+* [Veterinary Demographic Reports](https://doctordemographics.com/veterinary-demographics/): site, market and competition reports for veterinary practices.
+* [Optometry Demographic Reports](https://doctordemographics.com/optometry-demographics/): site, market and competition reports for optometry practices.
+* [Orthodontic Demographic Reports](https://doctordemographics.com/orthodontic-demographics/): site, market and competition reports for orthodontic practices.
+
 ## Learn
 
 * [Sample Reports](https://doctordemographics.com/sample-reports/): sample pages from each report.

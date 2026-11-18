@@ -1,0 +1,226 @@
+<!-- Source: Apex review-only Wave 1 drafts, Nov 13 2026. gen.py strips comments, omits the unresolved turnaround FAQ, fixes dashes, and wraps these in the shared header/footer. -->
+<!--
+  DRAFT ONLY. Review-only Wave 1 specialty page for Doctor Demographics. Not built, not committed, not live.
+  URL once approved: https://doctordemographics.com/veterinary-demographics/
+  Sources: George's Nov 13, 2026, 3:41 PM MT reply on thread 1a1d041b9dae1af1 (factors and common questions);
+  confirmed company facts from Nov 12 (including "since 1983" and "10,000+ reports" at 8:05 AM MT);
+  live report, order, policy and blog pages verified HTTP 200 on Nov 13, 2026.
+  Rules: static HTML, readable without JS; no invented stats or numeric "healthy" ratios; no client identifiers;
+  no former data-vendor names removed from /eula/; do not post sample PDFs.
+  Live /practice-types/ was HTTP 404 on Nov 13; this draft assumes the hub ships with Wave 1.
+  Live /dental-demographics/ is HTTP 200 but noindex until PR #3 is approved.
+  All related article links below were checked Nov 13: HTTP 200 and the page actually mentions veterinary.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veterinary Demographic Reports | Doctor Demographics</title>
+<meta name="description" content="Veterinary demographic reports from Doctor Demographics: hand-written site, market and competition analysis for veterinary practices, with a live consultation after every report.">
+<link rel="canonical" href="https://doctordemographics.com/veterinary-demographics/">
+<meta name="robots" content="index, follow">
+<!-- shared head: CSS, GA4 G-R78SE578C3, Organization/WebSite JSON-LD come from gen.py -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebPage",
+   "@id": "https://doctordemographics.com/veterinary-demographics/#webpage",
+   "url": "https://doctordemographics.com/veterinary-demographics/",
+   "name": "Veterinary Demographic Reports",
+   "isPartOf": {
+    "@id": "https://doctordemographics.com/#website"
+   },
+   "publisher": {
+    "@id": "https://doctordemographics.com/#organization"
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "Veterinary practice location research"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://doctordemographics.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Practice types",
+     "item": "https://doctordemographics.com/practice-types/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Veterinary"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://doctordemographics.com/veterinary-demographics/#faq",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Do you write reports specifically for veterinary practices?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Every report is written for the client's specialty. On a veterinary report we look at the location factors listed on this page — households and growth, pet-owning households and what they spend, household income, households per vet clinic nearby, and visibility, parking and easy access — and we write the analysis for a veterinary practice, not a generic office."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How long does a report take?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Standard turnaround is 5 to 7 business days for every report, including the Competition Report. If you need it sooner, a rush option is available; we can usually turn a report around in 24 to 48 hours when that option is selected."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Is there a call after the report?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Every report is hand-written and includes a live 20-minute follow-up call to go over the findings. When we email the finished report, we include a booking link to schedule that call. You can also reply to that delivery email and we will set a time. Spouses, partners and consultants are welcome on the call."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How many households per vet is healthy?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We do not publish a single national number as a rule of thumb on this page. In the report we look at households per vet clinic nearby, together with how fast the area is growing, household income, pet ownership and spending, and how easy the site is to see and reach. We then go over what those figures mean for your site or area on the 20-minute follow-up call."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Is there room for another general veterinary practice here?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "That is a site-specific question, which is what the reports are for. A Site Viability Report studies a specific address, including nearby clinics and the households around the site. A Best Sites Report compares up to five counties when you have not yet picked an address. We will tell you what the data shows, including when the news is not what you hoped to hear."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Should I start from scratch or buy an existing practice?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We can study either path. Send us the address of a site you might build or lease, or the address of a practice you might buy, and say which situation you are in when you order. The Site Viability Report is the usual starting point when you already have an address. We will walk through the findings with you on the follow-up call so you can compare those options with the local household and clinic picture."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What if something in the report is wrong? Can I get a refund?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It is not the policy of Doctor Demographics to offer refunds on reports. The full Refunds and Errors Policy is in our Terms and Conditions. If something in a report is wrong — an address or a detail we missed — we correct it and send the report again. Errors of that kind are not a reason for a refund. If a location was misidentified at the time you ordered, it can be corrected at an additional cost."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Do you track insurance accepted in the area?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. We do not track insurance offered or accepted in the region."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<!-- shared header/nav from gen.py -->
+<main id="main">
+  <section class="hero small"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/practice-types/">Practice types</a> / Veterinary</nav>
+    <h1>Veterinary Demographic Reports</h1>
+    <p>Hand-written veterinary demographic reports that look at households and growth, pet ownership and spending, income, nearby clinics, and how easy the site is to see, park at and reach — with a 20-minute follow-up call after every report.</p>
+    <p><a class="btn" href="/site-viability-report/">See the Site Viability Report</a> <a class="btn ghost" href="/telephone-consultation/">Book a Telephone Consultation</a></p>
+  </div></section>
+
+  <section class="section"><div class="wrap prose">
+    <h2>Why does location matter for a veterinary practice?</h2>
+    <p>A veterinary practice lives or dies on the households around it. Since 1983, Doctor Demographics has written 10,000+ reports for doctors and other private practice owners, including veterinarians, who need to know whether a place can support the practice they want to build or buy. The report is not a generic demographic printout. It is hand-written for a veterinary practice, and it is followed by a live 20-minute consultation.</p>
+    <p>Households — not just raw population — are the starting point, because pets live in households. It also matters how fast those households are growing, how many of them own pets and how much they spend on them, and what they earn. A site can look busy on a map and still be a poor fit if nearby clinics already serve those households, or if people cannot see, park at, or reach the office easily.</p>
+    <p>That is why a veterinary location decision is different from a general dental or medical one. The questions we hear most often from veterinarians are practical: how many households per vet is healthy in this area, whether there is room for another general practice, and whether it is wiser to start from scratch or buy an existing practice. The report examines those questions for your site or your study area; it does not replace your own judgment, and we will not invent a one-size-fits-all ratio on this page.</p>
+
+    <h2>Which demographic factors matter most for veterinary?</h2>
+    <!-- Factors below are George’s Nov 13 wording, written as how DD looks at them. No invented benchmarks. -->
+    <ul>
+      <li><strong>Number of households, and how fast the area is growing.</strong> We start with households around the site or across the counties you ask us to study, and whether that household base is growing or shrinking.</li>
+      <li><strong>How many households own pets, and how much they spend on them.</strong> Pet ownership and pet spending tell us more about veterinary demand than population counts alone.</li>
+      <li><strong>Household income.</strong> Income helps show whether households in the area can support the kind of practice you want to operate.</li>
+      <li><strong>Households per vet clinic nearby.</strong> We look at how many households there are for the veterinary clinics already in the area, which is the comparison clients often have in mind when they ask if there is room for another practice.</li>
+      <li><strong>Visibility, parking and easy access.</strong> A clinic that is hard to see, hard to park at, or hard to reach will struggle even in a strong household market.</li>
+    </ul>
+
+    <h2>Which Doctor Demographics report fits a veterinary practice?</h2>
+    <!-- Prices re-checked on live order pages Nov 13, 2026. Recheck before each build. Quick View stays partners-only and is omitted here. -->
+    <table>
+      <thead><tr><th>Your situation</th><th>Report</th><th>Price</th></tr></thead>
+      <tbody>
+        <tr><td>You have a specific address and want to know if it can support a practice</td><td><a href="/site-viability-report/">Site Viability Report</a></td><td>$495 (additional sites $350 each)</td></tr>
+        <tr><td>You are choosing an area (up to 5 counties in one state)</td><td><a href="/best-sites-report/">Best Sites Report</a></td><td>$795</td></tr>
+        <tr><td>You want to see local competition, Google reviews and online traffic around a site</td><td><a href="/comp-report/">Competition Report</a></td><td>$350 per site</td></tr>
+        <tr><td>You want a marketing plan built around your street address</td><td><a href="/marketing-report/">Marketing Report</a></td><td>$695</td></tr>
+        <tr><td>You need time with a demographic expert before deciding</td><td><a href="/telephone-consultation/">Telephone Consultation</a></td><td>$149</td></tr>
+      </tbody>
+    </table>
+    <p>Every report is written for the client's specialty, including veterinary. Reports are hand-written and include a 20-minute follow-up call.</p>
+
+    <h2>What do you need to send us?</h2>
+    <p>For a site report: the street address or cross streets, city, state and zip, your practice type, and your circumstances (new, purchase, move, or satellite). For a Best Sites Report: your practice type, the state, and up to five counties. Tell us about any non-compete or exclusion area up front.</p>
+
+    <!-- RECONCILIATION A (do not publish this FAQ until DD/Gavin align the wording):
+         George, Nov 13, 3:41 PM MT: standard is 5 to 7 business days for every report, including Competition;
+         rush is usually 24 to 48 hours when the rush option is selected (no fee named in that reply).
+         Live order pages for Site Viability, Best Sites and Marketing (Nov 13) still say typical turnaround is
+         "around 7 days" and "Rush My Report ($100) 48 Hour Turn Around."
+         The Competition order page has no turnaround or rush line.
+         RECONCILIATION B: /eula/ Refunds and Errors Policy body uses (800) 849-0499; site header/footer/contact use (844) 704-0499.
+         This page uses (844) 704-0499 only in the shared header/footer and does not quote a number in the refund FAQ. -->
+    <h2>Frequently asked questions</h2>
+    <!-- Visible FAQ: plain HTML, no accordion JS. JSON-LD below is generated from these same Q&amp;As. -->
+    <h3>Do you write reports specifically for veterinary practices?</h3>
+    <p>Yes. Every report is written for the client's specialty. On a veterinary report we look at the location factors listed on this page — households and growth, pet-owning households and what they spend, household income, households per vet clinic nearby, and visibility, parking and easy access — and we write the analysis for a veterinary practice, not a generic office.</p>
+    <h3>How long does a report take?</h3>
+    <p>Standard turnaround is 5 to 7 business days for every report, including the Competition Report. If you need it sooner, a rush option is available; we can usually turn a report around in 24 to 48 hours when that option is selected.</p>
+    <h3>Is there a call after the report?</h3>
+    <p>Yes. Every report is hand-written and includes a live 20-minute follow-up call to go over the findings. When we email the finished report, we include a booking link to schedule that call. You can also reply to that delivery email and we will set a time. Spouses, partners and consultants are welcome on the call.</p>
+    <h3>How many households per vet is healthy?</h3>
+    <p>We do not publish a single national number as a rule of thumb on this page. In the report we look at households per vet clinic nearby, together with how fast the area is growing, household income, pet ownership and spending, and how easy the site is to see and reach. We then go over what those figures mean for your site or area on the 20-minute follow-up call.</p>
+    <h3>Is there room for another general veterinary practice here?</h3>
+    <p>That is a site-specific question, which is what the reports are for. A Site Viability Report studies a specific address, including nearby clinics and the households around the site. A Best Sites Report compares up to five counties when you have not yet picked an address. We will tell you what the data shows, including when the news is not what you hoped to hear.</p>
+    <h3>Should I start from scratch or buy an existing practice?</h3>
+    <p>We can study either path. Send us the address of a site you might build or lease, or the address of a practice you might buy, and say which situation you are in when you order. The Site Viability Report is the usual starting point when you already have an address. We will walk through the findings with you on the follow-up call so you can compare those options with the local household and clinic picture.</p>
+    <h3>What if something in the report is wrong? Can I get a refund?</h3>
+    <p>It is not the policy of Doctor Demographics to offer refunds on reports. The full Refunds and Errors Policy is in our <a href="/eula/">Terms and Conditions</a>. If something in a report is wrong — an address or a detail we missed — we correct it and send the report again. Errors of that kind are not a reason for a refund. If a location was misidentified at the time you ordered, it can be corrected at an additional cost.</p>
+    <h3>Do you track insurance accepted in the area?</h3>
+    <p>No. We do not track insurance offered or accepted in the region.</p>
+  </div></section>
+
+  <section class="section alt"><div class="wrap prose">
+    <h2>More for veterinary practice owners</h2>
+    <!-- Only links verified live (HTTP 200, Nov 13) that actually mention this specialty. -->
+    <ul>
+      <li><a href="/blog/b/launch-smart-5-demographic-factors-for-your-new-practice/">Launch Smart: 5 Demographic Factors for Your New Practice</a></li>
+      <li><a href="/blog/b/big-city-exodus/">Big City Exodus</a></li>
+      <li><a href="/blog/b/places-with-promise-2026/">Places with Promise 2026</a></li>
+      <li><a href="/blog/b/relocate-or-revamp/">Relocate or Revamp</a></li>
+      <li><a href="/podcast/">The Perfect Place to Put a Practice podcast</a></li>
+    </ul>
+    <p>Other practice types: <a href="/dental-demographics/">Dental</a> · <a href="/optometry-demographics/">Optometry</a> · <a href="/orthodontic-demographics/">Orthodontics</a> · <a href="/practice-types/">All practice types</a></p>
+  </div></section>
+</main>
+<!-- shared footer from gen.py; live footer already uses "Since 1983" and phone (844) 704-0499 -->
+</body>
+</html>

@@ -63,6 +63,10 @@
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 30 Years, Doctor Demographics has | Since 1983, Doctor Demographics has |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | Our founder, Scott McDonald pioneered | Our founder, Scott McDonald (now retired), pioneered |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /veterinary-demographics | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /optometry-demographics | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /orthodontic-demographics | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /practice-types | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /podcast | dash removed (builder copy rule) | In this data-packed episode, we reveal the 5 areas in the greater Phoenix metro showing th | In this data-packed episode, we reveal the 5 areas in the greater Phoenix metro showing th |
 | /podcast | dash removed (builder copy rule) | In this episode, Mike Green from Doctor Demographics explores the top 5 southern states tr | In this episode, Mike Green from Doctor Demographics explores the top 5 southern states tr |
 | /podcast | dash removed (builder copy rule) | In this episode, discover exactly how to transform the demographic and psychographic data  | In this episode, discover exactly how to transform the demographic and psychographic data  |
