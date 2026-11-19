@@ -1,6 +1,6 @@
 # best-sites-report
-TITLE: Best Sites Report
-DESC: This is really a combination between a Report and a Consultation. It will take the geographic area YOU define (up to 5 Counties in the same State) and the priorities that YOU state.
+TITLE: Best Sites for a New Dental Practice | Doctor Demographics
+DESC: Define up to 5 counties and your priorities. We recommend the 5 best practice sites and why, plus a 20-minute consultation. $795 from Doctor Demographics.
 ROBOTS: 
 CANON: 
 
@@ -12,7 +12,7 @@ Demographic Reports
 Podcast
 Training
 Contact
-Best Sites Report
+Best Sites Report: Where to Open Your Practice
 Enable sound
 Best Sites Report Features:
 Report Price:  $795

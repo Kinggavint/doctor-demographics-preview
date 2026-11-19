@@ -1,5 +1,5 @@
 # blog__b__demographic-marketing
-TITLE: Demographic Marketing
+TITLE: Demographic Marketing | Doctor Demographics
 DESC: How to use demographic data from doctor demographics to create the perfect marketing strategy for your practice.
 ROBOTS: 
 CANON: 

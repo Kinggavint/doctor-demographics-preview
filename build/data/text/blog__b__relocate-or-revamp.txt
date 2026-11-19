@@ -1,6 +1,6 @@
 # blog__b__relocate-or-revamp
-TITLE: Relocate or Revamp
-DESC: In this episode, we tackle a common dilemma for dentists, veterinarians, optometrists, and other practice owners: Should you relocate your struggling practice or revamp your marketing instead? Discover why ineffective marketing is often the real culprit behind slow growth, not your location.
+TITLE: Relocate or Revamp | Doctor Demographics
+DESC: Should you relocate a struggling practice or revamp marketing? This episode explains why weak marketing, not location, is often the real issue for practice owners.
 ROBOTS: 
 CANON: https://www.example.com/blog/b/relocate-or-revamp
 

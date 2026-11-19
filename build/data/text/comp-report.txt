@@ -1,6 +1,6 @@
 # comp-report
-TITLE: Competition Report
-DESC: Unlock the potential of your practice with our tailored Competition Report, designed exclusively for professional practices (Dental, Medical, Veterinary, Optometry, etc)  seeking to thrive in their local market. This comprehensive analysis delivers actionable insights to help you attract more patients and stand out from the competition. 
+TITLE: Dental Practice Competition Report | Doctor Demographics
+DESC: See how your practice compares with local competitors and what to improve. $350 per site, including a 20-minute call after the report.
 ROBOTS: 
 CANON: 
 

@@ -536,7 +536,7 @@ def page_home():
     cards = [(39, 40, '/best-sites-report', '64adb6bd1aa4669e1a404704.jpg'), (43, 44, '/site-viability-report', '65258de43fd52c3674559fc6.jpg'),
              (47, 48, '/marketing-report', '68e832bde22f982ba43459c3.jpg'), (51, 52, '/telephone-consultation', '68e833334d2dffc79b33fde1.jpg')]
     for h, d, href, im in cards:
-        m += f'<div class="card report-card home-rcard">{ricon(href, "ico xl")}<h3>{t(L(s,h))}</h3>{p(L(s,d))}<div class="actions">{btn("More Infomation", href)}</div></div>'
+        m += f'<div class="card report-card home-rcard">{ricon(href, "ico xl")}<h3>{t(L(s,h))}</h3>{p(L(s,d))}<div class="actions">{btn(HOME_MORE_INFO[href], href)}</div></div>'
     m += '</div></div></section>'
     CHANGES.append(('/', 'Gavin design (Oct 30)', 'video thumbnails on report cards', 'report icons'))
     CHANGES.append(('/', 'Gavin design (Oct 30)', 'Key Benefits: 4 small icon cards', 'navy editorial split: photo + numbered benefit rows with short headlines (copy unchanged)'))
@@ -560,16 +560,41 @@ def ohref(slug):
     o = PRODUCTS[slug]['order']
     return o if o.startswith('#') else O(o)
 
+# Visible prices and descriptive anchors on /reports/ (George Nov 18 SEO/AEO brief, item 1).
+# Telephone Consultation stays on the hub but was not one of the four priced reports in the brief.
+REPORT_PRICES = {
+    'best-sites-report': '$795',
+    'site-viability-report': '$495',
+    'marketing-report': '$695',
+    'comp-report': '$350 per site',
+}
+REPORT_MORE_INFO = {
+    'telephone-consultation': 'See the Telephone Consultation',
+    'site-viability-report': 'See the Site Viability Report',
+    'marketing-report': 'See the Marketing Report',
+    'best-sites-report': 'See the Best Sites Report',
+    'comp-report': 'See the Competition Report',
+}
+HOME_MORE_INFO = {
+    '/best-sites-report': 'See the Best Sites Report',
+    '/site-viability-report': 'See the Site Viability Report',
+    '/marketing-report': 'See the Marketing Report',
+    '/telephone-consultation': 'See the Telephone Consultation',
+}
+
 def reports_page():
     begin('/reports')
     s = 'reports'
-    m = dx_hero('Demographic Reports', img('635195d6b495690eab7a6fa0.jpg', 'Analyst reviewing a report at a desk', 'dx-hero-img', lazy=False))
+    m = dx_hero('Practice Demographics Reports', img('635195d6b495690eab7a6fa0.jpg', 'Analyst reviewing a report at a desk', 'dx-hero-img', lazy=False))
     items = [('telephone-consultation', 16, 17), ('site-viability-report', 19, 20), ('marketing-report', 22, 24),
              ('best-sites-report', 26, 28), ('comp-report', 30, 31)]
     m += '<section class="section dx-light"><div class="wrap"><div class="dx-cards dx-5">'
     for slug, h0, d in items:
         title = ' '.join(x.strip() for x in L(s, h0, d - 1))
-        acts = btn('More Info', '/' + slug, 'ghost')
+        price = REPORT_PRICES.get(slug)
+        if price:
+            title = f'{title} ({price})'
+        acts = btn(REPORT_MORE_INFO[slug], '/' + slug, 'ghost')
         o = PRODUCTS[slug]['order']
         acts += btn('Order a report', ('/' + slug + o) if o.startswith('#') else O(o))
         m += (f'<article class="card report-card dx-card"><div class="dx-card-top">{ricon(slug, "ico xl dx-ico")}</div>'

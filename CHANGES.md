@@ -6,14 +6,9 @@
 | / | client OEDIT d9e575d | VETERINARIANS, and optometrists | veterinarians, optometrists, and audiologists |
 | / | no-cost wording (CEO call) | Live (Free) Trainings | Live Trainings |
 | / | typo (CEO call) | doctor's of all kinds | doctors of all kinds |
-| / | typo (CEO call) | Infomation | Information |
 | / | typo (CEO call) | Site Viability  Report | Site Viability Report |
-| / | typo (CEO call) | Infomation | Information |
-| / | typo (CEO call) | Infomation | Information |
-| / | typo (CEO call) | Infomation | Information |
 | / | Gavin design (Oct 30) | video thumbnails on report cards | report icons |
 | / | Gavin design (Oct 30) | Key Benefits: 4 small icon cards | navy editorial split: photo + numbered benefit rows with short headlines (copy unchanged) |
-| / | client request (Mike, Oct 31) | Doctor Demographics / Scott McDonald / Dental Optometry Veterinary | Doctor Demographics / Scott McDonald / Mike Green / Dental Optometry Veterinary |
 | / | Gavin decision (since 1983, Scott now retired) | For over 40 years, the team at Doctor Demographics has | Since 1983, the team at Doctor Demographics has |
 | / | Gavin decision (since 1983, Scott now retired) | with over 30 years of experience specializing | specializing |
 | / | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
@@ -115,7 +110,6 @@
 | /blog/b/big-city-exodus | dash removed (builder copy rule) | But cons exist: Relocating means upfront costs like moving equipment, licensing in a new s | But cons exist: Relocating means upfront costs like moving equipment, licensing in a new s |
 | /blog/b/big-city-exodus | dash removed (builder copy rule) |  to analyze population trends, competition, and income levels in target areas. Look at sta |  to analyze population trends, competition, and income levels in target areas. Look at sta |
 | /blog/b/big-city-exodus | no-cost wording (CEO call) | for a free consultation | for a consultation |
-| /blog/b/big-city-exodus | dash removed (builder copy rule) | In this episode, we reveal the top five mid- and large-sized U.S. markets with the brighte | In this episode, we reveal the top five mid- and large-sized U.S. markets with the brighte |
 | /blog/b/big-city-exodus | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/places-with-promise-2026 | dash removed (builder copy rule) | ! I’m your host, Mike Green, from Doctor Demographics. Today, we’re exploring "Places with | ! I’m your host, Mike Green, from Doctor Demographics. Today, we’re exploring "Places with |
 | /blog/b/places-with-promise-2026 | dash removed (builder copy rule) | Alright, let’s get into it. As we look ahead to 2026, the U.S. is seeing uneven recovery a | Alright, let’s get into it. As we look ahead to 2026, the U.S. is seeing uneven recovery a |
@@ -127,7 +121,6 @@
 | /blog/b/places-with-promise-2026 | dash removed (builder copy rule) | There you have it—our top five places with promise for 2026: Orlando for its dynamic appea | There you have it, our top five places with promise for 2026: Orlando for its dynamic appe |
 | /blog/b/places-with-promise-2026 | no-cost wording (CEO call) | for a free consultation | for a consultation |
 | /blog/b/places-with-promise-2026 | dash removed (builder copy rule) | . Subscribe, review, and share—we’ll see you next time! | . Subscribe, review, and share, we’ll see you next time! |
-| /blog/b/places-with-promise-2026 | dash removed (builder copy rule) | In this episode, we reveal the top five mid- and large-sized U.S. markets with the brighte | In this episode, we reveal the top five mid- and large-sized U.S. markets with the brighte |
 | /blog/b/places-with-promise-2026 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/kiss-of-death-locations-for-2026 | link fix | http://KFF.org | https://www.kff.org |
 | /blog/b/kiss-of-death-locations-for-2026 | dash removed (builder copy rule) | Alright, let's dive into today’s topic: "Kiss of Death Locations for 2026." If you’re thin | Alright, let's dive into today’s topic: "Kiss of Death Locations for 2026." If you’re thin |
@@ -143,7 +136,6 @@
 | /blog/b/kiss-of-death-locations-for-2026 | dash removed (builder copy rule) | —a large, iconic city turned cautionary tale. San Francisco lost 7% of its population sinc | , a large, iconic city turned cautionary tale. San Francisco lost 7% of its population sin |
 | /blog/b/kiss-of-death-locations-for-2026 | dash removed (builder copy rule) | Whew, that’s our list of eight kiss of death locations for 2026. Remember, these aren’t ho | Whew, that’s our list of eight kiss of death locations for 2026. Remember, these aren’t ho |
 | /blog/b/kiss-of-death-locations-for-2026 | no-cost wording (CEO call) | for a free consultation | for a consultation |
-| /blog/b/kiss-of-death-locations-for-2026 | dash removed (builder copy rule) | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026" – 8 markets  | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026", 8 markets ( |
 | /blog/b/kiss-of-death-locations-for-2026 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | dash removed (builder copy rule) | Today, we’re talking about something critical for anyone planning to open their first prac | Today, we’re talking about something critical for anyone planning to open their first prac |
 | /blog/b/launch-smart-5-demographic-factors-for-your-new-practice | dash removed (builder copy rule) | When you’re opening your first practice, you’re not just setting up a business—you’re buil | When you’re opening your first practice, you’re not just setting up a business, you’re bui |

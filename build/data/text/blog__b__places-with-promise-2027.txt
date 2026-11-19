@@ -1,6 +1,6 @@
 # blog__b__places-with-promise-2027
-TITLE: Places With Promise 2027
-DESC: Episode 293 of The Perfect Place to Put a Practice: Places With Promise 2027 names the 8 best towns to open a practice—from Meridian, Idaho to Celina, Texas—with show notes, the town list, takeaways, and timestamps.
+TITLE: Places With Promise 2027 | Doctor Demographics
+DESC: Episode 293 names eight towns to open a practice in 2027, from Meridian, Idaho to Celina, Texas, with show notes, the town list, takeaways, and timestamps.
 ROBOTS: 
 CANON: https://www.example.com/blog/b/places-with-promise-2027
 

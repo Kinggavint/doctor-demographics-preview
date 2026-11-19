@@ -1,6 +1,6 @@
 # site-viability-report
-TITLE: Site Viability Report
-DESC: Most often this Report is used to determine practice viability before you risk your money or a paper is signed. This is often used as part of an SBA package. The Report will break down 14 CONTIGUOUS Zip Codes as well as 5-, 10-, and 15-minute drive-time radii.
+TITLE: Dental Practice Site Viability Report | Doctor Demographics
+DESC: Before you sign a lease, get a $495 site viability report: 14 ZIP codes, 5 to 15 minute drive times, competition, and a demographer's recommendation plus a 20-minute consult.
 ROBOTS: 
 CANON: 
 
@@ -12,7 +12,7 @@ Demographic Reports
 Podcast
 Training
 Contact
-Site Viability Report
+Site Viability Report: Is This Practice Location Viable?
 Enable sound
 Site Viability Report Features:
 Price: $495 (discount for multiple sites)
@@ -23,7 +23,7 @@ Includes 20-minute live phone call with our head demographic analyst.
 Order Site Viabililty Report
 Order a Sample Site Viability Report Here
 Site Viability Report Description
-Most often this Report is used to determine practice viability before you risk your money or a paper is signed. This is often used as part of an SBA package. The Report will break down 14 CONTIGUOUS Zip Codes as well as 5-, 10-, and 15-minute drive-time radii. Data comes from two competing data vendors. Competition (and when applicable) Referral Sources are considered. Relevant landmarks such as schools are included for pediatric-type practices.
+The Site Viability Report is a practice location demographic analysis for dental, medical, optometry, and veterinary practices. Most often this Report is used to determine practice viability before you risk your money or a paper is signed. This is often used as part of an SBA package. The Report will break down 14 CONTIGUOUS Zip Codes as well as 5-, 10-, and 15-minute drive-time radii. Data comes from two competing data vendors. Competition (and when applicable) Referral Sources are considered. Relevant landmarks such as schools are included for pediatric-type practices.
 The end of the Report is an analysis by a demographer familiar with the specific discipline that will offer a Recommendation and Observation based upon this information. If you want to know something specific, please ask*. A 20-minute telephone consultation is available as part of the price of the Report.
 Order Site Viabililty Report
 What We Need to Know

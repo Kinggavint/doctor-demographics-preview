@@ -1,6 +1,6 @@
 # marketing-report
 TITLE: Marketing Report | Doctor Demographics
-DESC: This is a research-based tool to help practices promote their practices cost-efficiently. It is NOT a pre-fabricated package of standard-issue tools. It is an in-depth analysis of the practice’s current or proposed brand, current or proposed marketing tools, competition, and clinical offerings.
+DESC: A $695 research-based marketing report for dental, medical, optometry, and veterinary practices: brand, media, competition, and a consult, not a generic toolkit.
 ROBOTS: 
 CANON: 
 

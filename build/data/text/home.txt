@@ -1,5 +1,5 @@
 # home
-TITLE: Doctor Demographics | Scott McDonald | Dental Optometry Veterinary
+TITLE: Practice Location Demographics Reports | Doctor Demographics
 DESC: For over 40 years, the team at Doctor Demographics has provided demographic and psychographic data which is key to practice placement for doctors
 ROBOTS: 
 CANON: 
