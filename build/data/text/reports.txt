@@ -1,6 +1,6 @@
 # reports
-TITLE: Demographic Reports | Doctor Demographics
-DESC: Doctor Demographics provides different reports to help doctors make crucial decisions at every stage of their research. Whether you have a practice location picked out or are early in the process, we have a custom hand-written report to fit your needs. 
+TITLE: Dental Practice Demographics Reports | Doctor Demographics
+DESC: Compare custom practice-location reports for dentists, physicians, optometrists, and veterinarians: Best Sites ($795), Site Viability ($495), Competition ($350), and Marketing ($695).
 ROBOTS: 
 CANON: 
 

@@ -1,6 +1,6 @@
 # blog__b__places-with-promise-2026
-TITLE: Places with Promise 2026
-DESC: In this episode, we reveal the top five mid- and large-sized U.S. markets with the brightest futures for opening a practice in 2026. From booming population growth and strong economic outlooks to business-friendly local governments, these spots—Orlando, Austin, Nashville, Charlotte, and Boise—offer low taxes, incentives, and high demand for healthcare services.
+TITLE: Places with Promise 2026 | Doctor Demographics
+DESC: Mike Green names five mid- and large-sized U.S. markets with promise for a new practice in 2026, with growth, economic outlook, and business-friendly conditions.
 ROBOTS: 
 CANON: https://www.example.com/blog/b/places-with-promise-2026
 

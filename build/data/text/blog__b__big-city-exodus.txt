@@ -1,6 +1,6 @@
 # blog__b__big-city-exodus
-TITLE: Big City Exodus
-DESC: In this episode, we reveal the top five mid- and large-sized U.S. markets with the brightest futures for opening a practice in 2026. From booming population growth and strong economic outlooks to business-friendly local governments, these spots—Orlando, Austin, Nashville, Charlotte, and Boise—offer low taxes, incentives, and high demand for healthcare services.
+TITLE: Big City Exodus | Doctor Demographics
+DESC: Doctors are leaving large cities for suburbs and other states. This episode covers urban out-migration and the practice-location risk of staying or moving.
 ROBOTS: 
 CANON: https://www.example.com/blog/b/big-city-exodus
 

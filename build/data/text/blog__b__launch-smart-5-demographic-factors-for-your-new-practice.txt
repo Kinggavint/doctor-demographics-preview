@@ -1,6 +1,6 @@
 # blog__b__launch-smart-5-demographic-factors-for-your-new-practice
-TITLE: Launch Smart: 5 Demographic Factors for Your New Practice
-DESC: Join Mike Green from Doctor Demographics on The Perfect Place to Put a Practice as we uncover the five demographic factors you need to know before opening your first practice. From population growth to competition, we’ll break down how to choose a location that maximizes your success. Packed with data-driven insights and actionable tips, this 17-minute episode is a must-listen for new practice owners.
+TITLE: Launch Smart: 5 Demographic Factors for Your New Practice | Doctor Demographics
+DESC: Mike Green covers five demographic factors to know before opening a first practice, from population growth to competition.
 ROBOTS: 
 CANON: https://www.example.com/blog/b/launch-smart-5-demographic-factors-for-your-new-practice
 
