@@ -1,6 +1,6 @@
 # reports
-TITLE: Dental Practice Demographics Reports | Doctor Demographics
-DESC: Compare custom practice-location reports for dentists, physicians, optometrists, and veterinarians: Best Sites ($795), Site Viability ($495), Competition ($350), and Marketing ($695).
+TITLE: Healthcare Practice Demographics Reports | Doctor Demographics
+DESC: Compare healthcare practice location demographics and site selection reports. Best Sites $795, Site Viability $495, Competition $350, Marketing $695.
 ROBOTS: 
 CANON: 
 

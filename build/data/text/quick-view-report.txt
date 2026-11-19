@@ -1,6 +1,6 @@
 # quick-view-report
 TITLE: Quick View Report | Doctor Demographics
-DESC: The Quick View Report is exactly that - a brief analysis of an area or site. The report is about 16 pages in length and is primarily built for consultants, realtors, and others who are helping practice owners gain a better view of an area demographically.
+DESC: A brief 16-page practice location demographics analysis of an area or site, for consultants and realtors helping healthcare practices with site selection.
 ROBOTS: 
 CANON: 
 

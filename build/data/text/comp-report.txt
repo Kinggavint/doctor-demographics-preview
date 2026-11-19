@@ -1,6 +1,6 @@
 # comp-report
-TITLE: Dental Practice Competition Report | Doctor Demographics
-DESC: See how your practice compares with local competitors and what to improve. $350 per site, including a 20-minute call after the report.
+TITLE: Healthcare Practice Competition Report | Doctor Demographics
+DESC: Compare practice location demographics with local competitors and see what to improve. $350 per site, with site selection insight and a 20-minute call.
 ROBOTS: 
 CANON: 
 
