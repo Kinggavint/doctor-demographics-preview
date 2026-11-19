@@ -198,11 +198,107 @@ def lite(vid, alt):
     return (f'<a class="lite" href="https://www.youtube.com/watch?v={vid}" target="_blank" rel="noopener">'
             f'<img src="https://img.youtube.com/vi/{vid}/hqdefault.jpg" alt="{a_(alt)}" loading="lazy"></a>')
 
-def latest_episode():
-    """Newest podcast episode, picked client side by YouTube: the playlist embed opens on the first (newest) item."""
-    return (f'<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/videoseries?list={POD_PLAYLIST}" '
-            f'title="Latest podcast episode" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" '
+FEATURED_EP = 293
+FEATURED_VID = 'RKsoPfqTuHk'
+FEATURED_TITLE = 'Places With Promise 2027: The 8 Best Towns to Open a Practice'
+FEATURED_THUMB = 'podcast-places-with-promise-2027-thumbnail.png'
+FEATURED_LIBSYN_ID = '43815549'
+FEATURED_NOTES_INTRO = [
+    "If you're opening a practice in 2027, forget the famous skylines. Go where the patients are actually unpacking their boxes.",
+    'This is my favorite episode of the year: Places With Promise. Last year we talked about big metros. This year we got more specific and named towns, because you don\'t lease an office in "Charlotte," you lease one on a real street, serving real people, in a real community. Every town on this list has families moving in, putting down roots, and looking for a new dentist, doctor, audiologist and vet.',
+]
+FEATURED_TOWNS = [
+    '#8 Meridian, Idaho (Boise metro): about 143,000 people and still growing, with median income right around $100,000. A big, established base with room for specialists and second locations.',
+    '#7 Fort Mill, South Carolina (Charlotte metro): grew almost 7% in a single year, with median household income about $122,000. Tip: say "Fort Mill" in your marketing.',
+    '#6 Madison, Alabama (Huntsville metro): about 68,000 people, growing around 6.5% a year, with median household income about $135,000. The Rocket City surprise.',
+    '#5 Apex, North Carolina (Raleigh area): about 80,000 people, growing about 6% a year, with median household income about $144,000. A growing town inside a booming county. Be the easy answer for new families.',
+    '#4 Queen Creek, Arizona (Southeast Valley, Phoenix): about 90,000 people, grew more than 8% in a single year, with median household income about $142,000. Vets: build your pitch around pet owners, not just the kids.',
+    '#3 Eagle Mountain, Utah (Utah County): about 43% of the people are under 18, the median age is 23, about 66,000 people, and about 8.5% growth in a single year. Build a real family experience, front desk included.',
+    '#2 Fulshear, Texas (west side of Houston): grew about 21% in one year, about 65,000 people, and median household income about $187,000, the highest on our list.',
+    '#1 Celina, Texas (north of Dallas): grew 25% in a single year (one in four), added about 12,000 residents, is now about 64,000 people, and has median income about $171,000. My boldest prediction of the episode.',
+]
+FEATURED_TAKEAWAY = "The big takeaway: don't stop at the famous city name or the skyline. Pick the right town, pick the right spot. That's the key combination."
+FEATURED_FIND = 'Find your spot: visit https://doctordemographics.com. Early in the process? Ask about our Best Sites report. Already have a location in mind? Ask about our Site Viability report. Dentist, orthodontist, physician, audiologist, vet or any specialty, we can help.'
+FEATURED_APEX = 'Also in this episode: a quick word about Apex AI Labs, the website, search and AI-search visibility company born out of Doctor Demographics (https://apexailabs.ai).'
+FEATURED_TIMES = [
+    ('00:00', 'Forget the skylines: go where patients are unpacking boxes'),
+    ('01:03', 'Welcome, and thank you (about 15 years, 300+ episodes)'),
+    ('01:30', 'Why Places With Promise is my favorite episode'),
+    ('02:42', "Last year's metros vs. this year's towns"),
+    ('03:16', "How we built this year's list"),
+    ('03:57', 'Where America is moving in 2027'),
+    ('04:30', '#8 Meridian, Idaho'),
+    ('06:32', '#7 Fort Mill, South Carolina'),
+    ('08:07', '#6 Madison, Alabama'),
+    ('10:02', '#5 Apex, North Carolina'),
+    ('11:55', 'A quick word from Apex AI Labs'),
+    ('13:20', '#4 Queen Creek, Arizona'),
+    ('15:35', '#3 Eagle Mountain, Utah'),
+    ('17:56', '#2 Fulshear, Texas'),
+    ('19:48', '#1 Celina, Texas'),
+    ('21:29', 'Recap: all 8 Places With Promise'),
+    ('21:55', 'The big takeaway, plus Best Sites and Site Viability reports'),
+    ('23:11', 'Subscribe, review, share'),
+]
+FEATURED_THANKS = "Thanks for listening. Subscribe, leave us a review, and share this episode with a friend who's thinking about opening, expanding or moving a practice in 2027."
+FEATURED_SIGNOFF = 'Mike Green, Doctor Demographics'
+
+def linkify(s):
+    """Escape copy-fixed text and turn bare http(s) URLs into links."""
+    s = fx(s.strip())
+    out, last = [], 0
+    for m in re.finditer(r'https?://[^\s)]+', s):
+        out.append(html.escape(s[last:m.start()], quote=False))
+        url, trail = m.group(0), ''
+        while url and url[-1] in '.,;:':
+            trail = url[-1] + trail
+            url = url[:-1]
+        out.append(f'<a href="{a_(url)}" target="_blank" rel="noopener">{html.escape(url, quote=False)}</a>{html.escape(trail, quote=False)}')
+        last = m.end()
+    out.append(html.escape(s[last:], quote=False))
+    return ''.join(out)
+
+def yt_embed(vid, title):
+    return (f'<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/{vid}" '
+            f'title="{a_(title)}" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" '
             f'allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>')
+
+def latest_episode():
+    """Newest podcast episode as a YouTube embed (Episode 293). Used on the home page."""
+    return yt_embed(FEATURED_VID, f'Episode {FEATURED_EP}: {FEATURED_TITLE}')
+
+def libsyn_player(eid):
+    return (f'<div class="dx-latest-audio"><iframe title="Libsyn Player" style="border: none" '
+            f'src="https://html5-player.libsyn.com/embed/episode/id/{eid}/height/405/theme/standard/thumbnail/yes/direction/backward/" '
+            f'height="405" width="100%" scrolling="no" allowfullscreen loading="lazy"></iframe></div>')
+
+def featured_episode():
+    """Dedicated /podcast block for Episode 293: thumbnail, YouTube, Libsyn, show notes, timestamps."""
+    title = f'Episode {FEATURED_EP}: {FEATURED_TITLE}'
+    towns = ''.join(f'<li>{t(item)}</li>' for item in FEATURED_TOWNS)
+    times = ''.join(f'<li><time>{t(hm)}</time><span>{t(label)}</span></li>' for hm, label in FEATURED_TIMES)
+    playlist = f'https://www.youtube.com/playlist?list={POD_PLAYLIST}'
+    notes = (
+        ''.join(f'<p>{linkify(para)}</p>' for para in FEATURED_NOTES_INTRO)
+        + f'<h3>{t("The 2027 Places With Promise list")}</h3>'
+        + f'<ul class="dx-latest-towns">{towns}</ul>'
+        + f'<p>{linkify(FEATURED_TAKEAWAY)}</p>'
+        + f'<p>{linkify(FEATURED_FIND)}</p>'
+        + f'<p>{linkify(FEATURED_APEX)}</p>'
+        + f'<h3>{t("Episode timestamps")}</h3>'
+        + f'<ol class="dx-latest-times">{times}</ol>'
+        + f'<p>{linkify(FEATURED_THANKS)}</p>'
+        + f'<p>{t(FEATURED_SIGNOFF)}</p>'
+    )
+    return (
+        f'<article class="card dx-latest"><header class="dx-latest-head">{icon("mic", "ico xl dx-ico")}'
+        f'<p class="dx-latest-kicker">Our Most Recent Episode</p><h2>{t(title)}</h2></header>'
+        f'{img(FEATURED_THUMB, FEATURED_TITLE, "dx-latest-thumb", lazy=False, wh=(1280, 720))}'
+        f'{yt_embed(FEATURED_VID, title)}'
+        f'{libsyn_player(FEATURED_LIBSYN_ID)}'
+        f'<p class="dx-playlist-link"><a href="{a_(playlist)}" target="_blank" rel="noopener">Also on our YouTube podcast playlist</a></p>'
+        f'<div class="dx-latest-notes prose">{notes}</div></article>'
+    )
 
 def video(src, poster=None, title='Product video'):
     if 'vimeo' in src:
@@ -647,13 +743,13 @@ def page_dental():
 <div class="card">{img('67adf42190796256c5f5834a.jpg', 'Best Sites Report', 'thumb')}<h3 class="with-ico">{ricon('best-sites-report')}<span>{t(L(s,22))}</span></h3>{p(L(s,23))}<div class="actions">{btn(L(s,24), '/best-sites-report')}</div></div>
 <div class="card">{img('67adf5a6dd8c5c69890b2d05.jpg', 'Practice Site Viability Report', 'thumb')}<h3 class="with-ico">{ricon('site-viability-report')}<span>{t(L(s,25))}</span></h3>{p(L(s,26))}<div class="actions">{btn(L(s,27), '/site-viability-report')}</div></div>
 </div></div></section>
-<section class="section"><div class="wrap prose"><h2>{t(L(s,28))}</h2><p>{t(L(s,29).replace('over 250 episodes', 'over 290 episodes').replace('well over 100K downloads', '100K+ downloads'))} {todo('Episode count updated to over 290 (the podcast page numbers episodes up to 292). Download count shown as 100K+ per decision on Oct 30.', 'done')}</p>{p(L(s,30))}
+<section class="section"><div class="wrap prose"><h2>{t(L(s,28))}</h2><p>{t(L(s,29).replace('over 250 episodes', 'over 290 episodes').replace('well over 100K downloads', '100K+ downloads'))} {todo('Episode count updated to over 290 (the podcast page numbers episodes up to 293). Download count shown as 100K+ per decision on Oct 30.', 'done')}</p>{p(L(s,30))}
 <div class="badges"><a href="{SPOTIFY}" target="_blank" rel="noopener">{img('67adf9f516725e5ab4fc8ddf.png', 'Listen on Spotify')}</a>
 <a href="{APPLE}" target="_blank" rel="noopener">{img('67adffc74478e192700f4248.png', 'Apple Podcasts')}</a>
 <a class="btn ghost ext" href="{YT_FOOTER}" target="_blank" rel="noopener">YouTube</a></div></div></section>'''
     finish(title_of(s, 'Dental Demographics'), desc_of(s), m, flag=fl)
 
-POD_VIDEOS = {292: 'DLRUQ0ugVMA', 291: '0pK3TDC90V0', 290: 'UBmlxksls5Q', 289: 'yDTjof2sIII', 288: 'CTvdj7PVWN4', 287: 'axQAnZh-mDg',
+POD_VIDEOS = {293: 'RKsoPfqTuHk', 292: 'DLRUQ0ugVMA', 291: '0pK3TDC90V0', 290: 'UBmlxksls5Q', 289: 'yDTjof2sIII', 288: 'CTvdj7PVWN4', 287: 'axQAnZh-mDg',
   286: 'iJBQwi3FZtA', 285: 'vAhCjC1FjzM', 284: '7ULHhxkbkiw', 283: 'zq0joirpLTI', 282: 'vjwg3XhGbzM', 281: 'viiWr4cWQp0',
   280: 'nlNjbWqcYLI', 279: 'TDBOGw668-8', 278: '-2zQNXdhd70', 277: 'CYyRiZRHZNA', 276: 'nqmaNhJOiXc', 275: 'NiB5TKiOHbo',
   274: '-bZQ7BynbIY', 273: 'FhkavTfclCA', 272: '_bGqGG8tm08', 271: '16DU0Jx_ecs', 270: 'McF2OJSkCjE', 269: 'QecVd90QOtA',
@@ -686,8 +782,9 @@ def page_podcast():
     badges = f'<div class="badges"><a href="{APPLE}" target="_blank" rel="noopener">{img("67adffc74478e192700f4248.png", "Apple Podcasts", lazy=False)}</a><a href="{SPOTIFY}" target="_blank" rel="noopener">{img("67adf9f516725e5ab4fc8ddf.png", "Listen on Spotify", lazy=False)}</a></div>'
     ptitle = 'The Perfect Place to Put a Practice Podcast'
     m = dx_hero(ptitle, img(*POD_HERO_IMG, 'dx-hero-img dx-portrait', lazy=False, wh=(680, 680)), after=badges)
-    m += f'''<section class="section dx-light dx-pull"><div class="wrap"><div class="card dx-feature"><div class="dx-feature-txt">{icon('mic', 'ico xl dx-ico')}<h2>Our Most Recent Episode</h2></div>
-<div>{latest_episode()}</div></div></div></section>
+    CHANGES.append(('/podcast', 'client request (George, Nov 19)', 'Our Most Recent Episode was the YouTube playlist embed; Previous list topped at Episode 292', 'Episode 293 featured with thumbnail, YouTube embed, Libsyn player, show notes and timestamps; Episode 293 added at the top of Previous Podcast Episodes'))
+    CHANGES.append(('/', 'client request (George, Nov 19)', 'home latest episode used the YouTube playlist embed', 'home latest episode embeds Episode 293 (RKsoPfqTuHk)'))
+    m += f'''<section class="section dx-light dx-pull"><div class="wrap">{featured_episode()}</div></section>
 <section class="section dx-light dx-eps"><div class="wrap"><h2>Previous Podcast Episodes</h2><div class="dx-ep-list">'''
     nums = [e[0] for e in eps]
     for n, title, desc in eps:
