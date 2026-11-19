@@ -8,16 +8,16 @@
   "description": ""
  },
  "reports": {
-  "title": "Dental Practice Demographics Reports | Doctor Demographics",
-  "description": "Compare custom practice-location reports for dentists, physicians, optometrists, and veterinarians: Best Sites ($795), Site Viability ($495), Competition ($350), and Marketing ($695)."
+  "title": "Healthcare Practice Demographics Reports | Doctor Demographics",
+  "description": "Compare healthcare practice location demographics and site selection reports. Best Sites $795, Site Viability $495, Competition $350, Marketing $695."
  },
  "best-sites-report": {
-  "title": "Best Sites for a New Dental Practice | Doctor Demographics",
-  "description": "Define up to 5 counties and your priorities. We recommend the 5 best practice sites and why, plus a 20-minute consultation. $795 from Doctor Demographics."
+  "title": "Best Sites for a Healthcare Practice | Doctor Demographics",
+  "description": "Define up to 5 counties and your priorities. Get the 5 best practice location sites, with demographics, site selection help, and a 20-minute consult. $795."
  },
  "site-viability-report": {
-  "title": "Dental Practice Site Viability Report | Doctor Demographics",
-  "description": "Before you sign a lease, get a $495 site viability report: 14 ZIP codes, 5 to 15 minute drive times, competition, and a demographer's recommendation plus a 20-minute consult."
+  "title": "Healthcare Practice Site Viability Report | Doctor Demographics",
+  "description": "Before you sign a lease, get a $495 site viability report with practice location demographics, site selection, 14 ZIP codes, and a 20-minute consult."
  },
  "marketing-report": {
   "title": "Marketing Report | Doctor Demographics",
@@ -28,12 +28,12 @@
   "description": "Get Immediate help with your practice placement, marketing, and other challenging situation with a live telephone consultation."
  },
  "comp-report": {
-  "title": "Dental Practice Competition Report | Doctor Demographics",
-  "description": "See how your practice compares with local competitors and what to improve. $350 per site, including a 20-minute call after the report."
+  "title": "Healthcare Practice Competition Report | Doctor Demographics",
+  "description": "Compare practice location demographics with local competitors and see what to improve. $350 per site, with site selection insight and a 20-minute call."
  },
  "quick-view-report": {
   "title": "Quick View Report | Doctor Demographics",
-  "description": "The Quick View Report is exactly that - a brief analysis of an area or site. The report is about 16 pages in length and is primarily built for consultants, realtors, and others who are helping practice owners gain a better view of an area demographically."
+  "description": "A brief 16-page practice location demographics analysis of an area or site, for consultants and realtors helping healthcare practices with site selection."
  },
  "on-site-report": {
   "title": "On-Site Demographic Marketing Report",

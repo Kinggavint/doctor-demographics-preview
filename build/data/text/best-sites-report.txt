@@ -1,6 +1,6 @@
 # best-sites-report
-TITLE: Best Sites for a New Dental Practice | Doctor Demographics
-DESC: Define up to 5 counties and your priorities. We recommend the 5 best practice sites and why, plus a 20-minute consultation. $795 from Doctor Demographics.
+TITLE: Best Sites for a Healthcare Practice | Doctor Demographics
+DESC: Define up to 5 counties and your priorities. Get the 5 best practice location sites, with demographics, site selection help, and a 20-minute consult. $795.
 ROBOTS: 
 CANON: 
 

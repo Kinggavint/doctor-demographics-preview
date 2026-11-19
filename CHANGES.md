@@ -35,7 +35,6 @@
 | /telephone-consultation | typo (CEO call) | numbers will comes | numbers will come |
 | /telephone-consultation | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /quick-view-report | dash removed (builder copy rule) | The Quick View Report is exactly that - a brief analysis of an area or site. The report is | The Quick View Report is exactly that, a brief analysis of an area or site. The report is  |
-| /quick-view-report | dash removed (builder copy rule) | The Quick View Report is exactly that - a brief analysis of an area or site. The report is | The Quick View Report is exactly that, a brief analysis of an area or site. The report is  |
 | /quick-view-report | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /sample-reports | Mike decision | three exclusive sample reports | four exclusive sample reports |
 | /sample-reports | no-cost wording (CEO call) | Free Sample Reports | Sample Reports |
