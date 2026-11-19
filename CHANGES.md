@@ -63,6 +63,8 @@
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 30 Years, Doctor Demographics has | Since 1983, Doctor Demographics has |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | Our founder, Scott McDonald pioneered | Our founder, Scott McDonald (now retired), pioneered |
 | /dental-demographics | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /podcast | client request (George, Nov 19) | Our Most Recent Episode was the YouTube playlist embed; Previous list topped at Episode 292 | Episode 293 featured with thumbnail, YouTube embed, Libsyn player, show notes and timestamps; Episode 293 added at the top of Previous Podcast Episodes |
+| / | client request (George, Nov 19) | home latest episode used the YouTube playlist embed | home latest episode embeds Episode 293 (RKsoPfqTuHk) |
 | /podcast | dash removed (builder copy rule) | In this data-packed episode, we reveal the 5 areas in the greater Phoenix metro showing th | In this data-packed episode, we reveal the 5 areas in the greater Phoenix metro showing th |
 | /podcast | dash removed (builder copy rule) | In this episode, Mike Green from Doctor Demographics explores the top 5 southern states tr | In this episode, Mike Green from Doctor Demographics explores the top 5 southern states tr |
 | /podcast | dash removed (builder copy rule) | In this episode, discover exactly how to transform the demographic and psychographic data  | In this episode, discover exactly how to transform the demographic and psychographic data  |
