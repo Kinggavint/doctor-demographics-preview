@@ -273,31 +273,12 @@ def libsyn_player(eid):
             f'height="405" width="100%" scrolling="no" allowfullscreen loading="lazy"></iframe></div>')
 
 def featured_episode():
-    """Dedicated /podcast block for Episode 293: thumbnail, YouTube, Libsyn, show notes, timestamps."""
+    """Dedicated /podcast block for Episode 293: title + YouTube only (notes live on the blog post)."""
     title = f'Episode {FEATURED_EP}: {FEATURED_TITLE}'
-    towns = ''.join(f'<li>{t(item)}</li>' for item in FEATURED_TOWNS)
-    times = ''.join(f'<li><time>{t(hm)}</time><span>{t(label)}</span></li>' for hm, label in FEATURED_TIMES)
-    playlist = f'https://www.youtube.com/playlist?list={POD_PLAYLIST}'
-    notes = (
-        ''.join(f'<p>{linkify(para)}</p>' for para in FEATURED_NOTES_INTRO)
-        + f'<h3>{t("The 2027 Places With Promise list")}</h3>'
-        + f'<ul class="dx-latest-towns">{towns}</ul>'
-        + f'<p>{linkify(FEATURED_TAKEAWAY)}</p>'
-        + f'<p>{linkify(FEATURED_FIND)}</p>'
-        + f'<p>{linkify(FEATURED_APEX)}</p>'
-        + f'<h3>{t("Episode timestamps")}</h3>'
-        + f'<ol class="dx-latest-times">{times}</ol>'
-        + f'<p>{linkify(FEATURED_THANKS)}</p>'
-        + f'<p>{t(FEATURED_SIGNOFF)}</p>'
-    )
     return (
         f'<article class="card dx-latest"><header class="dx-latest-head">{icon("mic", "ico xl dx-ico")}'
         f'<p class="dx-latest-kicker">Our Most Recent Episode</p><h2>{t(title)}</h2></header>'
-        f'{img(FEATURED_THUMB, FEATURED_TITLE, "dx-latest-thumb", lazy=False, wh=(1280, 720))}'
-        f'{yt_embed(FEATURED_VID, title)}'
-        f'{libsyn_player(FEATURED_LIBSYN_ID)}'
-        f'<p class="dx-playlist-link"><a href="{a_(playlist)}" target="_blank" rel="noopener">Also on our YouTube podcast playlist</a></p>'
-        f'<div class="dx-latest-notes prose">{notes}</div></article>'
+        f'{yt_embed(FEATURED_VID, title)}</article>'
     )
 
 def video(src, poster=None, title='Product video'):
@@ -810,7 +791,7 @@ def page_podcast():
     finish(title_of('podcast', 'Podcast'), 'The Perfect Place to Put a Practice podcast from Doctor Demographics with Scott McDonald and Mike Green.', m)
     return eps
 
-BLOGS = [('relocate-or-revamp', 'banner-mike-68b5e065419f89ab7b17b8f3.jpg'), ('big-city-exodus', 'banner-mike-68ae36a93ba6188b15e093ae.jpg'),
+BLOGS = [('places-with-promise-2027', 'banner-mike-68a862537dc6b074cb6ee577.jpg'), ('relocate-or-revamp', 'banner-mike-68b5e065419f89ab7b17b8f3.jpg'), ('big-city-exodus', 'banner-mike-68ae36a93ba6188b15e093ae.jpg'),
          ('places-with-promise-2026', 'banner-mike-68a862537dc6b074cb6ee577.jpg'), ('kiss-of-death-locations-for-2026', 'banner-mike-689bba15b52dae7d965071d5.jpg'),
          ('launch-smart-5-demographic-factors-for-your-new-practice', 'banner-mike-6892773400987beaf980e0fc.jpg'), ('demographic-marketing', 'banner-mike-67b50b86aea6db7f0ba29683.jpg')]
 

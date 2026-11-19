@@ -89,9 +89,11 @@
 | /podcast | dash removed (builder copy rule) | Episode 234: The Two Step Model - A Foundational Model in Establishing a New Practice Imag | Episode 234: The Two Step Model, A Foundational Model in Establishing a New Practice Image |
 | /podcast | Gavin decision (since 1983, Scott now retired) | for doctors nearly 40 years ago | for doctors back in 1983 |
 | /podcast | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /blog | dash removed (builder copy rule) | Episode 293 names the 8 best towns to open a practice in 2027—from Meridian, Idaho to Celi | Episode 293 names the 8 best towns to open a practice in 2027, from Meridian, Idaho to Cel |
 | /blog | dash removed (builder copy rule) | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026" – 8 markets  | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026", 8 markets ( |
 | /blog | Mike decision | blog not in the menu | Blog added to the main menu |
 | /blog | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /blog/b/places-with-promise-2027 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/relocate-or-revamp | dash removed (builder copy rule) | , the podcast where we help dentists, veterinarians, optometrists, and other private pract | , the podcast where we help dentists, veterinarians, optometrists, and other private pract |
 | /blog/b/relocate-or-revamp | dash removed (builder copy rule) | Alright, let's dive into today’s topic: "Relocate or Revamp: The Marketing Fix Your Practi | Alright, let's dive into today’s topic: "Relocate or Revamp: The Marketing Fix Your Practi |
 | /blog/b/relocate-or-revamp | dash removed (builder copy rule) | First, let’s talk about why so many practice owners jump to relocation as the solution. It | First, let’s talk about why so many practice owners jump to relocation as the solution. It |
