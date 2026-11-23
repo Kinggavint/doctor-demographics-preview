@@ -605,6 +605,7 @@ def reports_page():
 <div class="dx-contact-item">{icon('mail', 'ico dx-gold-ico')}<div><h3>Contact Us by Email</h3><p><a href="mailto:{EMAIL}"><strong>{EMAIL.replace('@', '<wbr>@')}</strong></a></p></div></div></div></div></section>'''
     CHANGES.append(('/reports', 'client OEDIT d92ae0d', 'card buttons', 'added "Order a report" next to More Info'))
     CHANGES.append(('/reports', 'Gavin design (Oct 30)', 'sample report buttons on each block and the Order a Sample Report button', 'removed; report icons added to all 5 blocks'))
+    m += faq_section('/reports')
     finish(title_of(s, 'Demographic Reports'), desc_of(s), m)
 
 def need_list(items, sub_after=None, sub=None):
@@ -616,6 +617,77 @@ def need_list(items, sub_after=None, sub=None):
         else:
             out.append(t(x))
     return '<ul class="check">' + ''.join(f'<li>{x}</li>' for x in out) + '</ul>'
+
+# ---------------------------------------------------------------- visible FAQs on the report pages (George, Nov 23 2026, item 2)
+# Questions are short labels. Every answer is copy that is already on the live site (the page itself, /reports/, the
+# Places With Promise 2027 post, or the site-wide footer), word for word, or a fact George confirmed (Since 1983, 10,000+).
+# A list answer is shown as a list and joined with '; ' in the FAQPage JSON-LD. The FAQPage is built from this visible block.
+FAQ_INSURANCE = ('Does the report track insurance in the area?', ['We do not track insurance offered or accepted in the region.'])
+REPORT_FAQS = {
+    '/site-viability-report': [
+        ('How much does the Site Viability Report cost?',
+         ['Price: $495 (discount for multiple sites).', 'A 20-minute telephone consultation is available as part of the price of the Report.']),
+        ('Which practices is the Site Viability Report for?',
+         ['The Site Viability Report is a practice location demographic analysis for dental, medical, optometry, and veterinary practices.']),
+        ('When should I order a Site Viability Report?',
+         ['Most often this Report is used to determine practice viability before you risk your money or a paper is signed.', 'This is often used as part of an SBA package.']),
+        ('What area does the Site Viability Report cover?',
+         ['The Report will break down 14 CONTIGUOUS Zip Codes as well as 5-, 10-, and 15-minute drive-time radii.', 'Competition (and when applicable) Referral Sources are considered.']),
+        ('What do I get at the end of the Report?',
+         ['The end of the Report is an analysis by a demographer familiar with the specific discipline that will offer a Recommendation and Observation based upon this information.']),
+        ('What do you need from me to start?',
+         [['Street Address or Cross Streets', 'City, State, and Zip Code', 'Type of Practice', 'Circumstances (New or Scratch, Purchase or Existing, Move from Existing Location, Main or Satellite or Second)']]),
+        FAQ_INSURANCE,
+    ],
+    '/best-sites-report': [
+        ('How much does the Best Sites Report cost?',
+         ['Report Price: $795.', 'A 20-minute telephone consultation is included in the price of the order.']),
+        ('When is the Best Sites Report the right choice?',
+         ['Perfect for the early site selection process.', 'Early in the process? Ask about our Best Sites report.']),
+        ('What area can the Best Sites Report cover?',
+         ['It will take the geographic area YOU define (up to 5 Counties in the same State) and the priorities that YOU state.']),
+        ('What will I receive?',
+         ['The analyst will provide a written report of locations with the 5 Best Sites in the area-of-study.', 'It will come by E-Mail.']),
+        ('Will every county I choose be in the Report?',
+         ['Not all Counties or Zip Codes will be reflected in the Report, just the best five locations.']),
+        ('Can the locations be ranked?',
+         ['The locations can be ranked but you must make the request at the time of ordering according to some demographic factor (such as income or growth).']),
+        ('Do I have to do the phone consultation?',
+         ['You don\u2019t have to do this consultation if you don\u2019t want to do so.', 'This is the option of many Clients.']),
+        ('What do you need from me to start?',
+         [['State', 'Up to 5 Counties', 'Type of Practice', 'Circumstances (New or Scratch, Purchase or Existing, Move from Existing Location, Main or Satellite or Second)']]),
+        FAQ_INSURANCE,
+    ],
+    '/reports': [
+        ('How much do the reports cost?',
+         [['Practice Site Viability Report ($495)', 'Best Sites Report ($795)', 'Marketing Report ($695)', 'Competition Report ($350 per site)']]),
+        ('Which report do I need?',
+         ['Early in the process? Ask about our Best Sites report.', 'Already have a location in mind? Ask about our Site Viability report.']),
+        ('Do the reports include a phone consultation?',
+         [['Site Viability Report: It includes competition analysis, expert site specific recommendations, and a 20-minute consultation.',
+           'Best Sites Report: This report includes a 20-minute consultation.',
+           'Competition Report: Includes a 20-minute after report phone call.']]),
+        ('How long has Doctor Demographics been doing this?',
+         ['Since 1983, the Doctor Demographics team has helped thousands of doctors and practice owners select the perfect place to set up their practice.',
+          'Having conducted over 10,000 market studies over the years, Mike transforms insights into actionable plans, helping practice owners establish and scale their practices across the United States and beyond.']),
+        ('How do I ask a question before I order?',
+         [['Contact Us by Phone: (844) 704-0499', 'Contact Us by Email: support@doctordemographics.com']]),
+    ],
+}
+
+def faq_answer_text(parts):
+    return ' '.join('; '.join(x) if isinstance(x, list) else x for x in parts)
+
+def faq_section(path):
+    """Visible FAQ block. The FAQPage JSON-LD (page_schema) is read back from this block, so the two always match."""
+    qa = REPORT_FAQS.get(path)
+    if not qa:
+        return ''
+    out = ''
+    for q, parts in qa:
+        body_ = ''.join(('<ul class="check">' + ''.join(f'<li>{t(y)}</li>' for y in x) + '</ul>') if isinstance(x, list) else p(x) for x in parts)
+        out += f'<div class="faq-item"><h3 class="faq-q">{t(q)}</h3><div class="faq-a">{body_}</div></div>'
+    return f'<section class="section faq" id="faq" aria-labelledby="faq-h"><div class="wrap prose"><h2 id="faq-h">Frequently Asked Questions</h2>{out}</div></section>'
 
 def product(slug, h1, media, feat_head, price_html, feats, order_label, sample_label, desc_head, desc_html,
             need_html='', after='', flag=None, feat_extra='', top_extra=''):
@@ -630,6 +702,7 @@ def product(slug, h1, media, feat_head, price_html, feats, order_label, sample_l
 <section class="section alt"><div class="wrap split"><div class="prose"><h2>{t(desc_head)}</h2>{desc_html}
 {('<div class="btn-row">' + btn(order_label, ohref(slug)) + '</div>') if order_label and pr['order'].startswith('/') else ''}</div>
 <div>{need_html}</div></div></section>{after}'''
+    m += faq_section('/' + slug)
     finish(title_of(slug, h1), desc_of(slug), m, flag=flag)
 
 # Written from the Marketing Report video on /marketing-report (GCS 68e83148fd24b5fd49c5f4fb.mp4), per Mike.
@@ -980,6 +1053,22 @@ def _iso_date(d):
 def _txt(node):
     return re.sub(r'\s+', ' ', node.get_text(' ', strip=True)).strip()
 
+def faq_from_visible(sp, canon):
+    """FAQPage built from the visible #faq block (George Nov 23 item 2). List answers are joined with '; '."""
+    items = []
+    for it in sp.select('#faq .faq-item'):
+        q = it.select_one('.faq-q'); a = it.select_one('.faq-a')
+        parts = []
+        for ch in a.find_all(['p', 'ul'], recursive=False):
+            parts.append('; '.join(_txt(li) for li in ch.find_all('li')) if ch.name == 'ul' else _txt(ch))
+        items.append({'@type': 'Question', 'name': _txt(q), 'acceptedAnswer': {'@type': 'Answer', 'text': ' '.join(parts)}})
+    if not items:
+        return None
+    return {'@type': 'FAQPage', '@id': canon + '#faq', 'url': canon, 'mainEntity': items}
+
+# /reports/ hub: the four priced reports (George Nov 23 item 2). Price comes from the visible card heading "(... $NNN ...)".
+REPORTS_HUB_PRODUCTS = ['site-viability-report', 'best-sites-report', 'comp-report', 'marketing-report']
+
 def page_schema(path, title, desc, main, canon):
     sp = BeautifulSoup(main, 'html.parser')
     for f_ in sp.select('.todo, .flag'):
@@ -996,13 +1085,39 @@ def page_schema(path, title, desc, main, canon):
         offer = {'@type': 'Offer', 'price': mm.group(1).replace(',', ''), 'priceCurrency': 'USD', 'url': canon,
                  'description': price_line, 'seller': {'@id': SCHEMA_PUBLISHER['@id']}}
         kind = SCHEMA_OFFERS[path]
-        item = {'@type': kind, '@id': canon + '#offer-item', 'name': name, 'description': desc, 'url': canon, 'offers': offer}
+        # Product name = the report's own name as used in the menu (not the question-style H1). George Nov 23 item 2.
+        pname = dict((h, l) for l, h in NAV_REPORTS).get(path, name)
+        item = {'@type': kind, '@id': canon + '#offer-item', 'name': pname, 'description': desc, 'url': canon, 'offers': offer}
         if kind == 'Product':
             item['brand'] = {'@type': 'Brand', 'name': 'Doctor Demographics'}
         else:
             item['provider'] = {'@id': SCHEMA_PUBLISHER['@id']}
             item['serviceType'] = name
-        return schema_graph([item, SCHEMA_PUBLISHER])
+        objs = [item, SCHEMA_PUBLISHER]
+        faq = faq_from_visible(sp, canon)
+        if faq:
+            objs.insert(1, faq)
+        return schema_graph(objs)
+    if path == '/reports':
+        prods = []
+        for slug in REPORTS_HUB_PRODUCTS:
+            a = sp.find('a', href=lambda h: h and h.rstrip('/').endswith('/' + slug) and not h.startswith('http'))
+            card = a.find_parent('article') if a else None
+            h3 = card.find('h3') if card else None
+            mm = re.match(r'(.*?) \((\$([\d,]+)[^)]*)\)$', _txt(h3)) if h3 else None
+            assert mm, 'reports hub: no visible price for ' + slug
+            pcanon = LIVE + '/' + slug
+            prods.append({'@type': 'Product', '@id': pcanon + '#offer-item', 'name': dict((h, l) for l, h in NAV_REPORTS)['/' + slug], 'url': pcanon,
+                          'brand': {'@type': 'Brand', 'name': 'Doctor Demographics'},
+                          'offers': {'@type': 'Offer', 'price': mm.group(3).replace(',', ''), 'priceCurrency': 'USD', 'url': pcanon,
+                                     'description': mm.group(2), 'seller': {'@id': SCHEMA_PUBLISHER['@id']}}})
+        lst = {'@type': 'ItemList', '@id': canon + '#reports', 'name': name, 'url': canon,
+               'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': pr_} for i, pr_ in enumerate(prods)]}
+        objs = [lst]
+        faq = faq_from_visible(sp, canon)
+        if faq:
+            objs.append(faq)
+        return schema_graph(objs + [SCHEMA_PUBLISHER])
     if path == '/sample-reports':
         # The only question and answer shown on the site: "Why Choose Doctor Demographics?" and its three points.
         q = next((h for h in sp.find_all('h2') if h.get_text(strip=True).endswith('?')), None)
@@ -1047,7 +1162,28 @@ def page_schema(path, title, desc, main, canon):
             {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': LIVE + '/'},
             {'@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': LIVE + '/blog'},
             {'@type': 'ListItem', 'position': 3, 'name': name, 'item': canon}]}
-        return schema_graph([post, crumbs, SCHEMA_PUBLISHER])
+        objs = [post, crumbs, SCHEMA_PUBLISHER]
+        if slug == 'places-with-promise-2027':
+            # George Nov 23 item 2: Article + PodcastEpisode. Built from what the post shows: its title, the first
+            # show-notes line, the YouTube link and the Libsyn player on the page, and the /podcast series it belongs to.
+            post['@type'] = 'Article'
+            ep = {'@type': 'PodcastEpisode', '@id': canon + '#episode', 'episodeNumber': FEATURED_EP, 'name': fx(FEATURED_TITLE),
+                  'url': canon, 'description': fx(FEATURED_NOTES_INTRO[0]),
+                  'author': {'@type': 'Person', 'name': 'Mike Green', 'url': LIVE + '/about'},
+                  'partOfSeries': {'@type': 'PodcastSeries', '@id': LIVE + '/podcast#podcast',
+                                   'name': 'The Perfect Place to Put a Practice Podcast', 'url': LIVE + '/podcast'}}
+            media = []
+            yt = sp.select_one('a.lite')
+            if yt and yt.get('href'):
+                ep['sameAs'] = [yt['href']]  # the YouTube video on the page (no VideoObject: upload date is not shown on the site)
+            au = sp.select_one('iframe.audio')
+            if au and au.get('src'):
+                media.append({'@type': 'AudioObject', 'name': fx(FEATURED_TITLE), 'embedUrl': au['src']})
+            if media:
+                ep['associatedMedia'] = media
+            post['about'] = {'@id': ep['@id']}
+            objs.insert(1, ep)
+        return schema_graph(objs)
     return ''
 
 HEAD_HOOKS.append(page_schema)
