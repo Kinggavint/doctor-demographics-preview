@@ -44,7 +44,20 @@ for (const r of rows) {
   }
 }
 // every live page passes through (and its slash-less form gets only the trailing-slash 301 to itself)
+const FILE_301 = { '/index.html': A + '/', '/favicon.ico': A + '/assets/img/68a3b42d10041847e0bead17.png' };
+for (const [f, want] of Object.entries(FILE_301)) {
+  const r = run('doctordemographics.com', f); ok(r.statusCode === 301 && r.headers.location.value === want, 'file 301 ' + f);
+}
+ok(pages.has('/assets/img/68a3b42d10041847e0bead17.png'), 'favicon target missing from dist');
+{ const r = run('doctordemographics.com', '/'); ok(!r.statusCode && r.uri === '/index.html', 'home / must still serve /index.html'); }
+// George Nov 23 item 3: correctly spelled order-form URLs
+for (const [u_, want] of [['/site-viability-report-form', 'https://order.doctordemographics.com/site-viabilty-report-form'],
+                          ['/site-viability-report-form/', 'https://order.doctordemographics.com/site-viabilty-report-form'],
+                          ['/marketing-report-form', 'https://order.doctordemographics.com/marketing-report-order']]) {
+  const r = run('doctordemographics.com', u_); ok(r.statusCode === 301 && r.headers.location.value === want, 'order form 301 ' + u_);
+}
 for (const p of pages) {
+  if (FILE_301[p]) continue;
   const r = run('doctordemographics.com', p);
   ok(!r.statusCode && r.uri === p, 'live file redirected: ' + p);
   if (p.endsWith('/index.html') && p !== '/index.html') {
