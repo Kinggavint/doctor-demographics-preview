@@ -48,12 +48,18 @@ def add(src, dst, where):
 for r in csv.DictReader(open(os.path.join(ROOT, 'REDIRECTS.csv'))):
     assert r['type'] == '301', r; add(r['from'], r['to'], 'REDIRECTS.csv')
 for g in GHL: M.setdefault(g, ORDER + g)
+# File URLs (George Nov 18 item 6 / Nov 23 item 3): /index.html is a 200 duplicate of / (canonical to /), /favicon.ico 404s.
+# Targets are used as-is (no trailing-slash rewrite). The homepage request '/' is still served from /index.html internally.
+FILES = {'/index.html': '/', '/favicon.ico': '/assets/img/68a3b42d10041847e0bead17.png'}
+for k_, t_ in FILES.items():
+    assert k_ not in M, k_
+    M[k_] = t_
 OLD = list(csv.DictReader(open(os.path.join(HERE, 'old-wp-404-redirects.csv'))))
 for r in OLD:
     add(r['old_url'], r['target'], 'old-wp-404-redirects.csv')
 full = dict(M)
 # drop rows the prefix rules already cover (keeps the function small); REDIRECTS.csv/GHL rows always stay explicit
-keep_explicit = {norm(r['from']) for r in csv.DictReader(open(os.path.join(ROOT, 'REDIRECTS.csv')))} | set(GHL)
+keep_explicit = {norm(r['from']) for r in csv.DictReader(open(os.path.join(ROOT, 'REDIRECTS.csv')))} | set(GHL) | set(FILES)
 E = {k: v for k, v in M.items() if k in keep_explicit or by_rule(k) != v}
 for t in list(E.values()) + [t for _, t in PREFIX] + [YEAR]:
     assert t.startswith(ORDER) or t.startswith('/'), t

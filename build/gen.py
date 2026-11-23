@@ -1347,7 +1347,10 @@ REDIRECTS = [('/home-9727', '/', 'duplicate home page'),
              # Old blog posts no longer on the site; still cited by Perplexity (baseline Oct 30). Approved by APEX CEO Oct 30.
              ('/blog/b/places-with-promise-2023', '/blog/b/places-with-promise-2026', 'old blog post; newer edition of same article'),
              ('/blog/b/site-selection-process-for-doctors', '/blog/b/launch-smart-5-demographic-factors-for-your-new-practice', 'old blog post; closest current article on choosing a practice location'),
-             ('/blog/b/patient-attitudes-7413', '/blog', 'old blog post; no matching current article')]
+             ('/blog/b/patient-attitudes-7413', '/blog', 'old blog post; no matching current article'),
+             # George Nov 18 + Nov 23 (item 3, 404s): correctly spelled order-form URLs 404 on live. 301 to the live GHL forms.
+             ('/site-viability-report-form', O('/site-viabilty-report-form'), '404 on live (George Nov 23 item 3); correctly spelled form URL to the live order form'),
+             ('/marketing-report-form', O('/marketing-report-order'), '404 on live (George Nov 23 item 3); to the live Marketing Report order form')]
 
 def redirect_stub(src, dst, why):
     begin(src)
