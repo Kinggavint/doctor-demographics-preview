@@ -272,13 +272,19 @@ def libsyn_player(eid):
             f'src="https://html5-player.libsyn.com/embed/episode/id/{eid}/height/405/theme/standard/thumbnail/yes/direction/backward/" '
             f'height="405" width="100%" scrolling="no" allowfullscreen loading="lazy"></iframe></div>')
 
+FEATURED_POST = '/blog/b/places-with-promise-2027'
+
+def featured_post_link():
+    """George Nov 23 item 4: text link from the home page and /podcast/ to the Places With Promise 2027 post (show notes)."""
+    return f'<p class="dx-ep-post">Show notes: <a href="{u(FEATURED_POST)}">{t(FEATURED_TITLE)}</a></p>'
+
 def featured_episode():
     """Dedicated /podcast block for Episode 293: title + YouTube only (notes live on the blog post)."""
     title = f'Episode {FEATURED_EP}: {FEATURED_TITLE}'
     return (
         f'<article class="card dx-latest"><header class="dx-latest-head">{icon("mic", "ico xl dx-ico")}'
         f'<p class="dx-latest-kicker">Our Most Recent Episode</p><h2>{t(title)}</h2></header>'
-        f'{yt_embed(FEATURED_VID, title)}</article>'
+        f'{yt_embed(FEATURED_VID, title)}{featured_post_link()}</article>'
     )
 
 def video(src, poster=None, title='Product video'):
@@ -531,7 +537,7 @@ def page_home():
 <div class="prose"><h2>{t(L(s,28))}</h2>{p(L(s,29))}<div class="btn-row">{btn("Order a Demographic Report", "/reports")}</div></div></div></div></section>
 <section class="section home-pod-wrap"><div class="wrap"><div class="home-pod dx-navy split"><div class="prose"><h2>{t(L(s,31))}</h2>{p(L(s,32))}
 <div class="btn-row">{btn("Subscribe Here", APPLE_HOME, "gold")}</div><p class="note">Weekly Episode in Your Inbox</p></div>
-<div><h3>Here's Our Most Recent Episode:</h3>{latest_episode()}</div></div></div></section>
+<div><h3>Here's Our Most Recent Episode:</h3>{latest_episode()}{featured_post_link()}</div></div></div></section>
 <section class="section dx-navy home-band"><div class="wrap"><h2 class="center">{t(L(s,36))}</h2><div class="grid g4">'''
     cards = [(39, 40, '/best-sites-report', '64adb6bd1aa4669e1a404704.jpg'), (43, 44, '/site-viability-report', '65258de43fd52c3674559fc6.jpg'),
              (47, 48, '/marketing-report', '68e832bde22f982ba43459c3.jpg'), (51, 52, '/telephone-consultation', '68e833334d2dffc79b33fde1.jpg')]
@@ -1019,6 +1025,13 @@ def blog_posts():
         title, cats, date, rt = BLOGMETA[slug]
         key = 'blog__b__' + slug
         content = wbr_urls(clean_post(slug))
+        if slug == 'places-with-promise-2027':
+            # George Nov 23 item 4: the post's own "Ask about our ... report" lines link to the two report pages (words unchanged).
+            for words, href in (('Best Sites report', '/best-sites-report'), ('Site Viability report', '/site-viability-report')):
+                old_ = f'Ask about our {words}.'
+                assert content.count(old_) == 1, old_
+                content = content.replace(old_, f'Ask about our <a href="{u(href)}">{words}</a>.')
+            CHANGES.append((CUR['path'], 'client request (George, Nov 23 item 4)', 'Best Sites report / Site Viability report as plain text', 'linked to /best-sites-report/ and /site-viability-report/'))
         try:
             bio = ln(key, 'Coming from a marketing background')
         except KeyError:

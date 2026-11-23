@@ -87,6 +87,7 @@
 | /blog | dash removed (builder copy rule) | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026" – 8 markets  | In this eye-opening episode, we reveal the "Kiss of Death Locations for 2026", 8 markets ( |
 | /blog | Mike decision | blog not in the menu | Blog added to the main menu |
 | /blog | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
+| /blog/b/places-with-promise-2027 | client request (George, Nov 23 item 4) | Best Sites report / Site Viability report as plain text | linked to /best-sites-report/ and /site-viability-report/ |
 | /blog/b/places-with-promise-2027 | Gavin decision (since 1983, Scott now retired) | For over 40 years, the Doctor Demographics team have helped | Since 1983, the Doctor Demographics team has helped |
 | /blog/b/relocate-or-revamp | dash removed (builder copy rule) | , the podcast where we help dentists, veterinarians, optometrists, and other private pract | , the podcast where we help dentists, veterinarians, optometrists, and other private pract |
 | /blog/b/relocate-or-revamp | dash removed (builder copy rule) | Alright, let's dive into today’s topic: "Relocate or Revamp: The Marketing Fix Your Practi | Alright, let's dive into today’s topic: "Relocate or Revamp: The Marketing Fix Your Practi |
