@@ -505,3 +505,6 @@ p.dx-cta-btns{margin:0}
 .btn.apx-light:hover{background:var(--offset);border-color:var(--offset);color:var(--primary-hover)}
 .apx-hero .dx-hero-txt>p{margin:1.25rem 0 0}
 @media (max-width:900px){.nav.open{flex-wrap:nowrap;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);overflow-y:auto}.nav.open>*{flex-shrink:0}}
+/* George Nov 23 item 4: show-notes link under the latest episode (home + /podcast/) */
+.dx-ep-post{margin:.85rem 0 0;font-weight:600}
+.home-pod .dx-ep-post{color:#CBD5E1}.home-pod .dx-ep-post a{color:#fff;text-decoration:underline;text-underline-offset:3px}.home-pod .dx-ep-post a:hover{color:var(--accent)}
