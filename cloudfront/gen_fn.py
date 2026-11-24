@@ -69,19 +69,20 @@ js = '''var T=%s;
 var M=%s;
 var P=%s;var Y=%d;
 var A='https://doctordemographics.com';
-function qs(q){var p=[];for(var k in q){var v=q[k];if(v.multiValue){for(var i=0;i<v.multiValue.length;i++)p.push(k+(v.multiValue[i].value!==''?'='+v.multiValue[i].value:''));}else p.push(k+(v.value!==''?'='+v.value:''));}return p.length?'?'+p.join('&'):'';}
+function qs(q){var p=[],d=0,n=0;for(var k in q){var l=k.toLowerCase();if(l==='ignorenitro'||l==='nitrowebhook')n=1;}for(var k in q){var l=k.toLowerCase();if(l==='cat'||l==='ignorenitro'||l==='nitrowebhook'||l==='trk'||(n&&l==='token')){d=1;continue;}var v=q[k];if(v.multiValue){for(var i=0;i<v.multiValue.length;i++)p.push(k+(v.multiValue[i].value!==''?'='+v.multiValue[i].value:''));}else p.push(k+(v.value!==''?'='+v.value:''));}return[p.length?'?'+p.join('&'):'',d];}
 function r301(loc){return{statusCode:301,statusDescription:'Moved Permanently',headers:{location:{value:loc},'cache-control':{value:'max-age=3600'}}};}
 function pre(k){var s=k+'/';for(var j=0;j<P.length;j++){if(s.indexOf(P[j][0])===0)return P[j][1];}if(/^\\/(19|20)\\d\\d\\//.test(s))return Y;return undefined;}
 function handler(event){
 var req=event.request;var h=(req.headers.host&&req.headers.host.value||'').toLowerCase();
 var www=h==='www.doctordemographics.com';var B=(www||h==='doctordemographics.com')?A:'';
-var u=req.uri;var k=u.toLowerCase().replace(/\\/+$/,'')||'/';var q=qs(req.querystring);
+var u=req.uri;var k=u.toLowerCase().replace(/\\/+$/,'')||'/';var cq=qs(req.querystring);var q=cq[0];
 var i=M[k];if(i===undefined)i=pre(k);
 if(i!==undefined){var t=T[i];return r301((t.charAt(0)==='/'?B:'')+t+q);}
 var last=u.slice(u.lastIndexOf('/')+1);var file=last.indexOf('.')>=0;
 if(!file&&u!==u.toLowerCase()){var l=u.toLowerCase();return r301(B+l+(l.slice(-1)==='/'?'':'/')+q);}
 if(!file&&u.slice(-1)!=='/'){return r301(B+u+'/'+q);}
 if(www){return r301(A+u+q);}
+if(cq[1]){return r301(B+(file?u:(u.slice(-1)==='/'?u:u+'/'))+q);}
 if(u.slice(-1)==='/'){req.uri=u+'index.html';}
 return req;}
 ''' % (json.dumps(T, separators=(',', ':')), '{' + ','.join(json.dumps(k) + ':' + str(ti[v]) for k, v in E.items()) + '}', P, ti[YEAR])
