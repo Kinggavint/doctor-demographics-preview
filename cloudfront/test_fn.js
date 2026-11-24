@@ -78,6 +78,38 @@ for (const g of ['/getsocial', '/accessdso', '/apexchat', '/ppschedule', '/best-
 for (const u of ['/no-such-page/', '/blog/b/no-such-post/', '/podcast/no-such/', '/order-complete-x/']) {
   const r = run('doctordemographics.com', u); ok(!r.statusCode, 'unknown path redirected: ' + u);
 }
+// George Nov 24: remaining GSC 404s and duplicates (main site)
+for (const [u_, want] of [['/webinar-nyc', A + '/reports/'], ['/webinar-nyc/', A + '/reports/'],
+                          ['/faq', A + '/reports/'], ['/faq/', A + '/reports/'],
+                          ['/blog/c/podcast/b/kiss-of-death-locations-for-2026', A + '/blog/b/kiss-of-death-locations-for-2026/'],
+                          ['/blog/c/podcast/b/kiss-of-death-locations-for-2026/', A + '/blog/b/kiss-of-death-locations-for-2026/']]) {
+  const r = run('doctordemographics.com', u_);
+  ok(r.statusCode === 301 && r.headers.location.value === want, 'nov24 301 ' + u_ + ' -> ' + (r.statusCode ? r.headers.location.value : r.uri));
+}
+// single-hop slash + NitroPack / ?cat= strip; keep utm; do not strip a lone token
+{
+  const r = run('doctordemographics.com', '/best-sites-report', { ignorenitro: { value: '1' }, nitroWebhook: { value: 'config' }, token: { value: 'test' } });
+  ok(r.statusCode === 301 && r.headers.location.value === A + '/best-sites-report/', 'nitro slashless single hop');
+  const r2 = run('doctordemographics.com', '/best-sites-report/', { ignorenitro: { value: '1' }, nitroWebhook: { value: 'config' }, token: { value: 'test' } });
+  ok(r2.statusCode === 301 && r2.headers.location.value === A + '/best-sites-report/', 'nitro slashed 301 to canonical');
+  const r3 = run('doctordemographics.com', '/best-sites-report/', { ignorenitro: { value: '1' }, utm_source: { value: 'x' } });
+  ok(r3.statusCode === 301 && r3.headers.location.value === A + '/best-sites-report/?utm_source=x', 'nitro strip keeps utm');
+  const r4 = run('doctordemographics.com', '/', { cat: { value: '' } });
+  ok(r4.statusCode === 301 && r4.headers.location.value === A + '/', 'empty cat 301 home');
+  const r5 = run('doctordemographics.com', '/', { cat: { value: 'podcast' } });
+  ok(r5.statusCode === 301 && r5.headers.location.value === A + '/', 'cat=podcast 301 home (same as live canonical)');
+  const r6 = run('doctordemographics.com', '/about/', { ignorenitro: { value: '1' }, trk: { value: 'test' } });
+  ok(r6.statusCode === 301 && r6.headers.location.value === A + '/about/', 'about nitro+trk');
+  const r7 = run('doctordemographics.com', '/best-sites-report/', { token: { value: 'abc' } });
+  ok(!r7.statusCode && r7.uri === '/best-sites-report/index.html', 'lone token not stripped');
+  const r8 = run('doctordemographics.com', '/best-sites-report/', { utm_source: { value: 'x' } });
+  ok(!r8.statusCode && r8.uri === '/best-sites-report/index.html', 'utm alone still served');
+  // junk builder paths stay 404 (no 301 to home)
+  for (const u of ['/_preview/', '/cdn-cgi/l/email-protection/', '/tmp/workspace/production/common/builder-preview/locales/da.json', '/tmp/workspace/production/common/builder-preview/locales/no.json']) {
+    const r = run('doctordemographics.com', u);
+    ok(!r.statusCode, 'junk should stay 404 (no redirect): ' + u);
+  }
+}
 // regression vs the old (live) function: identical result for every one of its redirects and the old test cases
 const oldf = process.argv[2];
 if (oldf) {

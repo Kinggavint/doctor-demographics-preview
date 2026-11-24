@@ -9,6 +9,8 @@ from,to,type,reason
 /blog/b/patient-attitudes-7413,https://doctordemographics.com/blog,301,old blog post; no matching current article
 /site-viability-report-form,https://doctordemographics.com/site-viabilty-report-form,301,404 on live (George Nov 23 item 3); correctly spelled form URL to the live order form
 /marketing-report-form,https://doctordemographics.com/marketing-report-order,301,404 on live (George Nov 23 item 3); to the live Marketing Report order form
+/faq,https://doctordemographics.com/reports,301,404 on live (George Nov 24); same target as existing /frequently-asked-questions
+/blog/c/podcast/b/kiss-of-death-locations-for-2026,https://doctordemographics.com/blog/b/kiss-of-death-locations-for-2026,301,404/duplicate on live (George Nov 24); WordPress category permalink of the live post
 /best-sites-report-medical-form,https://doctordemographics.com/best-sites-report,301,retired per Mike (Oct 2026); target approved by APEX CEO Oct 30
 /best-sites-report-medical-order,https://doctordemographics.com/best-sites-report,301,retired per Mike (Oct 2026); target approved by APEX CEO Oct 30
 /best-sites-report-veterinarian,https://doctordemographics.com/best-sites-report,301,retired per Mike (Oct 2026); target approved by APEX CEO Oct 30
@@ -32,3 +34,4 @@ from,to,type,reason
 /webinar-confirmation-cincinnati,https://doctordemographics.com/reports,301,retired per Mike (Oct 2026); target approved by APEX CEO Oct 30
 /webinar-registration-austin,https://doctordemographics.com/reports,301,retired per Mike (Oct 2026); target approved by APEX CEO Oct 30
 /webinar-registration-cincinnati,https://doctordemographics.com/reports,301,retired per Mike (Oct 2026); target approved by APEX CEO Oct 30
+/webinar-nyc,https://doctordemographics.com/reports,301,retired per Mike (Oct 2026); target approved by APEX CEO Oct 30

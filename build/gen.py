@@ -1350,7 +1350,10 @@ REDIRECTS = [('/home-9727', '/', 'duplicate home page'),
              ('/blog/b/patient-attitudes-7413', '/blog', 'old blog post; no matching current article'),
              # George Nov 18 + Nov 23 (item 3, 404s): correctly spelled order-form URLs 404 on live. 301 to the live GHL forms.
              ('/site-viability-report-form', O('/site-viabilty-report-form'), '404 on live (George Nov 23 item 3); correctly spelled form URL to the live order form'),
-             ('/marketing-report-form', O('/marketing-report-order'), '404 on live (George Nov 23 item 3); to the live Marketing Report order form')]
+             ('/marketing-report-form', O('/marketing-report-order'), '404 on live (George Nov 23 item 3); to the live Marketing Report order form'),
+             # George Nov 24 Search Console 404s / duplicates (main site).
+             ('/faq', '/reports', '404 on live (George Nov 24); same target as existing /frequently-asked-questions'),
+             ('/blog/c/podcast/b/kiss-of-death-locations-for-2026', '/blog/b/kiss-of-death-locations-for-2026', '404/duplicate on live (George Nov 24); WordPress category permalink of the live post')]
 
 def redirect_stub(src, dst, why):
     begin(src)
@@ -1374,7 +1377,8 @@ RETIRED = {'/best-sites-report-medical-form', '/best-sites-report-veterinary-for
 
 WHY_R = 'retired per Mike (Oct 2026); target approved by APEX CEO Oct 30'
 for _p in sorted(RETIRED) + ['/webinar-austin', '/webinar-broadcast-austin', '/webinar-broadcast-cincinnati', '/webinar-cincinnati',
-                             '/webinar-confirmation-austin', '/webinar-confirmation-cincinnati', '/webinar-registration-austin', '/webinar-registration-cincinnati']:
+                             '/webinar-confirmation-austin', '/webinar-confirmation-cincinnati', '/webinar-registration-austin', '/webinar-registration-cincinnati',
+                             '/webinar-nyc']:
     _d = '/best-sites-report' if _p.startswith('/best-sites') else '/site-viability-report' if _p.startswith('/site-viab') else '/reports'
     REDIRECTS.append((_p, _d, WHY_R))
 
@@ -1554,7 +1558,9 @@ def prod_files():
         shutil.copytree(os.path.join(ROOT, 'docs', d), os.path.join(SITE, d), dirs_exist_ok=True)
     urls = [p for p in PAGES if p not in PROD_NOINDEX]
     with open(os.path.join(SITE, 'robots.txt'), 'w') as f:
-        f.write(f'User-agent: *\nAllow: /\n\nSitemap: {LIVE}/sitemap.xml\n')
+        f.write('User-agent: *\nAllow: /\n'
+                'Disallow: /_preview/\nDisallow: /cdn-cgi/\nDisallow: /tmp/\n'
+                f'\nSitemap: {LIVE}/sitemap.xml\n')
     with open(os.path.join(SITE, 'sitemap.xml'), 'w') as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
         for p in sorted(urls, key=lambda x: (x != '/', x)):
